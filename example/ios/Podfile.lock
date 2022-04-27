@@ -1,0 +1,31 @@
+PODS:
+  - Flutter (1.0.0)
+  - teads_sdk_flutter (0.0.1):
+    - Flutter
+    - TeadsSDK (~> 5.0.14)
+  - TeadsSDK (5.0.15):
+    - TeadsSDK/Core (= 5.0.15)
+  - TeadsSDK/Core (5.0.15)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - teads_sdk_flutter (from `.symlinks/plugins/teads_sdk_flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - TeadsSDK
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  teads_sdk_flutter:
+    :path: ".symlinks/plugins/teads_sdk_flutter/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  teads_sdk_flutter: 7553ac951ce05d27663e1175abcb3fa2e2b265f9
+  TeadsSDK: daa54de78978992bcfcada47a104271fd55cf1ca
+
+PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
+
+COCOAPODS: 1.11.2
