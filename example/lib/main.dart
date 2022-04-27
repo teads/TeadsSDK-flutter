@@ -53,10 +53,10 @@ class _MyAppState extends State<MyApp> implements TeadsInReadAdPlacementDelegate
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Plugin Use Sample App'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('Running on:  $_platformVersion\n'),
         ),
       ),
     );
