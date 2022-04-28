@@ -1,9 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:teads_sdk_flutter/src/teads_ad_ratio.dart';
-import 'package:teads_sdk_flutter/src/teads_inread_ad.dart';
 import 'package:teads_sdk_flutter/teads_sdk_flutter.dart';
 
 void main() {
@@ -32,6 +32,12 @@ class _MyAppState extends State<MyApp> implements TeadsInReadAdPlacementDelegate
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
+      TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
+      await placementSettings.enableDebug();
+      TeadsInReadAdPlacement? placement = await Teads.createInReadPlacement(84242, placementSettings, this);
+      TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
+      await requestSettings.pageUrl("https://example.com");
+      await placement?.requestAd(requestSettings);
       platformVersion =
           await Teads.sdkVersion ?? 'Unknown platform version';
     } on PlatformException {
@@ -64,11 +70,11 @@ class _MyAppState extends State<MyApp> implements TeadsInReadAdPlacementDelegate
 
   @override
   void didReceiveAd(TeadsInReadAd ad, TeadsAdRatio adRatio) {
-    // TODO: implement didReceiveAd
+    log('didReceiveAd');
   }
 
   @override
   void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio) {
-    // TODO: implement didUpdateRatio
+    log('didUpdateRatio');
   }
 }

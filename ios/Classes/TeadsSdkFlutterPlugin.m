@@ -10,6 +10,9 @@
 
 @implementation TeadsSdkFlutterPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftTeadsSdkFlutterPlugin registerWithRegistrar:registrar];
+  [FLTTeads registerWithRegistrar:registrar];
+  [FLTTeadsAdPlacementSettings registerWithRegistrar:registrar];
+  [FLTTeadsAdRequestSettings registerWithRegistrar:registrar];
+  [FLTTeadsInReadAdPlacement registerWithRegistrar:registrar];
 }
 @end

@@ -1,35 +1,38 @@
-typedef BuildTeadsAdSettings = void Function(TeadsAdPlacementSettings _);
+import 'package:flutter/services.dart';
 
 class TeadsAdPlacementSettings {
 
-  TeadsAdPlacementSettings(BuildTeadsAdSettings build);
+  final MethodChannel _channel = const MethodChannel('teads_sdk_flutter/teads_ad_placement_settings');
+  Map mapValue = {};
 
-  void disableCrashMonitoring() {
+  TeadsAdPlacementSettings();
 
+  Future<void> disableCrashMonitoring() async {
+    mapValue = await _channel.invokeMethod('disableCrashMonitoring');
   }
 
-  void disableTeadsAudioSessionManagement() {
-
+  Future<void> disableTeadsAudioSessionManagement() async {
+    mapValue = await _channel.invokeMethod('disableTeadsAudioSessionManagement');
   }
 
-  void enableDebug() {
-
+  Future<void> enableDebug() async {
+    mapValue = await _channel.invokeMethod('enableDebug');
   }
 
-  void userConsent(String subjectToGDPR, String consent, { TCFVersion tcfVersion = TCFVersion.v2, int cmpSdkID = 0 }) {
-
+  Future<void> userConsent(String subjectToGDPR, String consent, { TCFVersion tcfVersion = TCFVersion.v2, int cmpSdkID = 0 }) async {
+    mapValue = await _channel.invokeMethod('userConsent', [subjectToGDPR, consent, tcfVersion.value, cmpSdkID]);
   }
 
-  void setUsPrivacy(String consent) {
-
+  Future<void> setUsPrivacy(String consent) async {
+    mapValue = await _channel.invokeMethod('setUsPrivacy', [consent]);
   }
 
-  void disableBatteryMonitoring() {
-
+  Future<void> disableBatteryMonitoring() async {
+    mapValue = await _channel.invokeMethod('disableBatteryMonitoring');
   }
 
-  void addExtras(String value, String key) {
-
+  Future<void> addExtras(String value, String key) async {
+    mapValue = await _channel.invokeMethod('addExtras', [value, key]);
   }
 }
 
