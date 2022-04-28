@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class FormatTitle extends StatefulWidget {
+class format_title extends StatefulWidget {
   @override
-  State<FormatTitle> createState() => _FormatTitleState();
+  State<format_title> createState() => _format_titleState();
 }
 
-class _FormatTitleState extends State<FormatTitle> {
+class _format_titleState extends State<format_title> {
   @override
   Widget build(BuildContext context) {
     return const SliverToBoxAdapter(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CreativeTitle extends StatefulWidget {
+class creative_title extends StatefulWidget {
   @override
-  State<CreativeTitle> createState() => _CreativeTitleState();
+  State<creative_title> createState() => _creative_titleState();
 }
 
-class _CreativeTitleState extends State<CreativeTitle> {
+class _creative_titleState extends State<creative_title> {
   @override
   Widget build(BuildContext context) {
     return const SliverToBoxAdapter(
