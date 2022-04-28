@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> implements TeadsInReadAdPlacementDelegate {
+class _MyAppState extends State<MyApp> implements TeadsInReadAdPlacementDelegate, TeadsAdDelegate, TeadsPlaybackDelegate {
   String _platformVersion = 'Unknown';
 
   @override
@@ -62,8 +62,15 @@ class _MyAppState extends State<MyApp> implements TeadsInReadAdPlacementDelegate
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+          child: ListView(
+            children: const <Widget>[
+              SizedBox(
+                height: 400,
+                child: TeadsInReadAdView(),
+              )
+            ],
+          ),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
   }
@@ -71,10 +78,67 @@ class _MyAppState extends State<MyApp> implements TeadsInReadAdPlacementDelegate
   @override
   void didReceiveAd(TeadsInReadAd ad, TeadsAdRatio adRatio) {
     log('didReceiveAd');
+    ad.delegate = this;
+    ad.playbackDelegate = this;
   }
 
   @override
   void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio) {
     log('didUpdateRatio');
+  }
+
+  @override
+  void adStartPlayingAudio(TeadsAd ad) {
+    log('adStartPlayingAudio');
+  }
+
+  @override
+  void adStopPlayingAudio(TeadsAd ad) {
+    log('adStopPlayingAudio');
+  }
+
+  @override
+  void didCatchError(TeadsAd ad, Error error) {
+    log('didCatchError');
+  }
+
+  @override
+  void didClose(TeadsAd ad) {
+    log('didClose');
+  }
+
+  @override
+  void didCollapsedFromFullscreen(TeadsAd ad) {
+    log('didCollapsedFromFullscreen');
+  }
+
+  @override
+  void didComplete(TeadsAd ad) {
+    log('didComplete');
+  }
+
+  @override
+  void didExpandedToFullscreen(TeadsAd ad) {
+    log('didExpandedToFullscreen');
+  }
+
+  @override
+  void didPause(TeadsAd ad) {
+    log('didPause');
+  }
+
+  @override
+  void didPlay(TeadsAd ad) {
+    log('didPlay');
+  }
+
+  @override
+  void didRecordClick(TeadsAd ad) {
+    log('didRecordClick');
+  }
+
+  @override
+  void didRecordImpression(TeadsAd ad) {
+    log('didRecordImpression');
   }
 }

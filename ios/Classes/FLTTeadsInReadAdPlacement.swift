@@ -11,6 +11,7 @@ import TeadsSDK
 public class FLTTeadsInReadAdPlacement: NSObject, FlutterPlugin {
     
     static var channel: FlutterMethodChannel?
+    static var teadsAd: TeadsAd?
         
     public static func register(with registrar: FlutterPluginRegistrar) {
         channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_inread_ad_placement", binaryMessenger: registrar.messenger())
@@ -50,6 +51,7 @@ public class FLTTeadsInReadAdPlacement: NSObject, FlutterPlugin {
 extension FLTTeadsInReadAdPlacement: TeadsInReadAdPlacementDelegate {
     
     public func didReceiveAd(ad: TeadsInReadAd, adRatio: TeadsAdRatio) {
+        Self.teadsAd = ad
         Self.channel?.invokeMethod("didReceiveAd", arguments: [])
     }
     
