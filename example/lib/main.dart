@@ -35,13 +35,21 @@ class _homeState extends State<home> {
     return Scaffold(
       body: CustomScrollView(slivers: [
         SliverAppBar(
-          title: const Text("SampleApp Flutter"),
+          title: Container(
+            height: 30,
+            child: (Image.asset(
+                "assets/Teads-Sample-App.imageset/Teads-Sample-App-black.png")),
+          ),
+          leading: Container(
+            height: 30,
+            child: (Image.asset("assets/logo.png")),
+          ),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 137, 24, 79),
-                  Color.fromARGB(255, 33, 86, 243),
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(255, 255, 255, 255)
                 ],
               ),
             ),

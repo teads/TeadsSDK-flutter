@@ -22,44 +22,55 @@ class _integration_listState extends State<integration_list> {
 
   @override
   Widget build(BuildContext context) {
-    int items = 1;
     return SliverToBoxAdapter(
-        child: SizedBox(
-            height: 70,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: items,
-                itemBuilder: (context, item) => Stack(
-                      children: [
-                        Row(
-                          children: [
-                            IconButton(
-                              icon: Image.asset(
-                                  "assets/ScrollView.imageset/ScrollView150.png"),
-                              iconSize: 50,
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              icon: Image.asset(
-                                  "assets/CollectionView.imageset/CollectionView150.png"),
-                              iconSize: 50,
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              icon: Image.asset(
-                                  "assets/TableView.imageset/TableView150.png"),
-                              iconSize: 50,
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              icon: Image.asset(
-                                  "assets/WebView.imageset/WebView150.png"),
-                              iconSize: 50,
-                              onPressed: () {},
-                            )
-                          ],
-                        )
-                      ],
-                    ))));
+        child: Container(
+            child: Row(
+      children: [
+        SizedBox(width: 50),
+        Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5.0),
+                  )),
+              child: Column(children: [
+                SizedBox(height: 10, width: 50),
+                IconButton(
+                  icon: Image.asset(
+                      "assets/ScrollView.imageset/ScrollView150.png"),
+                  iconSize: 100,
+                  onPressed: () {},
+                ),
+                Text("ScrollView"),
+                SizedBox(height: 10),
+              ]),
+            ),
+            IconButton(
+              icon: Image.asset(
+                  "assets/CollectionView.imageset/CollectionView150.png"),
+              iconSize: 100,
+              onPressed: () {},
+            ),
+          ],
+        ),
+        SizedBox(width: 50),
+        Column(children: [
+          SizedBox(height: 10),
+          IconButton(
+            icon: Image.asset("assets/TableView.imageset/TableView150.png"),
+            iconSize: 100,
+            onPressed: () {},
+          ),
+          SizedBox(height: 10),
+          IconButton(
+            icon: Image.asset("assets/WebView.imageset/WebView150.png"),
+            iconSize: 100,
+            onPressed: () {},
+          )
+        ]),
+      ],
+    )));
   }
 }

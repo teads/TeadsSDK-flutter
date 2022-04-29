@@ -1,42 +1,25 @@
 typedef BuildTeadsAdSettings = void Function(TeadsAdPlacementSettings _);
 
 class TeadsAdPlacementSettings {
-
   TeadsAdPlacementSettings(BuildTeadsAdSettings build);
 
-  void disableCrashMonitoring() {
+  void disableCrashMonitoring() {}
 
-  }
+  void disableTeadsAudioSessionManagement() {}
 
-  void disableTeadsAudioSessionManagement() {
+  void enableDebug() {}
 
-  }
+  void userConsent(String subjectToGDPR, String consent,
+      {TCFVersion tcfVersion = TCFVersion.v2, int cmpSdkID = 0}) {}
 
-  void enableDebug() {
+  void setUsPrivacy(String consent) {}
 
-  }
+  void disableBatteryMonitoring() {}
 
-  void userConsent(String subjectToGDPR, String consent, { TCFVersion tcfVersion = TCFVersion.v2, int cmpSdkID = 0 }) {
-
-  }
-
-  void setUsPrivacy(String consent) {
-
-  }
-
-  void disableBatteryMonitoring() {
-
-  }
-
-  void addExtras(String value, String key) {
-
-  }
+  void addExtras(String value, String key) {}
 }
 
-enum TCFVersion {
-  v1,
-  v2
-}
+enum TCFVersion { v1, v2 }
 
 extension TCFVersionExtension on TCFVersion {
   int get value {

@@ -1,3 +1,1 @@
-class TeadsAdRatio {
-
-}
+class TeadsAdRatio {}

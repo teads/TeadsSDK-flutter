@@ -12,9 +12,9 @@ class Teads {
   static Future<TeadsInReadAdPlacement?> createInReadPlacement(
       int pid,
       TeadsAdPlacementSettings settings,
-      TeadsInReadAdPlacementDelegate? delegate
-      ) async {
-    final TeadsInReadAdPlacement? placement = await _channel.invokeMethod('createInReadPlacement', [pid, settings, delegate]);
+      TeadsInReadAdPlacementDelegate? delegate) async {
+    final TeadsInReadAdPlacement? placement = await _channel
+        .invokeMethod('createInReadPlacement', [pid, settings, delegate]);
     return placement;
   }
 }

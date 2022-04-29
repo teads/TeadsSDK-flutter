@@ -1,3 +1,1 @@
-class TeadsInReadAd {
-
-}
+class TeadsInReadAd {}
