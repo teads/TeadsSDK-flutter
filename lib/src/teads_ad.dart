@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:teads_sdk_flutter/src/teads_inread_ad_placement.dart';
 
 mixin TeadsAdDelegate {
-  // UIViewController? willPresentModalView(ad: TeadsAd)
+  void willPresentModalView(TeadsAd ad);
   void didCatchError(TeadsAd ad, Error error);
   void didClose(TeadsAd ad);
   void didRecordImpression(TeadsAd ad);
@@ -32,9 +32,9 @@ class TeadsAd {
       if (adPlacement.teadsAd != null) {
 
         switch(call.method) {
-          // case "willPresentModalView":
-          //   _delegate.willPresentModalView(ad);
-          //   break;
+          case "willPresentModalView":
+            _delegate?.willPresentModalView(adPlacement.teadsAd as TeadsAd);
+            break;
           case "didCatchError":
             _delegate?.didCatchError(adPlacement.teadsAd as TeadsAd, Error());
             break;
@@ -75,14 +75,14 @@ class TeadsAd {
     });
   }
 
-  set delegate(TeadsAdDelegate delegate) {
+  setDelegate(TeadsAdDelegate delegate) async {
     _delegate = delegate;
-    _channel.invokeMethod('delegate');
+    await _channel.invokeMethod('delegate');
   }
 
-  set playbackDelegate(TeadsPlaybackDelegate playbackDelegate) {
+  setPlaybackDelegate(TeadsPlaybackDelegate playbackDelegate) async {
     _playbackDelegate = playbackDelegate;
-    _channel.invokeMethod('playbackDelegate');
+    await _channel.invokeMethod('playbackDelegate');
   }
 
 }

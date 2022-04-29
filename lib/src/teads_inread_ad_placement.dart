@@ -7,16 +7,17 @@ class TeadsInReadAdPlacement {
 
   TeadsInReadAdPlacementDelegate? delegate;
   TeadsInReadAd? teadsAd;
+  TeadsAdRatio teadsAdRatio = TeadsAdRatio();
 
   TeadsInReadAdPlacement(this.delegate) {
     _channel.setMethodCallHandler((call) async {
       if (teadsAd != null) {
         switch (call.method) {
           case "didReceiveAd":
-            delegate?.didReceiveAd(teadsAd!, TeadsAdRatio());
+            delegate?.didReceiveAd(teadsAd!, teadsAdRatio);
             break;
           case "didUpdateRatio":
-            delegate?.didUpdateRatio(teadsAd!, TeadsAdRatio());
+            delegate?.didUpdateRatio(teadsAd!, teadsAdRatio);
             break;
           default:
             break;

@@ -11,7 +11,8 @@ import TeadsSDK
 public class FLTTeadsInReadAdPlacement: NSObject, FlutterPlugin {
     
     static var channel: FlutterMethodChannel?
-    static var teadsAd: TeadsAd?
+    static var teadsAd: TeadsInReadAd?
+    static var adRatio: TeadsAdRatio?
         
     public static func register(with registrar: FlutterPluginRegistrar) {
         channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_inread_ad_placement", binaryMessenger: registrar.messenger())
@@ -30,8 +31,11 @@ public class FLTTeadsInReadAdPlacement: NSObject, FlutterPlugin {
                 let decoder = JSONDecoder()
                 if let settings = try? decoder.decode(TeadsAdRequestSettings.self, from: data) {
                     FLTTeads.placement?.delegate = self
-                    FLTTeads.placement?.requestAd(requestSettings: settings)
-                    result("")
+                    if let id = FLTTeads.placement?.requestAd(requestSettings: settings) {
+                        result(id.uuidString)
+                    } else {
+                        result(FlutterError())
+                    }
                 }
             } else {
                 result(
@@ -52,10 +56,13 @@ extension FLTTeadsInReadAdPlacement: TeadsInReadAdPlacementDelegate {
     
     public func didReceiveAd(ad: TeadsInReadAd, adRatio: TeadsAdRatio) {
         Self.teadsAd = ad
+        Self.adRatio = adRatio
         Self.channel?.invokeMethod("didReceiveAd", arguments: [])
     }
     
     public func didUpdateRatio(ad: TeadsInReadAd, adRatio: TeadsAdRatio) {
+        Self.teadsAd = ad
+        Self.adRatio = adRatio
         Self.channel?.invokeMethod("didUpdateRatio", arguments: [])
     }
     

@@ -10,15 +10,36 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Teads Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: const MyHomePage(title: 'Teads Demo'),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> implements TeadsInReadAdPlacementDelegate, TeadsAdDelegate, TeadsPlaybackDelegate {
-  String _platformVersion = 'Unknown';
+
+class MyHomePage extends StatefulWidget {
+
+  final String title;
+
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlacementDelegate, TeadsAdDelegate, TeadsPlaybackDelegate {
+  TeadsInReadAdView inReadAdView = TeadsInReadAdView();
+  double adViewHeight = 0;
 
   @override
   void initState() {
@@ -48,43 +69,52 @@ class _MyAppState extends State<MyApp> implements TeadsInReadAdPlacementDelegate
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: ListView(
-            children: const <Widget>[
-              SizedBox(
-                height: 400,
-                child: TeadsInReadAdView(),
-              )
-            ],
-          ),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
+      body: ListView(
+        children: <Widget>[
+          SizedBox(
+            height: adViewHeight,
+            child: inReadAdView,
+          )
+        ],
+      ) // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void resizeAd(TeadsAdRatio adRatio) async {
+    double width = MediaQuery.of(context).size.width;
+    double height = await adRatio.calculateHeight(width);
+
+    setState(() {
+      adViewHeight = height;
+    });
   }
 
   @override
   void didReceiveAd(TeadsInReadAd ad, TeadsAdRatio adRatio) {
     log('didReceiveAd');
-    ad.delegate = this;
-    ad.playbackDelegate = this;
+    ad.setDelegate(this);
+    ad.setPlaybackDelegate(this);
+    inReadAdView.bind(ad);
+    resizeAd(adRatio);
   }
 
   @override
   void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio) {
     log('didUpdateRatio');
+    resizeAd(adRatio);
+  }
+
+  @override
+  void willPresentModalView(TeadsAd ad) {
+    log('willPresentModalView');
   }
 
   @override
