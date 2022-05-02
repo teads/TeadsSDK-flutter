@@ -6,48 +6,107 @@ class provider_list extends StatefulWidget {
 }
 
 class _provider_listState extends State<provider_list> {
-  bool _isPressed = false;
-
-  void _ButtonFunction() {
-    setState(() {
-      if (_isPressed) {
-        _isPressed = false;
-        print(_isPressed);
-      } else {
-        _isPressed = true;
-        print(_isPressed);
-      }
-    });
-  }
+  String _selectedProvider = "Direct";
 
   @override
   Widget build(BuildContext context) {
     int items = 1;
     return SliverToBoxAdapter(
-        child: SizedBox(
-            height: 70,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: items,
-                itemBuilder: (context, item) => Stack(
-                      children: [
-                        Row(
-                          children: [
-                            TextButton(
-                                onPressed: _ButtonFunction,
-                                child: const Text('Direct')),
-                            TextButton(
-                                onPressed: _ButtonFunction,
-                                child: const Text('Admob')),
-                            TextButton(
-                                onPressed: _ButtonFunction,
-                                child: const Text('Mopub')),
-                            TextButton(
-                                onPressed: _ButtonFunction,
-                                child: const Text('Smart')),
-                          ],
-                        )
-                      ],
-                    ))));
+      child: SizedBox(
+        height: 70,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: items,
+          itemBuilder: (context, item) => Stack(
+            children: [
+              Row(
+                children: [
+                  SizedBox(width: 20),
+                  TextButton(
+                      onPressed: (() {
+                        setState(() {
+                          _selectedProvider = "Direct";
+                        });
+                      }),
+                      style: _selectedProvider == "Direct"
+                          ? TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                              onSurface: Colors.grey,
+                            )
+                          : TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor:
+                                  Color.fromARGB(255, 100, 100, 217),
+                              onSurface: Colors.grey,
+                            ),
+                      child: const Text('Direct')),
+                  SizedBox(width: 20),
+                  TextButton(
+                      onPressed: (() {
+                        setState(() {
+                          _selectedProvider = "Admob";
+                        });
+                      }),
+                      style: _selectedProvider == "Admob"
+                          ? TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                              onSurface: Colors.grey,
+                            )
+                          : TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor:
+                                  Color.fromARGB(255, 100, 100, 217),
+                              onSurface: Colors.grey,
+                            ),
+                      child: const Text('Admob')),
+                  SizedBox(width: 20),
+                  TextButton(
+                      onPressed: (() {
+                        setState(() {
+                          _selectedProvider = "Mopub";
+                        });
+                      }),
+                      style: _selectedProvider == "Mopub"
+                          ? TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                              onSurface: Colors.grey,
+                            )
+                          : TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor:
+                                  Color.fromARGB(255, 100, 100, 217),
+                              onSurface: Colors.grey,
+                            ),
+                      child: const Text('Mopub')),
+                  SizedBox(width: 20),
+                  TextButton(
+                      onPressed: (() {
+                        setState(() {
+                          _selectedProvider = "Smart";
+                        });
+                      }),
+                      style: _selectedProvider == "Smart"
+                          ? TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                              onSurface: Colors.grey,
+                            )
+                          : TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor:
+                                  Color.fromARGB(255, 100, 100, 217),
+                              onSurface: Colors.grey,
+                            ),
+                      child: const Text('Smart')),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

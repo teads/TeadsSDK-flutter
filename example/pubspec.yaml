@@ -60,6 +60,7 @@ flutter:
     - assets/Teads-Sample-App.imageset/Teads-Sample-App-white.png
     - assets/Teads-Sample-App.imageset/Teads-Sample-App-black.png
     - assets/logo.png
+    - assets/coffee_bg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

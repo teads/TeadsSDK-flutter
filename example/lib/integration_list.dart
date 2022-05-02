@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teads_sdk_flutter_example/demo_main.dart';
 
 class integration_list extends StatefulWidget {
   @override
@@ -78,9 +79,12 @@ class _integration_listState extends State<integration_list> {
                         "assets/TableView.imageset/TableView150.png"),
                     iconSize: 100,
                     onPressed: () {
-                      setState(() {
-                        _integrationType = "TableView";
-                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const demo_main()),
+                      );
+                      ;
                     },
                   ),
                   Text("TableView"),
