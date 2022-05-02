@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class demo_main extends StatelessWidget {
-  const demo_main({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +26,33 @@ class demo_main extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              Container(
+                  height: 200,
+                  width: 500,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 185, 97, 232),
+                        Color.fromARGB(255, 74, 52, 238)
+                      ],
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage("assets/coffee_bg.png"),
+                      fit: BoxFit.cover,
+                      opacity: 0.7,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text("Scroll down to see your creative",
+                        style: new TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255))),
+                  )),
+            ],
           ),
         ),
       ]),
