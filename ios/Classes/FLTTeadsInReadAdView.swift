@@ -49,10 +49,21 @@ public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
            channel.setMethodCallHandler({ [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
                switch(call.method) {
                case "bind":
-                   if let ad = FLTTeadsInReadAdPlacement.teadsAd {
-                       self?.inReadAdView.bind(ad)
+                   if let args = call.arguments as? [Any],
+                      let requestIdentifier = args[0] as? String {
+                       if let instance = try? FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier) {
+                           self?.inReadAdView.bind(instance.teadsAd)
+                       }
+                       result(nil)
+                   } else {
+                       result(
+                         FlutterError(
+                             code: "BAD_ARGS",
+                             message: "Wrong argument types",
+                             details: nil
+                         )
+                       )
                    }
-                   result("")
                default:
                    result(FlutterMethodNotImplemented)
                }

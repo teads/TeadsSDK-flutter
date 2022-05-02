@@ -10,7 +10,7 @@ import TeadsSDK
 
 public class FLTTeadsAdRequestSettings: NSObject, FlutterPlugin {
     
-    let bridgeInstance = TeadsAdRequestSettings()
+    let adRequestSettings = TeadsAdRequestSettings()
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_request_settings", binaryMessenger: registrar.messenger())
@@ -21,16 +21,16 @@ public class FLTTeadsAdRequestSettings: NSObject, FlutterPlugin {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "enableValidationMode":
-            bridgeInstance.enableValidationMode()
-            result(try? bridgeInstance.asDictionary())
+            adRequestSettings.enableValidationMode()
+            result(try? adRequestSettings.asDictionary())
         case "pageUrl":
             if let args = call.arguments as? [Any],
                let urlString = args[0] as? String {
-                bridgeInstance.pageUrl(urlString)
-                result(try? bridgeInstance.asDictionary())
+                adRequestSettings.pageUrl(urlString)
+                result(try? adRequestSettings.asDictionary())
             } else {
                 result(
-                  FlutterError.init(
+                  FlutterError(
                       code: "BAD_ARGS",
                       message: "Wrong argument types",
                       details: nil
@@ -41,11 +41,11 @@ public class FLTTeadsAdRequestSettings: NSObject, FlutterPlugin {
             if let args = call.arguments as? [Any],
                let value = args[0] as? String,
                let key = args[1] as? String {
-                bridgeInstance.addExtras(value, for: key)
-                result(try? bridgeInstance.asDictionary())
+                adRequestSettings.addExtras(value, for: key)
+                result(try? adRequestSettings.asDictionary())
             } else {
                 result(
-                  FlutterError.init(
+                  FlutterError(
                       code: "BAD_ARGS",
                       message: "Wrong argument types",
                       details: nil

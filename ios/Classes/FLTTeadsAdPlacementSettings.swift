@@ -10,7 +10,7 @@ import TeadsSDK
 
 public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
     
-    let bridgeInstance = TeadsAdPlacementSettings()
+    let placementSettings = TeadsAdPlacementSettings()
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_placement_settings", binaryMessenger: registrar.messenger())
@@ -21,14 +21,14 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "disableCrashMonitoring":
-            bridgeInstance.disableCrashMonitoring()
-            result(try? bridgeInstance.asDictionary())
+            placementSettings.disableCrashMonitoring()
+            result(try? placementSettings.asDictionary())
         case "disableTeadsAudioSessionManagement":
-            bridgeInstance.disableTeadsAudioSessionManagement()
-            result(try? bridgeInstance.asDictionary())
+            placementSettings.disableTeadsAudioSessionManagement()
+            result(try? placementSettings.asDictionary())
         case "enableDebug":
-            bridgeInstance.enableDebug()
-            result(try? bridgeInstance.asDictionary())
+            placementSettings.enableDebug()
+            result(try? placementSettings.asDictionary())
         case "userConsent":
             if let args = call.arguments as? [Any],
                let subjectToGDPR = args[0] as? String,
@@ -36,11 +36,11 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
                let tcfVersionRawValue = args[2] as? Int,
                let tcfVersion = TCFVersion(rawValue: tcfVersionRawValue),
                let cmpSdkID = args[3] as? Int {
-                bridgeInstance.userConsent(subjectToGDPR: subjectToGDPR, consent: consent, tcfVersion: tcfVersion, cmpSdkID: cmpSdkID)
-                result(try? bridgeInstance.asDictionary())
+                placementSettings.userConsent(subjectToGDPR: subjectToGDPR, consent: consent, tcfVersion: tcfVersion, cmpSdkID: cmpSdkID)
+                result(try? placementSettings.asDictionary())
             } else {
                 result(
-                  FlutterError.init(
+                  FlutterError(
                       code: "BAD_ARGS",
                       message: "Wrong argument types",
                       details: nil
@@ -50,11 +50,11 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
         case "setUsPrivacy":
             if let args = call.arguments as? [Any],
                let consent = args[0] as? String {
-                bridgeInstance.setUsPrivacy(consent: consent)
-                result(try? bridgeInstance.asDictionary())
+                placementSettings.setUsPrivacy(consent: consent)
+                result(try? placementSettings.asDictionary())
             } else {
                 result(
-                  FlutterError.init(
+                  FlutterError(
                       code: "BAD_ARGS",
                       message: "Wrong argument types",
                       details: nil
@@ -62,17 +62,17 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
                 )
             }
         case "disableBatteryMonitoring":
-            bridgeInstance.disableBatteryMonitoring()
-            result(try? bridgeInstance.asDictionary())
+            placementSettings.disableBatteryMonitoring()
+            result(try? placementSettings.asDictionary())
         case "addExtras":
             if let args = call.arguments as? [Any],
                let value = args[0] as? String,
                let key = args[1] as? String {
-                bridgeInstance.addExtras(value, for: key)
-                result(try? bridgeInstance.asDictionary())
+                placementSettings.addExtras(value, for: key)
+                result(try? placementSettings.asDictionary())
             } else {
                 result(
-                  FlutterError.init(
+                  FlutterError(
                       code: "BAD_ARGS",
                       message: "Wrong argument types",
                       details: nil

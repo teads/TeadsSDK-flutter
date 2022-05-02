@@ -19,7 +19,7 @@ class TeadsInReadAdView extends StatefulWidget {
 class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
 
   final MethodChannel _channel = const MethodChannel('teads_sdk_flutter/teads_ad_view');
-  late final TeadsInReadAd? inReadAd;
+  TeadsInReadAd? inReadAd;
 
   @override
   Widget build(BuildContext context) {

@@ -40,30 +40,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlacementDelegate, TeadsAdDelegate, TeadsPlaybackDelegate {
   TeadsInReadAdView inReadAdView = TeadsInReadAdView();
   double adViewHeight = 0;
+  TeadsInReadAdPlacement? placement;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    initTeadsAd();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
-      await placementSettings.enableDebug();
-      TeadsInReadAdPlacement? placement = await Teads.createInReadPlacement(84242, placementSettings, this);
-      TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
-      await requestSettings.pageUrl("https://example.com");
-      await placement?.requestAd(requestSettings);
-      platformVersion =
-          await Teads.sdkVersion ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
+  Future<void> initTeadsAd() async {
+    TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
+    await placementSettings.enableDebug();
+    placement = await Teads.createInReadPlacement(84242, placementSettings, this);
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -79,6 +68,14 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
       ),
       body: ListView(
         children: <Widget>[
+          ElevatedButton(
+            onPressed: () async {
+              TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
+              await requestSettings.pageUrl("https://example.com");
+              await placement?.requestAd(requestSettings);
+            },
+            child: const Text('Load ad'),
+          ),
           SizedBox(
             height: adViewHeight,
             child: inReadAdView,

@@ -4,8 +4,6 @@ import TeadsSDK
 
 public class FLTTeads: NSObject, FlutterPlugin {
     
-  static var placement: TeadsInReadAdPlacement?
-    
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads", binaryMessenger: registrar.messenger())
     let instance = FLTTeads()
@@ -23,12 +21,12 @@ public class FLTTeads: NSObject, FlutterPlugin {
              let data = try? JSONSerialization.data(withJSONObject: settingsMap, options: .prettyPrinted) {
               let decoder = JSONDecoder()
               if let settings = try? decoder.decode(TeadsAdPlacementSettings.self, from: data) {
-                  Self.placement = Teads.createInReadPlacement(pid: pid, settings: settings)
-                  result("")
+                  FLTTeadsAdInstanceManager.shared.placement = Teads.createInReadPlacement(pid: pid, settings: settings)
+                  result(nil)
               }
           } else {
               result(
-                FlutterError.init(
+                FlutterError(
                     code: "BAD_ARGS",
                     message: "Wrong argument types",
                     details: nil

@@ -10,9 +10,7 @@ import TeadsSDK
 
 public class FLTTeadsInReadAdPlacement: NSObject, FlutterPlugin {
     
-    static var channel: FlutterMethodChannel?
-    static var teadsAd: TeadsInReadAd?
-    static var adRatio: TeadsAdRatio?
+    private static var channel: FlutterMethodChannel?
         
     public static func register(with registrar: FlutterPluginRegistrar) {
         channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_inread_ad_placement", binaryMessenger: registrar.messenger())
@@ -30,8 +28,8 @@ public class FLTTeadsInReadAdPlacement: NSObject, FlutterPlugin {
                let data = try? JSONSerialization.data(withJSONObject: settingsMap, options: .prettyPrinted) {
                 let decoder = JSONDecoder()
                 if let settings = try? decoder.decode(TeadsAdRequestSettings.self, from: data) {
-                    FLTTeads.placement?.delegate = self
-                    if let id = FLTTeads.placement?.requestAd(requestSettings: settings) {
+                    FLTTeadsAdInstanceManager.shared.placement?.delegate = self
+                    if let id = FLTTeadsAdInstanceManager.shared.placement?.requestAd(requestSettings: settings) {
                         result(id.uuidString)
                     } else {
                         result(FlutterError())
@@ -39,7 +37,7 @@ public class FLTTeadsInReadAdPlacement: NSObject, FlutterPlugin {
                 }
             } else {
                 result(
-                  FlutterError.init(
+                  FlutterError(
                       code: "BAD_ARGS",
                       message: "Wrong argument types",
                       details: nil
@@ -55,15 +53,12 @@ public class FLTTeadsInReadAdPlacement: NSObject, FlutterPlugin {
 extension FLTTeadsInReadAdPlacement: TeadsInReadAdPlacementDelegate {
     
     public func didReceiveAd(ad: TeadsInReadAd, adRatio: TeadsAdRatio) {
-        Self.teadsAd = ad
-        Self.adRatio = adRatio
-        Self.channel?.invokeMethod("didReceiveAd", arguments: [])
+        FLTTeadsAdInstanceManager.shared.new(instance: FLTAdInstanceMap(teadsAd: ad, adRatio: adRatio))
+        Self.channel?.invokeMethod("didReceiveAd", arguments: [ad.requestIdentifier.uuidString])
     }
     
     public func didUpdateRatio(ad: TeadsInReadAd, adRatio: TeadsAdRatio) {
-        Self.teadsAd = ad
-        Self.adRatio = adRatio
-        Self.channel?.invokeMethod("didUpdateRatio", arguments: [])
+        Self.channel?.invokeMethod("didUpdateRatio", arguments: [ad.requestIdentifier.uuidString])
     }
     
     public func didFailToReceiveAd(reason: AdFailReason) {
