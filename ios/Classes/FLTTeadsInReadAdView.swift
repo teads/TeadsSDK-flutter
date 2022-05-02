@@ -56,13 +56,7 @@ public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
                        }
                        result(nil)
                    } else {
-                       result(
-                         FlutterError(
-                             code: "BAD_ARGS",
-                             message: "Wrong argument types",
-                             details: nil
-                         )
-                       )
+                       result(FlutterError.badArguments)
                    }
                default:
                    result(FlutterMethodNotImplemented)

@@ -25,13 +25,7 @@ public class FLTTeads: NSObject, FlutterPlugin {
                   result(nil)
               }
           } else {
-              result(
-                FlutterError(
-                    code: "BAD_ARGS",
-                    message: "Wrong argument types",
-                    details: nil
-                )
-              )
+              result(FlutterError.badArguments)
           }
       default:
           result(FlutterMethodNotImplemented)

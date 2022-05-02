@@ -39,13 +39,7 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
                 placementSettings.userConsent(subjectToGDPR: subjectToGDPR, consent: consent, tcfVersion: tcfVersion, cmpSdkID: cmpSdkID)
                 result(try? placementSettings.asDictionary())
             } else {
-                result(
-                  FlutterError(
-                      code: "BAD_ARGS",
-                      message: "Wrong argument types",
-                      details: nil
-                  )
-                )
+                result(FlutterError.badArguments)
             }
         case "setUsPrivacy":
             if let args = call.arguments as? [Any],
@@ -53,13 +47,7 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
                 placementSettings.setUsPrivacy(consent: consent)
                 result(try? placementSettings.asDictionary())
             } else {
-                result(
-                  FlutterError(
-                      code: "BAD_ARGS",
-                      message: "Wrong argument types",
-                      details: nil
-                  )
-                )
+                result(FlutterError.badArguments)
             }
         case "disableBatteryMonitoring":
             placementSettings.disableBatteryMonitoring()
@@ -71,13 +59,7 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
                 placementSettings.addExtras(value, for: key)
                 result(try? placementSettings.asDictionary())
             } else {
-                result(
-                  FlutterError(
-                      code: "BAD_ARGS",
-                      message: "Wrong argument types",
-                      details: nil
-                  )
-                )
+                result(FlutterError.badArguments)
             }
         default:
             result(FlutterMethodNotImplemented)

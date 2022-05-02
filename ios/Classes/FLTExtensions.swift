@@ -16,3 +16,17 @@ extension Encodable {
     return dictionary
   }
 }
+
+extension FlutterError {
+    static let noAdInstance = FlutterError(
+        code: "NO_AD_INSTANCE",
+        message: "Unable to find an ad instance",
+        details: nil
+    )
+    
+    static let badArguments = FlutterError(
+        code: "BAD_ARGS",
+        message: "Wrong argument types",
+        details: nil
+    )
+}

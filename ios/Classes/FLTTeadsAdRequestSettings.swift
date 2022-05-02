@@ -29,13 +29,7 @@ public class FLTTeadsAdRequestSettings: NSObject, FlutterPlugin {
                 adRequestSettings.pageUrl(urlString)
                 result(try? adRequestSettings.asDictionary())
             } else {
-                result(
-                  FlutterError(
-                      code: "BAD_ARGS",
-                      message: "Wrong argument types",
-                      details: nil
-                  )
-                )
+                result(FlutterError.badArguments)
             }
         case "addExtras":
             if let args = call.arguments as? [Any],
@@ -44,13 +38,7 @@ public class FLTTeadsAdRequestSettings: NSObject, FlutterPlugin {
                 adRequestSettings.addExtras(value, for: key)
                 result(try? adRequestSettings.asDictionary())
             } else {
-                result(
-                  FlutterError(
-                      code: "BAD_ARGS",
-                      message: "Wrong argument types",
-                      details: nil
-                  )
-                )
+                result(FlutterError.badArguments)
             }
         default:
             result(FlutterMethodNotImplemented)

@@ -26,7 +26,7 @@ class FLTTeadsAdInstanceManager {
         if let instance = list.first(where: { $0.teadsAd.requestIdentifier.uuidString == requestIdentifier }) {
             return instance
         } else {
-            throw NSError(domain: "tv.teads.flutter.instance.error", code: 1, userInfo: ["" : ""])
+            throw NSError()
         }
     }
 }

@@ -25,34 +25,26 @@ public class FLTTeadsAd: NSObject, FlutterPlugin {
         case "delegate":
             if let args = call.arguments as? [Any],
                let requestIdentifier = args[0] as? String {
-                if let instance = try? FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier) {
-                    instance.teadsAd.delegate = self
+                do {
+                    try FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).teadsAd.delegate = self
+                    result(nil)
+                } catch {
+                    result(FlutterError.noAdInstance)
                 }
-                result(nil)
             } else {
-                result(
-                  FlutterError(
-                      code: "BAD_ARGS",
-                      message: "Wrong argument types",
-                      details: nil
-                  )
-                )
+                result(FlutterError.badArguments)
             }
         case "playbackDelegate":
             if let args = call.arguments as? [Any],
                let requestIdentifier = args[0] as? String {
-                if let instance = try? FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier) {
-                    instance.teadsAd.playbackDelegate = self
+                do {
+                    try FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).teadsAd.playbackDelegate = self
+                    result(nil)
+                } catch {
+                    result(FlutterError.noAdInstance)
                 }
-                result(nil)
             } else {
-                result(
-                  FlutterError(
-                      code: "BAD_ARGS",
-                      message: "Wrong argument types",
-                      details: nil
-                  )
-                )
+                result(FlutterError.badArguments)
             }
         default:
             result(FlutterMethodNotImplemented)

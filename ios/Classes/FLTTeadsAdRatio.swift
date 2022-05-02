@@ -22,47 +22,25 @@ public class FLTTeadsAdRatio: NSObject, FlutterPlugin {
             if let args = call.arguments as? [Any],
                let width = args[0] as? CGFloat,
                let requestIdentifier = args[1] as? String {
-                if let instance = try? FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier) {
-                    result(instance.adRatio.calculateHeight(for: width))
+                do {
+                    result(try FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.calculateHeight(for: width))
+                } catch {
+                    result(FlutterError.noAdInstance)
                 }
-                return result(
-                    FlutterError(
-                        code: "NO_AD_INSTANCE",
-                        message: "Unable to find an ad instance",
-                        details: nil
-                    )
-                )
             } else {
-                result(
-                  FlutterError(
-                      code: "BAD_ARGS",
-                      message: "Wrong argument types",
-                      details: nil
-                  )
-                )
+                result(FlutterError.badArguments)
             }
         case "value":
             if let args = call.arguments as? [Any],
                let width = args[0] as? CGFloat,
                let requestIdentifier = args[1] as? String {
-                if let instance = try? FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier) {
-                    result(instance.adRatio.value(for: width))
+                do {
+                    result(try FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.value(for: width))
+                } catch {
+                    result(FlutterError.noAdInstance)
                 }
-                return result(
-                    FlutterError(
-                        code: "NO_AD_INSTANCE",
-                        message: "Unable to find an ad instance",
-                        details: nil
-                    )
-                )
             } else {
-                result(
-                  FlutterError(
-                      code: "BAD_ARGS",
-                      message: "Wrong argument types",
-                      details: nil
-                  )
-                )
+                result(FlutterError.badArguments)
             }
         default:
             result(FlutterMethodNotImplemented)
