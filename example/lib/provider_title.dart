@@ -8,8 +8,21 @@ class provider_title extends StatefulWidget {
 class _provider_titleState extends State<provider_title> {
   @override
   Widget build(BuildContext context) {
-    return const SliverToBoxAdapter(
-      child: Text("Providers"),
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: new EdgeInsets.symmetric(
+          horizontal: 10.0,
+          vertical: 10,
+        ),
+        child: Text(
+          "Providers",
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            color: Color.fromARGB(255, 0, 0, 0),
+            fontSize: 20,
+          ),
+        ),
+      ),
     );
   }
 }

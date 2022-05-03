@@ -15,17 +15,18 @@ class _integration_listState extends State<integration_list> {
       child: Container(
         child: Row(
           children: [
-            SizedBox(width: 50),
+            SizedBox(width: 20),
             Column(
               children: [
                 Container(
+                  padding:
+                      new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(5.0),
+                        Radius.circular(15.0),
                       )),
                   child: Column(children: [
-                    SizedBox(height: 10),
                     IconButton(
                       icon: Image.asset(
                           "assets/ScrollView.imageset/ScrollView150.png"),
@@ -37,17 +38,18 @@ class _integration_listState extends State<integration_list> {
                       },
                     ),
                     Text("ScrollView"),
-                    SizedBox(height: 10),
                   ]),
                 ),
+                SizedBox(height: 10),
                 Container(
+                  padding:
+                      new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(5.0),
+                        Radius.circular(15.0),
                       )),
                   child: Column(children: [
-                    SizedBox(height: 10),
                     IconButton(
                       icon: Image.asset(
                           "assets/CollectionView.imageset/CollectionView150.png"),
@@ -59,21 +61,21 @@ class _integration_listState extends State<integration_list> {
                       },
                     ),
                     Text("CollectionView"),
-                    SizedBox(height: 10),
                   ]),
                 ),
               ],
             ),
-            SizedBox(width: 50),
+            SizedBox(width: 10),
             Column(children: [
               Container(
+                padding:
+                    new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(5.0),
+                      Radius.circular(15.0),
                     )),
                 child: Column(children: [
-                  SizedBox(height: 10),
                   IconButton(
                     icon: Image.asset(
                         "assets/TableView.imageset/TableView150.png"),
@@ -87,17 +89,18 @@ class _integration_listState extends State<integration_list> {
                     },
                   ),
                   Text("TableView"),
-                  SizedBox(height: 10),
                 ]),
               ),
+              SizedBox(height: 10),
               Container(
+                padding:
+                    new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(5.0),
+                      Radius.circular(15.0),
                     )),
                 child: Column(children: [
-                  SizedBox(height: 10),
                   IconButton(
                     icon: Image.asset("assets/WebView.imageset/WebView150.png"),
                     iconSize: 100,
@@ -108,7 +111,6 @@ class _integration_listState extends State<integration_list> {
                     },
                   ),
                   Text("Webview"),
-                  SizedBox(height: 10),
                 ]),
               ),
             ]),

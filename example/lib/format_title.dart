@@ -8,8 +8,21 @@ class format_title extends StatefulWidget {
 class _format_titleState extends State<format_title> {
   @override
   Widget build(BuildContext context) {
-    return const SliverToBoxAdapter(
-      child: Text("Formats"),
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: new EdgeInsets.symmetric(
+          horizontal: 10.0,
+          vertical: 10,
+        ),
+        child: Text(
+          "Formats",
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            color: Color.fromARGB(255, 0, 0, 0),
+            fontSize: 20,
+          ),
+        ),
+      ),
     );
   }
 }
