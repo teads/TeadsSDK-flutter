@@ -6,7 +6,7 @@ class provider_list extends StatefulWidget {
 }
 
 class _provider_listState extends State<provider_list> {
-  String _selectedProvider = "Direct";
+  String _selectedProvider = "direct";
 
   @override
   Widget build(BuildContext context) {
@@ -23,84 +23,156 @@ class _provider_listState extends State<provider_list> {
                 children: [
                   SizedBox(width: 20),
                   TextButton(
-                      onPressed: (() {
-                        setState(() {
-                          _selectedProvider = "Direct";
-                        });
-                      }),
-                      style: _selectedProvider == "Direct"
-                          ? TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
-                              onSurface: Colors.grey,
+                    onPressed: (() {
+                      setState(() {
+                        _selectedProvider = "direct";
+                      });
+                    }),
+                    style: _selectedProvider == "direct"
+                        ? TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                            onSurface: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          )
+                        : TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.white,
+                            onSurface: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Color.fromARGB(255, 21, 21, 195),
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          ),
+                    child: Text(
+                      'Direct',
+                      style: _selectedProvider == "direct"
+                          ? TextStyle(
+                              color: Colors.white,
                             )
-                          : TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor:
-                                  Color.fromARGB(255, 100, 100, 217),
-                              onSurface: Colors.grey,
+                          : TextStyle(
+                              color: Color.fromARGB(255, 21, 21, 195),
                             ),
-                      child: const Text('Direct')),
+                    ),
+                  ),
                   SizedBox(width: 20),
                   TextButton(
-                      onPressed: (() {
-                        setState(() {
-                          _selectedProvider = "Admob";
-                        });
-                      }),
-                      style: _selectedProvider == "Admob"
-                          ? TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
-                              onSurface: Colors.grey,
+                    onPressed: (() {
+                      setState(() {
+                        _selectedProvider = "admob";
+                      });
+                    }),
+                    style: _selectedProvider == "admob"
+                        ? TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                            onSurface: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          )
+                        : TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.white,
+                            onSurface: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Color.fromARGB(255, 21, 21, 195),
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          ),
+                    child: Text(
+                      'Admob',
+                      style: _selectedProvider == "admob"
+                          ? TextStyle(
+                              color: Colors.white,
                             )
-                          : TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor:
-                                  Color.fromARGB(255, 100, 100, 217),
-                              onSurface: Colors.grey,
+                          : TextStyle(
+                              color: Color.fromARGB(255, 21, 21, 195),
                             ),
-                      child: const Text('Admob')),
+                    ),
+                  ),
                   SizedBox(width: 20),
                   TextButton(
-                      onPressed: (() {
-                        setState(() {
-                          _selectedProvider = "Mopub";
-                        });
-                      }),
-                      style: _selectedProvider == "Mopub"
-                          ? TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
-                              onSurface: Colors.grey,
+                    onPressed: (() {
+                      setState(() {
+                        _selectedProvider = "mopub";
+                      });
+                    }),
+                    style: _selectedProvider == "mopub"
+                        ? TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                            onSurface: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          )
+                        : TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.white,
+                            onSurface: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Color.fromARGB(255, 21, 21, 195),
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          ),
+                    child: Text(
+                      'Mopub',
+                      style: _selectedProvider == "mopub"
+                          ? TextStyle(
+                              color: Colors.white,
                             )
-                          : TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor:
-                                  Color.fromARGB(255, 100, 100, 217),
-                              onSurface: Colors.grey,
+                          : TextStyle(
+                              color: Color.fromARGB(255, 21, 21, 195),
                             ),
-                      child: const Text('Mopub')),
+                    ),
+                  ),
                   SizedBox(width: 20),
                   TextButton(
-                      onPressed: (() {
-                        setState(() {
-                          _selectedProvider = "Smart";
-                        });
-                      }),
-                      style: _selectedProvider == "Smart"
-                          ? TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
-                              onSurface: Colors.grey,
+                    onPressed: (() {
+                      setState(() {
+                        _selectedProvider = "smart";
+                      });
+                    }),
+                    style: _selectedProvider == "smart"
+                        ? TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                            onSurface: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          )
+                        : TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.white,
+                            onSurface: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Color.fromARGB(255, 21, 21, 195),
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          ),
+                    child: Text(
+                      'Smart',
+                      style: _selectedProvider == "smart"
+                          ? TextStyle(
+                              color: Colors.white,
                             )
-                          : TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor:
-                                  Color.fromARGB(255, 100, 100, 217),
-                              onSurface: Colors.grey,
+                          : TextStyle(
+                              color: Color.fromARGB(255, 21, 21, 195),
                             ),
-                      child: const Text('Smart')),
+                    ),
+                  ),
                 ],
               )
             ],

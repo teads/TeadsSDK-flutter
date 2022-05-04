@@ -25,49 +25,83 @@ class _format_listState extends State<format_list> {
                   SizedBox(
                     width: 150,
                     child: TextButton(
-                        onPressed: (() {
-                          setState(() {
-                            _formatSelected = "inreads";
-                          });
-                        }),
+                      onPressed: (() {
+                        setState(() {
+                          _formatSelected = "inreads";
+                        });
+                      }),
+                      style: _formatSelected == "inreads"
+                          ? TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                              onSurface: Colors.grey,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                            )
+                          : TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors.white,
+                              onSurface: Colors.grey,
+                              shape: const RoundedRectangleBorder(
+                                  side: BorderSide(
+                                    color: Color.fromARGB(255, 21, 21, 195),
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                            ),
+                      child: Text(
+                        'InReads',
                         style: _formatSelected == "inreads"
-                            ? TextButton.styleFrom(
-                                primary: Colors.white,
-                                backgroundColor:
-                                    Color.fromARGB(255, 21, 21, 195),
-                                onSurface: Colors.grey,
+                            ? TextStyle(
+                                color: Colors.white,
                               )
-                            : TextButton.styleFrom(
-                                primary: Colors.white,
-                                backgroundColor:
-                                    Color.fromARGB(255, 100, 100, 217),
-                                onSurface: Colors.grey,
+                            : TextStyle(
+                                color: Color.fromARGB(255, 21, 21, 195),
                               ),
-                        child: const Text('InReads')),
+                      ),
+                    ),
                   ),
                   SizedBox(width: 20),
                   SizedBox(
                     width: 150,
                     child: TextButton(
-                        onPressed: (() {
-                          setState(() {
-                            _formatSelected = "native";
-                          });
-                        }),
+                      onPressed: (() {
+                        setState(() {
+                          _formatSelected = "native";
+                        });
+                      }),
+                      style: _formatSelected == "native"
+                          ? TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                              onSurface: Colors.grey,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                            )
+                          : TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors.white,
+                              onSurface: Colors.grey,
+                              shape: const RoundedRectangleBorder(
+                                  side: BorderSide(
+                                    color: Color.fromARGB(255, 21, 21, 195),
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                            ),
+                      child: Text(
+                        'Native',
                         style: _formatSelected == "native"
-                            ? TextButton.styleFrom(
-                                primary: Colors.white,
-                                backgroundColor:
-                                    Color.fromARGB(255, 21, 21, 195),
-                                onSurface: Colors.grey,
+                            ? TextStyle(
+                                color: Colors.white,
                               )
-                            : TextButton.styleFrom(
-                                primary: Colors.white,
-                                backgroundColor:
-                                    Color.fromARGB(255, 100, 100, 217),
-                                onSurface: Colors.grey,
+                            : TextStyle(
+                                color: Color.fromARGB(255, 21, 21, 195),
                               ),
-                        child: const Text('Native')),
+                      ),
+                    ),
                   ),
                 ],
               )

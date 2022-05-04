@@ -7,7 +7,7 @@ class integration_list extends StatefulWidget {
 }
 
 class _integration_listState extends State<integration_list> {
-  String _integrationType = "ScrollView";
+  String _integrationType = "scrollView";
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,8 @@ class _integration_listState extends State<integration_list> {
                   padding:
                       new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border:
+                          Border.all(color: Color.fromRGBO(170, 184, 205, 1)),
                       borderRadius: BorderRadius.all(
                         Radius.circular(15.0),
                       )),
@@ -33,11 +34,22 @@ class _integration_listState extends State<integration_list> {
                       iconSize: 100,
                       onPressed: () {
                         setState(() {
-                          _integrationType = "ScrollView";
+                          _integrationType = "scrollView";
                         });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => demo_main(),
+                          ),
+                        );
                       },
                     ),
-                    Text("ScrollView"),
+                    Text(
+                      "ScrollView",
+                      style: TextStyle(
+                        color: Color.fromRGBO(170, 184, 205, 1),
+                      ),
+                    ),
                   ]),
                 ),
                 SizedBox(height: 10),
@@ -45,7 +57,8 @@ class _integration_listState extends State<integration_list> {
                   padding:
                       new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border:
+                          Border.all(color: Color.fromRGBO(170, 184, 205, 1)),
                       borderRadius: BorderRadius.all(
                         Radius.circular(15.0),
                       )),
@@ -56,11 +69,22 @@ class _integration_listState extends State<integration_list> {
                       iconSize: 100,
                       onPressed: () {
                         setState(() {
-                          _integrationType = "CollectionView";
+                          _integrationType = "collectionView";
                         });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => demo_main(),
+                          ),
+                        );
                       },
                     ),
-                    Text("CollectionView"),
+                    Text(
+                      "CollectionView",
+                      style: TextStyle(
+                        color: Color.fromRGBO(170, 184, 205, 1),
+                      ),
+                    ),
                   ]),
                 ),
               ],
@@ -71,7 +95,7 @@ class _integration_listState extends State<integration_list> {
                 padding:
                     new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(color: Color.fromRGBO(170, 184, 205, 1)),
                     borderRadius: BorderRadius.all(
                       Radius.circular(15.0),
                     )),
@@ -81,14 +105,21 @@ class _integration_listState extends State<integration_list> {
                         "assets/TableView.imageset/TableView150.png"),
                     iconSize: 100,
                     onPressed: () {
+                      setState(() {
+                        _integrationType = "tableview";
+                      });
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => demo_main()),
+                        MaterialPageRoute(
+                          builder: (context) => demo_main(),
+                        ),
                       );
-                      ;
                     },
                   ),
-                  Text("TableView"),
+                  Text(
+                    "TableView",
+                    style: TextStyle(color: Color.fromRGBO(170, 184, 205, 1)),
+                  ),
                 ]),
               ),
               SizedBox(height: 10),
@@ -96,7 +127,9 @@ class _integration_listState extends State<integration_list> {
                 padding:
                     new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(
+                      color: Color.fromRGBO(170, 184, 205, 1),
+                    ),
                     borderRadius: BorderRadius.all(
                       Radius.circular(15.0),
                     )),
@@ -106,11 +139,22 @@ class _integration_listState extends State<integration_list> {
                     iconSize: 100,
                     onPressed: () {
                       setState(() {
-                        _integrationType = "WebView";
+                        _integrationType = "webView";
                       });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => demo_main(),
+                        ),
+                      );
                     },
                   ),
-                  Text("Webview"),
+                  Text(
+                    "Webview",
+                    style: TextStyle(
+                      color: Color.fromRGBO(170, 184, 205, 1),
+                    ),
+                  ),
                 ]),
               ),
             ]),
