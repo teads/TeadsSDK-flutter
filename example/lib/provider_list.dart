@@ -21,7 +21,7 @@ class _provider_listState extends State<provider_list> {
             children: [
               Row(
                 children: [
-                  SizedBox(width: 20),
+                  SizedBox(width: 30),
                   TextButton(
                     onPressed: (() {
                       setState(() {

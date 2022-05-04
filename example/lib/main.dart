@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'integration_list.dart';
 import 'provider_list.dart';
-import 'provider_title.dart';
-import 'format_title.dart';
+
+import 'title.dart';
 import 'format_list.dart';
-import 'creative_title.dart';
+
 import 'creative_list.dart';
-import 'integration_title.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +29,8 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  String _test = "test";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,22 +47,17 @@ class _homeState extends State<home> {
           ),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 255, 255, 255),
-                  Color.fromARGB(255, 255, 255, 255)
-                ],
-              ),
+              color: Colors.white,
             ),
           ),
         ),
-        format_title(),
+        const title(giventitle: "Formats"),
         format_list(),
-        provider_title(),
+        const title(giventitle: "Providers"),
         provider_list(),
-        creative_title(),
+        const title(giventitle: "Creatives"),
         creative_list(),
-        integration_title(),
+        const title(giventitle: "Integrations"),
         integration_list()
       ]),
     );

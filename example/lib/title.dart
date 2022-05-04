@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class creative_title extends StatefulWidget {
-  @override
-  State<creative_title> createState() => _creative_titleState();
-}
+class title extends StatelessWidget {
+  const title({
+    Key? key,
+    required this.giventitle,
+  }) : super(key: key);
 
-class _creative_titleState extends State<creative_title> {
+  final String giventitle;
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -15,7 +17,7 @@ class _creative_titleState extends State<creative_title> {
           vertical: 10,
         ),
         child: Text(
-          "Creatives",
+          giventitle,
           style: TextStyle(
             fontWeight: FontWeight.w700,
             color: Color.fromARGB(255, 0, 0, 0),

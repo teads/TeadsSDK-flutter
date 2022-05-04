@@ -6,7 +6,7 @@ class format_list extends StatefulWidget {
 }
 
 class _format_listState extends State<format_list> {
-  String _formatSelected = "inreads";
+  String _formatSelected = "inread";
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +23,14 @@ class _format_listState extends State<format_list> {
                 children: [
                   SizedBox(width: 20),
                   SizedBox(
-                    width: 150,
+                    width: 160,
                     child: TextButton(
                       onPressed: (() {
                         setState(() {
-                          _formatSelected = "inreads";
+                          _formatSelected = "inread";
                         });
                       }),
-                      style: _formatSelected == "inreads"
+                      style: _formatSelected == "inread"
                           ? TextButton.styleFrom(
                               primary: Colors.white,
                               backgroundColor: Color.fromARGB(255, 21, 21, 195),
@@ -51,8 +51,8 @@ class _format_listState extends State<format_list> {
                                       BorderRadius.all(Radius.circular(10))),
                             ),
                       child: Text(
-                        'InReads',
-                        style: _formatSelected == "inreads"
+                        'InRead',
+                        style: _formatSelected == "inread"
                             ? TextStyle(
                                 color: Colors.white,
                               )
@@ -64,7 +64,7 @@ class _format_listState extends State<format_list> {
                   ),
                   SizedBox(width: 20),
                   SizedBox(
-                    width: 150,
+                    width: 160,
                     child: TextButton(
                       onPressed: (() {
                         setState(() {

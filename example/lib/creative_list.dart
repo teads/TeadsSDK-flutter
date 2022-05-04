@@ -8,7 +8,7 @@ class creative_list extends StatefulWidget {
 
 class _creative_listState extends State<creative_list> {
   String _selectedCreative = "landscape";
-  String _selectedPID = "84242";
+
   TextEditingController _controller = new TextEditingController(text: '84242');
 
   @override
