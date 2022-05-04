@@ -2,13 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:teads_sdk_flutter_example/demo_main.dart';
 
 class integration_list extends StatefulWidget {
+  String integrationType;
+  String selectedProvider;
+  String selectedCreative;
+  String selectedFormat;
+  String selectedPID;
+  integration_list(
+      {Key? key,
+      required this.integrationType,
+      required this.selectedProvider,
+      required this.selectedCreative,
+      required this.selectedFormat,
+      required this.selectedPID})
+      : super(key: key);
+
   @override
   State<integration_list> createState() => _integration_listState();
 }
 
 class _integration_listState extends State<integration_list> {
-  String _integrationType = "scrollView";
-
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -34,8 +46,9 @@ class _integration_listState extends State<integration_list> {
                       iconSize: 100,
                       onPressed: () {
                         setState(() {
-                          _integrationType = "scrollView";
+                          widget.integrationType = "scrollView";
                         });
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -69,7 +82,7 @@ class _integration_listState extends State<integration_list> {
                       iconSize: 100,
                       onPressed: () {
                         setState(() {
-                          _integrationType = "collectionView";
+                          widget.integrationType = "collectionView";
                         });
                         Navigator.push(
                           context,
@@ -106,7 +119,7 @@ class _integration_listState extends State<integration_list> {
                     iconSize: 100,
                     onPressed: () {
                       setState(() {
-                        _integrationType = "tableview";
+                        widget.integrationType = "tableview";
                       });
                       Navigator.push(
                         context,
@@ -139,7 +152,7 @@ class _integration_listState extends State<integration_list> {
                     iconSize: 100,
                     onPressed: () {
                       setState(() {
-                        _integrationType = "webView";
+                        widget.integrationType = "webView";
                       });
                       Navigator.push(
                         context,

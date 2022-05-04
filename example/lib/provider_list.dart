@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class provider_list extends StatefulWidget {
+  String selectedProvider;
+  provider_list({Key? key, required this.selectedProvider}) : super(key: key);
+
   @override
   State<provider_list> createState() => _provider_listState();
 }
 
 class _provider_listState extends State<provider_list> {
-  String _selectedProvider = "direct";
-
   @override
   Widget build(BuildContext context) {
     int items = 1;
@@ -25,10 +26,10 @@ class _provider_listState extends State<provider_list> {
                   TextButton(
                     onPressed: (() {
                       setState(() {
-                        _selectedProvider = "direct";
+                        widget.selectedProvider = "direct";
                       });
                     }),
-                    style: _selectedProvider == "direct"
+                    style: widget.selectedProvider == "direct"
                         ? TextButton.styleFrom(
                             primary: Colors.white,
                             backgroundColor: Color.fromARGB(255, 21, 21, 195),
@@ -50,7 +51,7 @@ class _provider_listState extends State<provider_list> {
                           ),
                     child: Text(
                       'Direct',
-                      style: _selectedProvider == "direct"
+                      style: widget.selectedProvider == "direct"
                           ? TextStyle(
                               color: Colors.white,
                             )
@@ -63,10 +64,10 @@ class _provider_listState extends State<provider_list> {
                   TextButton(
                     onPressed: (() {
                       setState(() {
-                        _selectedProvider = "admob";
+                        widget.selectedProvider = "admob";
                       });
                     }),
-                    style: _selectedProvider == "admob"
+                    style: widget.selectedProvider == "admob"
                         ? TextButton.styleFrom(
                             primary: Colors.white,
                             backgroundColor: Color.fromARGB(255, 21, 21, 195),
@@ -88,7 +89,7 @@ class _provider_listState extends State<provider_list> {
                           ),
                     child: Text(
                       'Admob',
-                      style: _selectedProvider == "admob"
+                      style: widget.selectedProvider == "admob"
                           ? TextStyle(
                               color: Colors.white,
                             )
@@ -101,10 +102,10 @@ class _provider_listState extends State<provider_list> {
                   TextButton(
                     onPressed: (() {
                       setState(() {
-                        _selectedProvider = "mopub";
+                        widget.selectedProvider = "mopub";
                       });
                     }),
-                    style: _selectedProvider == "mopub"
+                    style: widget.selectedProvider == "mopub"
                         ? TextButton.styleFrom(
                             primary: Colors.white,
                             backgroundColor: Color.fromARGB(255, 21, 21, 195),
@@ -126,7 +127,7 @@ class _provider_listState extends State<provider_list> {
                           ),
                     child: Text(
                       'Mopub',
-                      style: _selectedProvider == "mopub"
+                      style: widget.selectedProvider == "mopub"
                           ? TextStyle(
                               color: Colors.white,
                             )
@@ -139,10 +140,10 @@ class _provider_listState extends State<provider_list> {
                   TextButton(
                     onPressed: (() {
                       setState(() {
-                        _selectedProvider = "smart";
+                        widget.selectedProvider = "smart";
                       });
                     }),
-                    style: _selectedProvider == "smart"
+                    style: widget.selectedProvider == "smart"
                         ? TextButton.styleFrom(
                             primary: Colors.white,
                             backgroundColor: Color.fromARGB(255, 21, 21, 195),
@@ -164,7 +165,7 @@ class _provider_listState extends State<provider_list> {
                           ),
                     child: Text(
                       'Smart',
-                      style: _selectedProvider == "smart"
+                      style: widget.selectedProvider == "smart"
                           ? TextStyle(
                               color: Colors.white,
                             )

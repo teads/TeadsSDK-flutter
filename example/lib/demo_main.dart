@@ -6,6 +6,7 @@ class demo_main extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(slivers: [
         SliverAppBar(
+          pinned: true,
           title: Container(
             height: 30,
             child: (Image.asset(

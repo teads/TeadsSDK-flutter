@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class format_list extends StatefulWidget {
+  String selectedFormat;
+  format_list({Key? key, required this.selectedFormat}) : super(key: key);
+
   @override
   State<format_list> createState() => _format_listState();
 }
 
 class _format_listState extends State<format_list> {
-  String _formatSelected = "inread";
-
   @override
   Widget build(BuildContext context) {
     int items = 1;
@@ -27,10 +28,10 @@ class _format_listState extends State<format_list> {
                     child: TextButton(
                       onPressed: (() {
                         setState(() {
-                          _formatSelected = "inread";
+                          widget.selectedFormat = "inread";
                         });
                       }),
-                      style: _formatSelected == "inread"
+                      style: widget.selectedFormat == "inread"
                           ? TextButton.styleFrom(
                               primary: Colors.white,
                               backgroundColor: Color.fromARGB(255, 21, 21, 195),
@@ -52,7 +53,7 @@ class _format_listState extends State<format_list> {
                             ),
                       child: Text(
                         'InRead',
-                        style: _formatSelected == "inread"
+                        style: widget.selectedFormat == "inread"
                             ? TextStyle(
                                 color: Colors.white,
                               )
@@ -68,10 +69,10 @@ class _format_listState extends State<format_list> {
                     child: TextButton(
                       onPressed: (() {
                         setState(() {
-                          _formatSelected = "native";
+                          widget.selectedFormat = "native";
                         });
                       }),
-                      style: _formatSelected == "native"
+                      style: widget.selectedFormat == "native"
                           ? TextButton.styleFrom(
                               primary: Colors.white,
                               backgroundColor: Color.fromARGB(255, 21, 21, 195),
@@ -93,7 +94,7 @@ class _format_listState extends State<format_list> {
                             ),
                       child: Text(
                         'Native',
-                        style: _formatSelected == "native"
+                        style: widget.selectedFormat == "native"
                             ? TextStyle(
                                 color: Colors.white,
                               )

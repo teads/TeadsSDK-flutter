@@ -1,18 +1,23 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
+import 'package:teads_sdk_flutter_example/main.dart';
 
 class creative_list extends StatefulWidget {
+  String selectedCreative;
+  String selectedPID;
+  creative_list(
+      {Key? key, required this.selectedCreative, required this.selectedPID})
+      : super(key: key);
   @override
   State<creative_list> createState() => _creative_listState();
 }
 
 class _creative_listState extends State<creative_list> {
-  String _selectedCreative = "landscape";
-
-  TextEditingController _controller = new TextEditingController(text: '84242');
-
   @override
   Widget build(BuildContext context) {
+    TextEditingController _controller =
+        TextEditingController(text: widget.selectedPID);
     int items = 1;
     return SliverToBoxAdapter(
       child: SizedBox(
@@ -32,10 +37,10 @@ class _creative_listState extends State<creative_list> {
                         child: TextButton(
                           onPressed: (() {
                             setState(() {
-                              _selectedCreative = "landscape";
+                              widget.selectedCreative = "landscape";
                             });
                           }),
-                          style: _selectedCreative == "landscape"
+                          style: widget.selectedCreative == "landscape"
                               ? TextButton.styleFrom(
                                   primary: Colors.white,
                                   backgroundColor:
@@ -58,7 +63,7 @@ class _creative_listState extends State<creative_list> {
                                 ),
                           child: Text(
                             'LandScape',
-                            style: _selectedCreative == "landscape"
+                            style: widget.selectedCreative == "landscape"
                                 ? TextStyle(
                                     color: Colors.white,
                                   )
@@ -74,10 +79,10 @@ class _creative_listState extends State<creative_list> {
                         child: TextButton(
                           onPressed: (() {
                             setState(() {
-                              _selectedCreative = "vertical";
+                              widget.selectedCreative = "vertical";
                             });
                           }),
-                          style: _selectedCreative == "vertical"
+                          style: widget.selectedCreative == "vertical"
                               ? TextButton.styleFrom(
                                   primary: Colors.white,
                                   backgroundColor:
@@ -100,7 +105,7 @@ class _creative_listState extends State<creative_list> {
                                 ),
                           child: Text(
                             'Vertical',
-                            style: _selectedCreative == "vertical"
+                            style: widget.selectedCreative == "vertical"
                                 ? TextStyle(
                                     color: Colors.white,
                                   )
@@ -116,10 +121,10 @@ class _creative_listState extends State<creative_list> {
                         child: TextButton(
                           onPressed: (() {
                             setState(() {
-                              _selectedCreative = "square";
+                              widget.selectedCreative = "square";
                             });
                           }),
-                          style: _selectedCreative == "square"
+                          style: widget.selectedCreative == "square"
                               ? TextButton.styleFrom(
                                   primary: Colors.white,
                                   backgroundColor:
@@ -142,7 +147,7 @@ class _creative_listState extends State<creative_list> {
                                 ),
                           child: Text(
                             'Square',
-                            style: _selectedCreative == "square"
+                            style: widget.selectedCreative == "square"
                                 ? TextStyle(
                                     color: Colors.white,
                                   )
@@ -161,10 +166,10 @@ class _creative_listState extends State<creative_list> {
                         child: TextButton(
                           onPressed: (() {
                             setState(() {
-                              _selectedCreative = "carousel";
+                              widget.selectedCreative = "carousel";
                             });
                           }),
-                          style: _selectedCreative == "carousel"
+                          style: widget.selectedCreative == "carousel"
                               ? TextButton.styleFrom(
                                   primary: Colors.white,
                                   backgroundColor:
@@ -187,7 +192,7 @@ class _creative_listState extends State<creative_list> {
                                 ),
                           child: Text(
                             'Carousel',
-                            style: _selectedCreative == "carousel"
+                            style: widget.selectedCreative == "carousel"
                                 ? TextStyle(
                                     color: Colors.white,
                                   )
@@ -203,7 +208,7 @@ class _creative_listState extends State<creative_list> {
                         child: TextButton(
                           onPressed: (() {
                             setState(() {
-                              _selectedCreative = "custom";
+                              widget.selectedCreative = "custom";
                             });
                             showModalBottomSheet<void>(
                               context: context,
@@ -229,10 +234,18 @@ class _creative_listState extends State<creative_list> {
                                           ),
                                         ),
                                         ElevatedButton(
-                                          child: const Text('OK'),
-                                          onPressed: () =>
-                                              Navigator.pop(context),
-                                        )
+                                            child: const Text('OK'),
+                                            onPressed: () => Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) => home(
+                                                      selectedPID:
+                                                          _controller.text,
+                                                      selectedCreative:
+                                                          "custom",
+                                                    ),
+                                                  ),
+                                                )),
                                       ],
                                     ),
                                   ),
@@ -240,7 +253,7 @@ class _creative_listState extends State<creative_list> {
                               },
                             );
                           }),
-                          style: _selectedCreative == "custom"
+                          style: widget.selectedCreative == "custom"
                               ? TextButton.styleFrom(
                                   primary: Colors.white,
                                   backgroundColor:
@@ -263,7 +276,7 @@ class _creative_listState extends State<creative_list> {
                                 ),
                           child: Text(
                             'Custom',
-                            style: _selectedCreative == "custom"
+                            style: widget.selectedCreative == "custom"
                                 ? TextStyle(
                                     color: Colors.white,
                                   )

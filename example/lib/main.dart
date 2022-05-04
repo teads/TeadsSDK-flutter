@@ -17,25 +17,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: home(),
+      home: home(
+        selectedPID: "84242",
+        selectedCreative: "landscape",
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class home extends StatefulWidget {
+  String selectedPID;
+  String selectedCreative;
+  home({Key? key, required this.selectedPID, required this.selectedCreative})
+      : super(key: key);
+
   @override
   State<home> createState() => _homeState();
 }
 
 class _homeState extends State<home> {
-  String _test = "test";
+  //default values
+  String _selectedFormat = "inread";
+  String _selectedProvider = "direct";
+  String _integrationType = "scrollview";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(slivers: [
         SliverAppBar(
+          pinned: true,
           title: Container(
             height: 30,
             child: (Image.asset(
@@ -52,13 +64,25 @@ class _homeState extends State<home> {
           ),
         ),
         const title(giventitle: "Formats"),
-        format_list(),
+        format_list(
+          selectedFormat: _selectedFormat,
+        ),
         const title(giventitle: "Providers"),
-        provider_list(),
+        provider_list(
+          selectedProvider: _selectedProvider,
+        ),
         const title(giventitle: "Creatives"),
-        creative_list(),
+        creative_list(
+          selectedCreative: widget.selectedCreative,
+          selectedPID: widget.selectedPID,
+        ),
         const title(giventitle: "Integrations"),
-        integration_list()
+        integration_list(
+            integrationType: _integrationType,
+            selectedProvider: _selectedProvider,
+            selectedCreative: widget.selectedCreative,
+            selectedFormat: _selectedFormat,
+            selectedPID: widget.selectedPID),
       ]),
     );
   }
