@@ -24,7 +24,7 @@ class TeadsInReadAdPlacement {
             delegate?.didReceiveAd(inReadAdAdRatioMap.inReadAd, inReadAdAdRatioMap.adRatio);
           }
           on StateError {
-            // code for handling exception
+            throw Exception(badArgumentsErrorMessage);
           }
           break;
         case "didUpdateRatio":
@@ -34,7 +34,7 @@ class TeadsInReadAdPlacement {
             delegate?.didUpdateRatio(inReadAdAdRatioMap.inReadAd, inReadAdAdRatioMap.adRatio);
           }
           on StateError {
-            // code for handling exception
+            throw Exception(badArgumentsErrorMessage);
           }
           break;
         default:

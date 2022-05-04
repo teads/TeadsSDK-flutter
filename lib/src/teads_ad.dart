@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:teads_sdk_flutter/src/teads_inread_ad_placement.dart';
+import 'package:teads_sdk_flutter/teads_sdk_flutter.dart';
 
 mixin TeadsAdDelegate {
   void willPresentModalView(TeadsAd ad);
@@ -40,7 +40,7 @@ class TeadsAd {
             _delegate?.didCatchError(this, error);
           }
           on StateError {
-            // code for handling exception
+            throw Exception(badArgumentsErrorMessage);
           }
           break;
         case "didClose":
