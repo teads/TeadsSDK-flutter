@@ -24,9 +24,7 @@ rootProject.allprojects {
     }
 
     dependencies {
-        implementation("tv.teads.sdk.android:sdk:^5.0.14") {
-            transitive = true
-        }
+
     }
 }
 
@@ -50,10 +48,13 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 19
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation("tv.teads.sdk.android:sdk:5.0.14") {
+        transitive = true
+    }
 }
