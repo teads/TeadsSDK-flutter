@@ -26,114 +26,30 @@ class _integration_listState extends State<integration_list> {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Container(
-        child: Row(
-          children: [
-            SizedBox(width: 20),
-            Column(
-              children: [
-                Container(
-                  padding:
-                      new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
-                  decoration: BoxDecoration(
-                      border:
-                          Border.all(color: Color.fromRGBO(170, 184, 205, 1)),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15.0),
-                      )),
-                  child: Column(children: [
-                    IconButton(
-                      icon: Image.asset(
-                          "assets/ScrollView.imageset/ScrollView150.png"),
-                      iconSize: 100,
-                      onPressed: () {
-                        setState(() {
-                          widget.integrationType = "scrollView";
-                        });
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => demo_main(
-                                integrationType: widget.integrationType,
-                                selectedProvider: widget.selectedProvider,
-                                selectedCreative: widget.selectedCreative,
-                                selectedFormat: widget.selectedFormat,
-                                selectedPID: widget.selectedPID),
-                          ),
-                        );
-                      },
-                    ),
-                    Text(
-                      "ScrollView",
-                      style: TextStyle(
-                        color: Color.fromRGBO(170, 184, 205, 1),
-                      ),
-                    ),
-                  ]),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  padding:
-                      new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
-                  decoration: BoxDecoration(
-                      border:
-                          Border.all(color: Color.fromRGBO(170, 184, 205, 1)),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15.0),
-                      )),
-                  child: Column(children: [
-                    IconButton(
-                      icon: Image.asset(
-                          "assets/CollectionView.imageset/CollectionView150.png"),
-                      iconSize: 100,
-                      onPressed: () {
-                        setState(() {
-                          widget.integrationType = "collectionView";
-                        });
-                        log(widget.selectedFormat);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => demo_main(
-                                integrationType: widget.integrationType,
-                                selectedProvider: widget.selectedProvider,
-                                selectedCreative: widget.selectedCreative,
-                                selectedFormat: widget.selectedFormat,
-                                selectedPID: widget.selectedPID),
-                          ),
-                        );
-                      },
-                    ),
-                    Text(
-                      "CollectionView",
-                      style: TextStyle(
-                        color: Color.fromRGBO(170, 184, 205, 1),
-                      ),
-                    ),
-                  ]),
-                ),
-              ],
-            ),
-            SizedBox(width: 10),
-            Column(children: [
+      child: Row(
+        children: [
+          const SizedBox(width: 20),
+          Column(
+            children: [
               Container(
                 padding:
-                    new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
+                    const EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Color.fromRGBO(170, 184, 205, 1)),
-                    borderRadius: BorderRadius.all(
+                    border: Border.all(
+                        color: const Color.fromRGBO(170, 184, 205, 1)),
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(15.0),
                     )),
                 child: Column(children: [
                   IconButton(
                     icon: Image.asset(
-                        "assets/TableView.imageset/TableView150.png"),
+                        "assets/ScrollView.imageset/ScrollView150.png"),
                     iconSize: 100,
                     onPressed: () {
                       setState(() {
-                        widget.integrationType = "tableview";
+                        widget.integrationType = "scrollView";
                       });
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -147,55 +63,138 @@ class _integration_listState extends State<integration_list> {
                       );
                     },
                   ),
-                  Text(
-                    "TableView",
-                    style: TextStyle(color: Color.fromRGBO(170, 184, 205, 1)),
-                  ),
-                ]),
-              ),
-              SizedBox(height: 10),
-              Container(
-                padding:
-                    new EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color.fromRGBO(170, 184, 205, 1),
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.0),
-                    )),
-                child: Column(children: [
-                  IconButton(
-                    icon: Image.asset("assets/WebView.imageset/WebView150.png"),
-                    iconSize: 100,
-                    onPressed: () {
-                      setState(() {
-                        widget.integrationType = "webView";
-                      });
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => demo_main(
-                              integrationType: widget.integrationType,
-                              selectedProvider: widget.selectedProvider,
-                              selectedCreative: widget.selectedCreative,
-                              selectedFormat: widget.selectedFormat,
-                              selectedPID: widget.selectedPID),
-                        ),
-                      );
-                    },
-                  ),
-                  Text(
-                    "Webview",
+                  const Text(
+                    "ScrollView",
                     style: TextStyle(
                       color: Color.fromRGBO(170, 184, 205, 1),
                     ),
                   ),
                 ]),
               ),
-            ]),
-          ],
-        ),
+              const SizedBox(height: 10),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        color: const Color.fromRGBO(170, 184, 205, 1)),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15.0),
+                    )),
+                child: Column(children: [
+                  IconButton(
+                    icon: Image.asset(
+                        "assets/CollectionView.imageset/CollectionView150.png"),
+                    iconSize: 100,
+                    onPressed: () {
+                      setState(() {
+                        widget.integrationType = "collectionView";
+                      });
+                      log(widget.selectedFormat);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => demo_main(
+                              integrationType: widget.integrationType,
+                              selectedProvider: widget.selectedProvider,
+                              selectedCreative: widget.selectedCreative,
+                              selectedFormat: widget.selectedFormat,
+                              selectedPID: widget.selectedPID),
+                        ),
+                      );
+                    },
+                  ),
+                  const Text(
+                    "CollectionView",
+                    style: TextStyle(
+                      color: Color.fromRGBO(170, 184, 205, 1),
+                    ),
+                  ),
+                ]),
+              ),
+            ],
+          ),
+          const SizedBox(width: 10),
+          Column(children: [
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
+              decoration: BoxDecoration(
+                  border:
+                      Border.all(color: const Color.fromRGBO(170, 184, 205, 1)),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(15.0),
+                  )),
+              child: Column(children: [
+                IconButton(
+                  icon:
+                      Image.asset("assets/TableView.imageset/TableView150.png"),
+                  iconSize: 100,
+                  onPressed: () {
+                    setState(() {
+                      widget.integrationType = "tableview";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => demo_main(
+                            integrationType: widget.integrationType,
+                            selectedProvider: widget.selectedProvider,
+                            selectedCreative: widget.selectedCreative,
+                            selectedFormat: widget.selectedFormat,
+                            selectedPID: widget.selectedPID),
+                      ),
+                    );
+                  },
+                ),
+                const Text(
+                  "TableView",
+                  style: TextStyle(color: Color.fromRGBO(170, 184, 205, 1)),
+                ),
+              ]),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 25),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color.fromRGBO(170, 184, 205, 1),
+                  ),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(15.0),
+                  )),
+              child: Column(children: [
+                IconButton(
+                  icon: Image.asset("assets/WebView.imageset/WebView150.png"),
+                  iconSize: 100,
+                  onPressed: () {
+                    setState(() {
+                      widget.integrationType = "webView";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => demo_main(
+                            integrationType: widget.integrationType,
+                            selectedProvider: widget.selectedProvider,
+                            selectedCreative: widget.selectedCreative,
+                            selectedFormat: widget.selectedFormat,
+                            selectedPID: widget.selectedPID),
+                      ),
+                    );
+                  },
+                ),
+                const Text(
+                  "Webview",
+                  style: TextStyle(
+                    color: Color.fromRGBO(170, 184, 205, 1),
+                  ),
+                ),
+              ]),
+            ),
+          ]),
+        ],
       ),
     );
   }

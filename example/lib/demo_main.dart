@@ -27,7 +27,7 @@ class _demo_mainState extends State<demo_main> {
       body: CustomScrollView(slivers: [
         SliverAppBar(
           pinned: true,
-          title: Container(
+          title: SizedBox(
             height: 30,
             child: (Image.asset(
                 "assets/Teads-Sample-App.imageset/Teads-Sample-App-white.png")),
@@ -55,8 +55,9 @@ class _demo_mainState extends State<demo_main> {
               Container(
                 height: 200,
                 width: 500,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
+                    // ignore: prefer_const_literals_to_create_immutables
                     colors: [
                       Color.fromARGB(255, 170, 1, 136),
                       Color.fromARGB(255, 0, 66, 147)
@@ -79,16 +80,16 @@ class _demo_mainState extends State<demo_main> {
                             widget.selectedCreative +
                             " " +
                             widget.integrationType,
-                        style: new TextStyle(
+                        style: const TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),
                             fontSize: 20,
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    Center(
+                    const Center(
                       child: Text(
                         "Scroll down to see your creative",
-                        style: new TextStyle(
+                        style: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),
                             fontSize: 20,
                             fontWeight: FontWeight.w200),
@@ -101,19 +102,19 @@ class _demo_mainState extends State<demo_main> {
               Row(
                 children: [
                   Container(
-                    padding: new EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 10.0,
                       vertical: 15,
                     ),
                     child: Container(
-                        padding: new EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 3.0, vertical: 4),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color.fromRGBO(105, 169, 224, 1),
                         ),
-                        child: Text(
+                        child: const Text(
                           "ARTICLE",
-                          style: new TextStyle(
+                          style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w900,
@@ -124,13 +125,13 @@ class _demo_mainState extends State<demo_main> {
               ),
 
               Container(
-                padding: new EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 10.0,
                   vertical: 15,
                 ),
-                child: Text(
+                child: const Text(
                   "Creative that cuts through the noise…but respects the user.",
-                  style: new TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w700,
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 32,
@@ -139,13 +140,13 @@ class _demo_mainState extends State<demo_main> {
               ),
 
               Container(
-                padding: new EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 10.0,
                   vertical: 15,
                 ),
-                child: Text(
+                child: const Text(
                   "Holding attention in a mobile driven world is no easy challenge. At Teads, we embrace the swipes, the scrolls, the pinches and the taps to build ad experiences that delight the user and deliver business results for brands.",
-                  style: new TextStyle(
+                  style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     letterSpacing: 0.8,
                     fontSize: 18,
@@ -157,39 +158,39 @@ class _demo_mainState extends State<demo_main> {
                 Container(
                   // fake article
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(232, 232, 232, 1),
+                      color: const Color.fromRGBO(232, 232, 232, 1),
                       border: Border.all(
-                        color: Color.fromRGBO(232, 232, 232, 1),
+                        color: const Color.fromRGBO(232, 232, 232, 1),
                       ),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(5.0),
                       )),
                   height: 10,
                   margin:
-                      new EdgeInsets.symmetric(horizontal: 10.0, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4),
                   width: double.infinity,
                 ),
 
               //add
-              Text("ADD"),
+              const Text("ADD"),
               widget.selectedCreative == "custom"
                   ? Text("PID :" + widget.selectedPID)
-                  : Text(""),
+                  : const Text(""),
 
               for (int i = 0; i < 15; i++)
                 Container(
                   // fake article
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(232, 232, 232, 1),
+                      color: const Color.fromRGBO(232, 232, 232, 1),
                       border: Border.all(
-                        color: Color.fromRGBO(232, 232, 232, 1),
+                        color: const Color.fromRGBO(232, 232, 232, 1),
                       ),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(5.0),
                       )),
                   height: 10,
                   margin:
-                      new EdgeInsets.symmetric(horizontal: 10.0, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4),
                   width: double.infinity,
                 ),
             ],

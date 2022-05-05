@@ -25,7 +25,7 @@ class _provider_listState extends State<provider_list> {
             children: [
               Row(
                 children: [
-                  SizedBox(width: 30),
+                  const SizedBox(width: 30),
                   TextButton(
                     onPressed: (() {
                       widget.notifyParent("direct");
@@ -33,7 +33,8 @@ class _provider_listState extends State<provider_list> {
                     style: widget.selectedProvider == "direct"
                         ? TextButton.styleFrom(
                             primary: Colors.white,
-                            backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                            backgroundColor:
+                                const Color.fromARGB(255, 21, 21, 195),
                             onSurface: Colors.grey,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
@@ -53,15 +54,15 @@ class _provider_listState extends State<provider_list> {
                     child: Text(
                       'Direct',
                       style: widget.selectedProvider == "direct"
-                          ? TextStyle(
+                          ? const TextStyle(
                               color: Colors.white,
                             )
-                          : TextStyle(
+                          : const TextStyle(
                               color: Color.fromARGB(255, 21, 21, 195),
                             ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   TextButton(
                     onPressed: (() {
                       widget.notifyParent("admob");
@@ -69,7 +70,8 @@ class _provider_listState extends State<provider_list> {
                     style: widget.selectedProvider == "admob"
                         ? TextButton.styleFrom(
                             primary: Colors.white,
-                            backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                            backgroundColor:
+                                const Color.fromARGB(255, 21, 21, 195),
                             onSurface: Colors.grey,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
@@ -89,15 +91,15 @@ class _provider_listState extends State<provider_list> {
                     child: Text(
                       'Admob',
                       style: widget.selectedProvider == "admob"
-                          ? TextStyle(
+                          ? const TextStyle(
                               color: Colors.white,
                             )
-                          : TextStyle(
+                          : const TextStyle(
                               color: Color.fromARGB(255, 21, 21, 195),
                             ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   TextButton(
                     onPressed: (() {
                       widget.notifyParent("mopub");
@@ -105,7 +107,8 @@ class _provider_listState extends State<provider_list> {
                     style: widget.selectedProvider == "mopub"
                         ? TextButton.styleFrom(
                             primary: Colors.white,
-                            backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                            backgroundColor:
+                                const Color.fromARGB(255, 21, 21, 195),
                             onSurface: Colors.grey,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
@@ -125,15 +128,15 @@ class _provider_listState extends State<provider_list> {
                     child: Text(
                       'Mopub',
                       style: widget.selectedProvider == "mopub"
-                          ? TextStyle(
+                          ? const TextStyle(
                               color: Colors.white,
                             )
-                          : TextStyle(
+                          : const TextStyle(
                               color: Color.fromARGB(255, 21, 21, 195),
                             ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   TextButton(
                     onPressed: (() {
                       widget.notifyParent("smart");
@@ -141,7 +144,8 @@ class _provider_listState extends State<provider_list> {
                     style: widget.selectedProvider == "smart"
                         ? TextButton.styleFrom(
                             primary: Colors.white,
-                            backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                            backgroundColor:
+                                const Color.fromARGB(255, 21, 21, 195),
                             onSurface: Colors.grey,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
@@ -161,10 +165,10 @@ class _provider_listState extends State<provider_list> {
                     child: Text(
                       'Smart',
                       style: widget.selectedProvider == "smart"
-                          ? TextStyle(
+                          ? const TextStyle(
                               color: Colors.white,
                             )
-                          : TextStyle(
+                          : const TextStyle(
                               color: Color.fromARGB(255, 21, 21, 195),
                             ),
                     ),

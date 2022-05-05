@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: home(),
       debugShowCheckedModeBanner: false,
     );
@@ -67,12 +67,12 @@ class _homeState extends State<home> {
       body: CustomScrollView(slivers: [
         SliverAppBar(
           pinned: true,
-          title: Container(
+          title: SizedBox(
             height: 30,
             child: (Image.asset(
                 "assets/Teads-Sample-App.imageset/Teads-Sample-App-black.png")),
           ),
-          leading: Container(
+          leading: SizedBox(
             height: 30,
             child: (Image.asset("assets/logo.png")),
           ),

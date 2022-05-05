@@ -21,6 +21,7 @@ rootProject.allprojects {
         maven {
             url  "https://teads.jfrog.io/artifactory/SDKAndroid-maven-prod"
         }
+
     }
 
     dependencies {

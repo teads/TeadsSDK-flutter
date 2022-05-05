@@ -27,7 +27,7 @@ class _format_listState extends State<format_list> {
             children: [
               Row(
                 children: [
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   SizedBox(
                     width: 160,
                     child: TextButton(
@@ -37,7 +37,8 @@ class _format_listState extends State<format_list> {
                       style: widget.selectedFormat == "inread"
                           ? TextButton.styleFrom(
                               primary: Colors.white,
-                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 21, 21, 195),
                               onSurface: Colors.grey,
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
@@ -57,16 +58,16 @@ class _format_listState extends State<format_list> {
                       child: Text(
                         'InRead',
                         style: widget.selectedFormat == "inread"
-                            ? TextStyle(
+                            ? const TextStyle(
                                 color: Colors.white,
                               )
-                            : TextStyle(
+                            : const TextStyle(
                                 color: Color.fromARGB(255, 21, 21, 195),
                               ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   SizedBox(
                     width: 160,
                     child: TextButton(
@@ -76,7 +77,8 @@ class _format_listState extends State<format_list> {
                       style: widget.selectedFormat == "native"
                           ? TextButton.styleFrom(
                               primary: Colors.white,
-                              backgroundColor: Color.fromARGB(255, 21, 21, 195),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 21, 21, 195),
                               onSurface: Colors.grey,
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
@@ -96,10 +98,10 @@ class _format_listState extends State<format_list> {
                       child: Text(
                         'Native',
                         style: widget.selectedFormat == "native"
-                            ? TextStyle(
+                            ? const TextStyle(
                                 color: Colors.white,
                               )
-                            : TextStyle(
+                            : const TextStyle(
                                 color: Color.fromARGB(255, 21, 21, 195),
                               ),
                       ),
