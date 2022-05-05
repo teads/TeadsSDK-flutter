@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:teads_sdk_flutter_example/demo_main.dart';
 
@@ -52,7 +54,12 @@ class _integration_listState extends State<integration_list> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => demo_main(),
+                            builder: (context) => demo_main(
+                                integrationType: widget.integrationType,
+                                selectedProvider: widget.selectedProvider,
+                                selectedCreative: widget.selectedCreative,
+                                selectedFormat: widget.selectedFormat,
+                                selectedPID: widget.selectedPID),
                           ),
                         );
                       },
@@ -84,10 +91,16 @@ class _integration_listState extends State<integration_list> {
                         setState(() {
                           widget.integrationType = "collectionView";
                         });
+                        log(widget.selectedFormat);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => demo_main(),
+                            builder: (context) => demo_main(
+                                integrationType: widget.integrationType,
+                                selectedProvider: widget.selectedProvider,
+                                selectedCreative: widget.selectedCreative,
+                                selectedFormat: widget.selectedFormat,
+                                selectedPID: widget.selectedPID),
                           ),
                         );
                       },
@@ -124,7 +137,12 @@ class _integration_listState extends State<integration_list> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => demo_main(),
+                          builder: (context) => demo_main(
+                              integrationType: widget.integrationType,
+                              selectedProvider: widget.selectedProvider,
+                              selectedCreative: widget.selectedCreative,
+                              selectedFormat: widget.selectedFormat,
+                              selectedPID: widget.selectedPID),
                         ),
                       );
                     },
@@ -157,7 +175,12 @@ class _integration_listState extends State<integration_list> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => demo_main(),
+                          builder: (context) => demo_main(
+                              integrationType: widget.integrationType,
+                              selectedProvider: widget.selectedProvider,
+                              selectedCreative: widget.selectedCreative,
+                              selectedFormat: widget.selectedFormat,
+                              selectedPID: widget.selectedPID),
                         ),
                       );
                     },

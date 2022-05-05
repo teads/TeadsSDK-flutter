@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class format_list extends StatefulWidget {
   String selectedFormat;
-  format_list({Key? key, required this.selectedFormat}) : super(key: key);
+  final Function(dynamic) notifyParent;
+  format_list(
+      {Key? key, required this.selectedFormat, required this.notifyParent})
+      : super(key: key);
 
   @override
   State<format_list> createState() => _format_listState();
@@ -27,9 +32,7 @@ class _format_listState extends State<format_list> {
                     width: 160,
                     child: TextButton(
                       onPressed: (() {
-                        setState(() {
-                          widget.selectedFormat = "inread";
-                        });
+                        widget.notifyParent("inread");
                       }),
                       style: widget.selectedFormat == "inread"
                           ? TextButton.styleFrom(
@@ -68,9 +71,7 @@ class _format_listState extends State<format_list> {
                     width: 160,
                     child: TextButton(
                       onPressed: (() {
-                        setState(() {
-                          widget.selectedFormat = "native";
-                        });
+                        widget.notifyParent("native");
                       }),
                       style: widget.selectedFormat == "native"
                           ? TextButton.styleFrom(

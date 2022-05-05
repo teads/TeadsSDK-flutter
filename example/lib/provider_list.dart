@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class provider_list extends StatefulWidget {
   String selectedProvider;
-  provider_list({Key? key, required this.selectedProvider}) : super(key: key);
+  final Function(dynamic) notifyParent;
+  provider_list(
+      {Key? key, required this.selectedProvider, required this.notifyParent})
+      : super(key: key);
 
   @override
   State<provider_list> createState() => _provider_listState();
@@ -25,9 +28,7 @@ class _provider_listState extends State<provider_list> {
                   SizedBox(width: 30),
                   TextButton(
                     onPressed: (() {
-                      setState(() {
-                        widget.selectedProvider = "direct";
-                      });
+                      widget.notifyParent("direct");
                     }),
                     style: widget.selectedProvider == "direct"
                         ? TextButton.styleFrom(
@@ -63,9 +64,7 @@ class _provider_listState extends State<provider_list> {
                   SizedBox(width: 20),
                   TextButton(
                     onPressed: (() {
-                      setState(() {
-                        widget.selectedProvider = "admob";
-                      });
+                      widget.notifyParent("admob");
                     }),
                     style: widget.selectedProvider == "admob"
                         ? TextButton.styleFrom(
@@ -101,9 +100,7 @@ class _provider_listState extends State<provider_list> {
                   SizedBox(width: 20),
                   TextButton(
                     onPressed: (() {
-                      setState(() {
-                        widget.selectedProvider = "mopub";
-                      });
+                      widget.notifyParent("mopub");
                     }),
                     style: widget.selectedProvider == "mopub"
                         ? TextButton.styleFrom(
@@ -139,9 +136,7 @@ class _provider_listState extends State<provider_list> {
                   SizedBox(width: 20),
                   TextButton(
                     onPressed: (() {
-                      setState(() {
-                        widget.selectedProvider = "smart";
-                      });
+                      widget.notifyParent("smart");
                     }),
                     style: widget.selectedProvider == "smart"
                         ? TextButton.styleFrom(

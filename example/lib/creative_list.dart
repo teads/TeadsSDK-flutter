@@ -1,13 +1,16 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:teads_sdk_flutter_example/main.dart';
 
 class creative_list extends StatefulWidget {
   String selectedCreative;
   String selectedPID;
+  final Function(dynamic) notifyParentPID;
+  final Function(dynamic) notifyParentCreative;
   creative_list(
-      {Key? key, required this.selectedCreative, required this.selectedPID})
+      {Key? key,
+      required this.selectedCreative,
+      required this.selectedPID,
+      required this.notifyParentPID,
+      required this.notifyParentCreative})
       : super(key: key);
   @override
   State<creative_list> createState() => _creative_listState();
@@ -36,9 +39,7 @@ class _creative_listState extends State<creative_list> {
                         width: 100,
                         child: TextButton(
                           onPressed: (() {
-                            setState(() {
-                              widget.selectedCreative = "landscape";
-                            });
+                            widget.notifyParentCreative("landscape");
                           }),
                           style: widget.selectedCreative == "landscape"
                               ? TextButton.styleFrom(
@@ -78,9 +79,7 @@ class _creative_listState extends State<creative_list> {
                         width: 100,
                         child: TextButton(
                           onPressed: (() {
-                            setState(() {
-                              widget.selectedCreative = "vertical";
-                            });
+                            widget.notifyParentCreative("vertical");
                           }),
                           style: widget.selectedCreative == "vertical"
                               ? TextButton.styleFrom(
@@ -120,9 +119,7 @@ class _creative_listState extends State<creative_list> {
                         width: 100,
                         child: TextButton(
                           onPressed: (() {
-                            setState(() {
-                              widget.selectedCreative = "square";
-                            });
+                            widget.notifyParentCreative("square");
                           }),
                           style: widget.selectedCreative == "square"
                               ? TextButton.styleFrom(
@@ -165,9 +162,7 @@ class _creative_listState extends State<creative_list> {
                         width: 100,
                         child: TextButton(
                           onPressed: (() {
-                            setState(() {
-                              widget.selectedCreative = "carousel";
-                            });
+                            widget.notifyParentCreative("carousel");
                           }),
                           style: widget.selectedCreative == "carousel"
                               ? TextButton.styleFrom(
@@ -207,9 +202,7 @@ class _creative_listState extends State<creative_list> {
                         width: 100,
                         child: TextButton(
                           onPressed: (() {
-                            setState(() {
-                              widget.selectedCreative = "custom";
-                            });
+                            widget.notifyParentCreative("custom");
                             showModalBottomSheet<void>(
                               context: context,
                               builder: (BuildContext context) {
@@ -235,17 +228,11 @@ class _creative_listState extends State<creative_list> {
                                         ),
                                         ElevatedButton(
                                             child: const Text('OK'),
-                                            onPressed: () => Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) => home(
-                                                      selectedPID:
-                                                          _controller.text,
-                                                      selectedCreative:
-                                                          "custom",
-                                                    ),
-                                                  ),
-                                                )),
+                                            onPressed: () => {
+                                                  widget.notifyParentPID(
+                                                      _controller.text),
+                                                  Navigator.pop(context),
+                                                })
                                       ],
                                     ),
                                   ),

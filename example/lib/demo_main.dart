@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
 
-class demo_main extends StatelessWidget {
+class demo_main extends StatefulWidget {
+  String integrationType;
+  String selectedProvider;
+  String selectedCreative;
+  String selectedFormat;
+  String selectedPID;
+  demo_main(
+      {Key? key,
+      required this.integrationType,
+      required this.selectedProvider,
+      required this.selectedCreative,
+      required this.selectedFormat,
+      required this.selectedPID})
+      : super(key: key);
+
+  @override
+  State<demo_main> createState() => _demo_mainState();
+}
+
+class _demo_mainState extends State<demo_main> {
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,14 +68,33 @@ class demo_main extends StatelessWidget {
                     opacity: 0.7,
                   ),
                 ),
-                child: Center(
-                  child: Text(
-                    "Scroll down to see your creative",
-                    style: new TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w200),
-                  ),
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        widget.selectedFormat +
+                            " " +
+                            widget.selectedProvider +
+                            " " +
+                            widget.selectedCreative +
+                            " " +
+                            widget.integrationType,
+                        style: new TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        "Scroll down to see your creative",
+                        style: new TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w200),
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
@@ -133,6 +172,10 @@ class demo_main extends StatelessWidget {
 
               //add
               Text("ADD"),
+              widget.selectedCreative == "custom"
+                  ? Text("PID :" + widget.selectedPID)
+                  : Text(""),
+
               for (int i = 0; i < 15; i++)
                 Container(
                   // fake article

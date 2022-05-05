@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'integration_list.dart';
 import 'provider_list.dart';
-
 import 'title.dart';
 import 'format_list.dart';
-
 import 'creative_list.dart';
 
 void main() {
@@ -17,20 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: home(
-        selectedPID: "84242",
-        selectedCreative: "landscape",
-      ),
+      home: home(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class home extends StatefulWidget {
-  String selectedPID;
-  String selectedCreative;
-  home({Key? key, required this.selectedPID, required this.selectedCreative})
-      : super(key: key);
+  const home({Key? key}) : super(key: key);
 
   @override
   State<home> createState() => _homeState();
@@ -41,6 +33,33 @@ class _homeState extends State<home> {
   String _selectedFormat = "inread";
   String _selectedProvider = "direct";
   String _integrationType = "scrollview";
+  String _selectedPID = "84242";
+  String _selectedCreative = "landscape";
+
+  //update state
+  refreshFormat(dynamic childValue) {
+    setState(() {
+      _selectedFormat = childValue;
+    });
+  }
+
+  refreshProvider(dynamic childValue) {
+    setState(() {
+      _selectedProvider = childValue;
+    });
+  }
+
+  refreshCreative(dynamic childValue) {
+    setState(() {
+      _selectedCreative = childValue;
+    });
+  }
+
+  refreshPID(dynamic childValue) {
+    setState(() {
+      _selectedPID = childValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,23 +85,26 @@ class _homeState extends State<home> {
         const title(giventitle: "Formats"),
         format_list(
           selectedFormat: _selectedFormat,
+          notifyParent: refreshFormat,
         ),
         const title(giventitle: "Providers"),
         provider_list(
           selectedProvider: _selectedProvider,
+          notifyParent: refreshProvider,
         ),
         const title(giventitle: "Creatives"),
         creative_list(
-          selectedCreative: widget.selectedCreative,
-          selectedPID: widget.selectedPID,
-        ),
+            selectedCreative: _selectedCreative,
+            selectedPID: _selectedPID,
+            notifyParentCreative: refreshCreative,
+            notifyParentPID: refreshPID),
         const title(giventitle: "Integrations"),
         integration_list(
             integrationType: _integrationType,
             selectedProvider: _selectedProvider,
-            selectedCreative: widget.selectedCreative,
+            selectedCreative: _selectedCreative,
             selectedFormat: _selectedFormat,
-            selectedPID: widget.selectedPID),
+            selectedPID: _selectedPID),
       ]),
     );
   }
