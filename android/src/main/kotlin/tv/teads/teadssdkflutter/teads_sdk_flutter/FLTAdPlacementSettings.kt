@@ -2,7 +2,6 @@ package tv.teads.teadssdkflutter.teads_sdk_flutter
 
 import androidx.annotation.NonNull
 
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
