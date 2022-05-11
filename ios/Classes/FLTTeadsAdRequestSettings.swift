@@ -29,7 +29,7 @@ public class FLTTeadsAdRequestSettings: NSObject, FlutterPlugin {
                 adRequestSettings.pageUrl(urlString)
                 result(try? adRequestSettings.asDictionary())
             } else {
-                result(FlutterError.badArguments)
+                result(FlutterrError.badArguments)
             }
         case "addExtras":
             if let args = call.arguments as? [Any],

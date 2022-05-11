@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:7.0.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -57,4 +57,5 @@ dependencies {
     implementation("tv.teads.sdk.android:sdk:5.0.14") {
         transitive = true
     }
+
 }
