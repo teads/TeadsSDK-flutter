@@ -2,7 +2,6 @@ package tv.teads.teadssdkflutter.teads_sdk_flutter
 
 
 import androidx.annotation.NonNull
-import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
@@ -11,83 +10,93 @@ import tv.teads.sdk.*
 import tv.teads.sdk.renderer.InReadAdView
 
 /** FLTInReadAdPlacement */
-class FLTInReadAdPlacement( val channelAdPlacement: MethodChannel,val channelAdRequest: MethodChannel ): FlutterPlugin, MethodCallHandler {
-    /// The MethodChannel that will the communication between Flutter and native Android
-    ///
-    /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-    /// when the Flutter Engine is detached from the Activity
-
-    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    }
+class FLTInReadAdPlacement(
+    val channelAdPlacement: MethodChannel,
+    val channelAdRequest: MethodChannel
+) : MethodCallHandler {
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
 
-        when(call.method){
-            "requestAd"->{
+        when (call.method) {
+            "requestAd" -> {
                 (call.arguments as List<*>).let { args ->
-                    val settingsMap = args[0] as? Map<String,Any>
-                    if (settingsMap != null)
-
-                    {
-                        FLTAdInstanceManager.shared.placement?.requestAd(AdRequestSettings.fromMap(settingsMap),
+                    val settingsMap = args[0] as? Map<String, Any>
+                    if (settingsMap != null) {
+                        FLTAdInstanceManager.shared.placement?.requestAd(AdRequestSettings.fromMap(
+                            settingsMap
+                        ),
                             object : InReadAdListener {
                                 override fun adOpportunityTrackerView(trackerView: AdOpportunityTrackerView) {
                                     //channel.invokeMethod("adOpportunityTrackerView")
                                 }
-                                override fun onAdReceived(inReadAdView: InReadAdView, adRatio: AdRatio) {
+
+                                override fun onAdReceived(
+                                    inReadAdView: InReadAdView,
+                                    adRatio: AdRatio
+                                ) {
                                     channelAdPlacement.invokeMethod("didReceiveAd", listOf(""))
                                 }
+
                                 override fun onAdClicked() {
-                                    channelAdRequest.invokeMethod("didRecordClick",null)
+                                    channelAdRequest.invokeMethod("didRecordClick", null)
                                 }
+
                                 override fun onAdClosed() {
-                                    channelAdRequest.invokeMethod("didClose",null)
+                                    channelAdRequest.invokeMethod("didClose", null)
                                 }
+
                                 override fun onAdError(code: Int, description: String) {
                                     channelAdRequest.invokeMethod("didCatchError", listOf(""))
                                 }
+
                                 override fun onAdImpression() {
-                                    channelAdRequest.invokeMethod("didRecordImpression",null)
+                                    channelAdRequest.invokeMethod("didRecordImpression", null)
                                 }
+
                                 override fun onAdExpandedToFullscreen() {
-                                    channelAdRequest.invokeMethod("didExpandedToFullscreen",null)
+                                    channelAdRequest.invokeMethod("didExpandedToFullscreen", null)
                                 }
+
                                 override fun onAdCollapsedFromFullscreen() {
-                                    channelAdRequest.invokeMethod("didCollapsedFromFullscreen",null)
+                                    channelAdRequest.invokeMethod(
+                                        "didCollapsedFromFullscreen",
+                                        null
+                                    )
                                 }
+
                                 override fun onAdRatioUpdate(adRatio: AdRatio) {
                                     channelAdPlacement.invokeMethod("didUpdateRatio", listOf(""))
                                 }
+
                                 override fun onFailToReceiveAd(failReason: String) {
-                                    channelAdPlacement.invokeMethod("didFailToReceiveAd", listOf(""))
+                                    channelAdPlacement.invokeMethod(
+                                        "didFailToReceiveAd",
+                                        listOf("")
+                                    )
                                 }
                             },
                             object : VideoPlaybackListener {
                                 override fun onVideoComplete() {
-                                    channelAdRequest.invokeMethod("didComplete",null)
+                                    channelAdRequest.invokeMethod("didComplete", null)
                                 }
 
                                 override fun onVideoPause() {
-                                    channelAdRequest.invokeMethod("didPause",null)
+                                    channelAdRequest.invokeMethod("didPause", null)
                                 }
 
                                 override fun onVideoPlay() {
-                                    channelAdRequest.invokeMethod("didPlay",null)
+                                    channelAdRequest.invokeMethod("didPlay", null)
                                 }
 
                             })
-                        result.success("request ad on placement")}
+                        result.success("request ad on placement")
+                    }
                     // a implémenté avec adInstance Manager
                     else result.error("BAD_ARGS", "Wrong argument types", null)
                 }
             }
-            else->result.error("NO_AD_INSTANCE", "Unable to find an ad instance", null)
+            else -> result.error("NO_AD_INSTANCE", "Unable to find an ad instance", null)
         }
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        return Unit
-    }
 }
-
-//DO delegate
