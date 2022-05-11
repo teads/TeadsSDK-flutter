@@ -18,4 +18,14 @@ class Teads {
     final TeadsInReadAdPlacement placement = TeadsInReadAdPlacement(delegate);
     return placement;
   }
+
+  static Future<TeadsNativeAdPlacement?> createNativePlacement(
+      int pid,
+      TeadsAdPlacementSettings settings,
+      TeadsNativeAdPlacementDelegate? delegate
+      ) async {
+    await _channel.invokeMethod('createNativePlacement', [pid, settings.mapValue]);
+    final TeadsNativeAdPlacement placement = TeadsNativeAdPlacement(delegate);
+    return placement;
+  }
 }

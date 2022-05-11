@@ -14,6 +14,7 @@
   [FLTTeadsAdPlacementSettings registerWithRegistrar:registrar];
   [FLTTeadsAdRequestSettings registerWithRegistrar:registrar];
   [FLTTeadsInReadAdPlacement registerWithRegistrar:registrar];
+  [FLTTeadsNativeAdPlacement registerWithRegistrar:registrar];
   [FLTTeadsAd registerWithRegistrar:registrar];
   [FLTTeadsAdRatio registerWithRegistrar:registrar];
   FLTTeadsInReadAdViewFactory* factory = [[FLTTeadsInReadAdViewFactory alloc] initWithMessenger:registrar.messenger];

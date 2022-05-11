@@ -51,7 +51,7 @@ public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
                case "bind":
                    if let args = call.arguments as? [Any],
                       let requestIdentifier = args[0] as? String {
-                       if let instance = try? FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier) {
+                       if let instance = try? FLTTeadsInReadAdInstanceManager.shared.instance(for: requestIdentifier) {
                            self?.inReadAdView.bind(instance.teadsAd)
                        }
                        result(nil)

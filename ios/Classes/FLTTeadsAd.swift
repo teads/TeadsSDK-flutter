@@ -26,7 +26,7 @@ public class FLTTeadsAd: NSObject, FlutterPlugin {
             if let args = call.arguments as? [Any],
                let requestIdentifier = args[0] as? String {
                 do {
-                    try FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).teadsAd.delegate = self
+                    try FLTTeadsInReadAdInstanceManager.shared.instance(for: requestIdentifier).teadsAd.delegate = self
                     result(nil)
                 } catch {
                     result(FlutterError.noAdInstance)
@@ -38,7 +38,7 @@ public class FLTTeadsAd: NSObject, FlutterPlugin {
             if let args = call.arguments as? [Any],
                let requestIdentifier = args[0] as? String {
                 do {
-                    try FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).teadsAd.playbackDelegate = self
+                    try FLTTeadsInReadAdInstanceManager.shared.instance(for: requestIdentifier).teadsAd.playbackDelegate = self
                     result(nil)
                 } catch {
                     result(FlutterError.noAdInstance)

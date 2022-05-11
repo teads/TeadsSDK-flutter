@@ -63,25 +63,25 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: ListView(
-        children: <Widget>[
-          ElevatedButton(
-            onPressed: () async {
-              TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
-              await requestSettings.pageUrl("https://example.com");
-              await placement?.requestAd(requestSettings);
-            },
-            child: const Text('Load ad'),
-          ),
-          SizedBox(
-            height: adViewHeight,
-            child: inReadAdView,
-          )
-        ],
-      ) // This trailing comma makes auto-formatting nicer for build methods.
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: ListView(
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () async {
+                TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
+                await requestSettings.pageUrl("https://example.com");
+                await placement?.requestAd(requestSettings);
+              },
+              child: const Text('Load ad'),
+            ),
+            SizedBox(
+              height: adViewHeight,
+              child: inReadAdView,
+            )
+          ],
+        ) // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -107,6 +107,16 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
   void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio) {
     log('didUpdateRatio');
     resizeAd(adRatio);
+  }
+
+  @override
+  void adOpportunityTrackerView(String trackerView) {
+    log('adOpportunityTrackerView');
+  }
+
+  @override
+  void didFailToReceiveAd(String reason) {
+    log('didFailToReceiveAd');
   }
 
   @override

@@ -23,7 +23,7 @@ public class FLTTeadsAdRatio: NSObject, FlutterPlugin {
                let width = args[0] as? CGFloat,
                let requestIdentifier = args[1] as? String {
                 do {
-                    result(try FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.calculateHeight(for: width))
+                    result(try FLTTeadsInReadAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.calculateHeight(for: width))
                 } catch {
                     result(FlutterError.noAdInstance)
                 }
@@ -35,7 +35,7 @@ public class FLTTeadsAdRatio: NSObject, FlutterPlugin {
                let width = args[0] as? CGFloat,
                let requestIdentifier = args[1] as? String {
                 do {
-                    result(try FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.value(for: width))
+                    result(try FLTTeadsInReadAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.value(for: width))
                 } catch {
                     result(FlutterError.noAdInstance)
                 }

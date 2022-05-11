@@ -8,23 +8,41 @@
 import Foundation
 import TeadsSDK
 
-struct FLTAdInstanceMap {
+struct FLTInReadAdInstanceMap {
   let teadsAd: TeadsInReadAd
   let adRatio: TeadsAdRatio
 }
 
-class FLTTeadsAdInstanceManager {
-    static let shared = FLTTeadsAdInstanceManager()
+class FLTTeadsInReadAdInstanceManager {
+    static let shared = FLTTeadsInReadAdInstanceManager()
     var placement: TeadsInReadAdPlacement?
-    private var list = [FLTAdInstanceMap]()
+    private var list = [FLTInReadAdInstanceMap]()
     
-    func new(instance: FLTAdInstanceMap) {
+    func new(instance: FLTInReadAdInstanceMap) {
         list.append(instance)
     }
     
-    func instance(for requestIdentifier: String) throws -> FLTAdInstanceMap {
+    func instance(for requestIdentifier: String) throws -> FLTInReadAdInstanceMap {
         if let instance = list.first(where: { $0.teadsAd.requestIdentifier.uuidString == requestIdentifier }) {
             return instance
+        } else {
+            throw NSError()
+        }
+    }
+}
+
+class FLTTeadsNativeAdInstanceManager {
+    static let shared = FLTTeadsNativeAdInstanceManager()
+    var placement: TeadsNativeAdPlacement?
+    private var list = [TeadsNativeAd]()
+    
+    func new(ad: TeadsNativeAd) {
+        list.append(ad)
+    }
+    
+    func ad(for requestIdentifier: String) throws -> TeadsNativeAd {
+        if let ad = list.first(where: { $0.requestIdentifier.uuidString == requestIdentifier }) {
+            return ad
         } else {
             throw NSError()
         }
