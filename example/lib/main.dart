@@ -3,56 +3,36 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:teads_sdk_flutter/teads_sdk_flutter.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Teads Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: const MyHomePage(title: 'Teads Demo'),
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
 
-
-class MyHomePage extends StatefulWidget {
-
-  final String title;
-
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlacementDelegate, TeadsAdDelegate, TeadsPlaybackDelegate {
-  TeadsInReadAdView inReadAdView = TeadsInReadAdView();
-  double adViewHeight = 0;
-  TeadsInReadAdPlacement? placement;
-
+class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initTeadsAd();
+    initPlatformState();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initTeadsAd() async {
-    TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
-    await placementSettings.enableDebug();
-    placement = await Teads.createInReadPlacement(84242, placementSettings, this);
+  Future<void> initPlatformState() async {
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
+    TeadsAdPlacementSettings adPlacementSettings = TeadsAdPlacementSettings();
+
+    await adPlacementSettings.enableDebug();
+    log(adPlacementSettings.mapValue.toString());
+
+    Teads.createInReadPlacement(84242, adPlacementSettings, null);
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -62,110 +42,17 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: ListView(
-        children: <Widget>[
-          ElevatedButton(
-            onPressed: () async {
-              TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
-              await requestSettings.pageUrl("https://example.com");
-              await placement?.requestAd(requestSettings);
-            },
-            child: const Text('Load ad'),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+        ),
+        body: Center(
+          child: Row(
+            children: [Text("test")],
           ),
-          SizedBox(
-            height: adViewHeight,
-            child: inReadAdView,
-          )
-        ],
-      ) // This trailing comma makes auto-formatting nicer for build methods.
+        ),
+      ),
     );
-  }
-
-  void resizeAd(TeadsAdRatio adRatio) async {
-    double width = MediaQuery.of(context).size.width;
-    double height = await adRatio.calculateHeight(width);
-
-    setState(() {
-      adViewHeight = height;
-    });
-  }
-
-  @override
-  void didReceiveAd(TeadsInReadAd ad, TeadsAdRatio adRatio) {
-    log('didReceiveAd');
-    ad.setDelegate(this);
-    ad.setPlaybackDelegate(this);
-    inReadAdView.bind(ad);
-    resizeAd(adRatio);
-  }
-
-  @override
-  void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio) {
-    log('didUpdateRatio');
-    resizeAd(adRatio);
-  }
-
-  @override
-  void willPresentModalView(TeadsAd ad) {
-    log('willPresentModalView');
-  }
-
-  @override
-  void adStartPlayingAudio(TeadsAd ad) {
-    log('adStartPlayingAudio');
-  }
-
-  @override
-  void adStopPlayingAudio(TeadsAd ad) {
-    log('adStopPlayingAudio');
-  }
-
-  @override
-  void didCatchError(TeadsAd ad, Error error) {
-    log('didCatchError');
-  }
-
-  @override
-  void didClose(TeadsAd ad) {
-    log('didClose');
-  }
-
-  @override
-  void didCollapsedFromFullscreen(TeadsAd ad) {
-    log('didCollapsedFromFullscreen');
-  }
-
-  @override
-  void didComplete(TeadsAd ad) {
-    log('didComplete');
-  }
-
-  @override
-  void didExpandedToFullscreen(TeadsAd ad) {
-    log('didExpandedToFullscreen');
-  }
-
-  @override
-  void didPause(TeadsAd ad) {
-    log('didPause');
-  }
-
-  @override
-  void didPlay(TeadsAd ad) {
-    log('didPlay');
-  }
-
-  @override
-  void didRecordClick(TeadsAd ad) {
-    log('didRecordClick');
-  }
-
-  @override
-  void didRecordImpression(TeadsAd ad) {
-    log('didRecordImpression');
   }
 }
