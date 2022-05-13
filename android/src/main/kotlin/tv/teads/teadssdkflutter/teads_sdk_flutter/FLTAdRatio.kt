@@ -17,14 +17,17 @@ class FLTAdRatio : MethodCallHandler {
                     val requestIdentifier = args[1] as? String
                     if (with != null && requestIdentifier != null)
                         result.success("ok")
+                    //FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.calculateHeight(for: width)
                     else result.error("BAD_ARGS", "Wrong argument types", null)
                 }
             }
             "value" -> {
                 (call.arguments as List<*>).let { args ->
-                    val urlString = args[0] as? String
-                    if (urlString != null)
+                    val with = args[0] as? Float
+                    val requestIdentifier = args[1] as? String
+                    if (with != null && requestIdentifier != null)
                         result.success("ok")
+                    //FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.value(for: width)
                     else result.error("BAD_ARGS", "Wrong argument types", null)
                 }
             }

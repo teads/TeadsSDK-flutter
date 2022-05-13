@@ -1,13 +1,10 @@
 package tv.teads.teadssdkflutter.teads_sdk_flutter
 
-import tv.teads.sdk.AdRatio
 import tv.teads.sdk.InReadAd
 import tv.teads.sdk.InReadAdPlacement
 
 
 class FLTAdInstanceManager {
-    data class FLTAdInstanceMap(val teadsAd: InReadAd?, val adRatio: AdRatio?)
-
     var placement: InReadAdPlacement? = null
     private var list2: MutableList<InReadAd> = mutableListOf()
 
@@ -16,10 +13,9 @@ class FLTAdInstanceManager {
         list2.add(teadsAd)
     }
 
-    fun instance(requestIdentifier: String) {
-        val instance = list2.forEach {}
-        return
-
+    fun instance(): InReadAd {
+        val instance = list2.first()
+        return instance
     }
 
     companion object {

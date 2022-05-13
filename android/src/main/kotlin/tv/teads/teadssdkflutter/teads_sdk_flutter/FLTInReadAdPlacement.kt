@@ -89,9 +89,8 @@ class FLTInReadAdPlacement(
                                 }
 
                             })
-                        result.success("request ad on placement")
+
                     }
-                    // a implémenté avec adInstance Manager
                     else result.error("BAD_ARGS", "Wrong argument types", null)
                 }
             }
