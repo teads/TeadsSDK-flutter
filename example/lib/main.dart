@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:flutter/services.dart';
 import 'package:teads_sdk_flutter/teads_sdk_flutter.dart';
 
 void main() {
@@ -24,7 +26,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class MyHomePage extends StatefulWidget {
+
   final String title;
 
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -33,12 +37,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    implements
-        TeadsInReadAdPlacementDelegate,
-        TeadsAdDelegate,
-        TeadsPlaybackDelegate {
-  TeadsInReadAdView inReadAdView = TeadsInReadAdView();
+class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlacementDelegate, TeadsAdDelegate, TeadsPlaybackDelegate {
+  TeadsInReadAdView? inReadAdView;
   double adViewHeight = 0;
   TeadsInReadAdPlacement? placement;
 
@@ -52,8 +52,7 @@ class _MyHomePageState extends State<MyHomePage>
   Future<void> initTeadsAd() async {
     TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
     await placementSettings.enableDebug();
-    placement =
-        await Teads.createInReadPlacement(84242, placementSettings, null);
+    placement = await Teads.createInReadPlacement(84242, placementSettings, this);
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -71,8 +70,8 @@ class _MyHomePageState extends State<MyHomePage>
           children: <Widget>[
             ElevatedButton(
               onPressed: () async {
-                TeadsAdRequestSettings requestSettings =
-                    TeadsAdRequestSettings();
+                inReadAdView = null;
+                TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
                 await requestSettings.pageUrl("https://example.com");
                 await placement?.requestAd(requestSettings);
               },
@@ -84,15 +83,15 @@ class _MyHomePageState extends State<MyHomePage>
             )
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+    );
   }
 
   void resizeAd(TeadsAdRatio adRatio) async {
     double width = MediaQuery.of(context).size.width;
-    //double height = await adRatio.calculateHeight(width);
-    double height = 100;
+    // double height = await adRatio.calculateHeight(width);
+
     setState(() {
-      adViewHeight = height;
+      adViewHeight = 800;
     });
   }
 
@@ -101,7 +100,8 @@ class _MyHomePageState extends State<MyHomePage>
     log('didReceiveAd');
     ad.setDelegate(this);
     ad.setPlaybackDelegate(this);
-    inReadAdView.bind(ad);
+    inReadAdView = TeadsInReadAdView();
+    inReadAdView?.bind(ad);
     resizeAd(adRatio);
   }
 

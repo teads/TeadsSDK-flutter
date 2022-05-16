@@ -10,11 +10,10 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
     private lateinit var adRequestSettingsChannel: MethodChannel
     private lateinit var teadsChannel: MethodChannel
     private lateinit var teadsAdChannel: MethodChannel
-    private lateinit var teadsAdView: MethodChannel
+    private lateinit var teadsAdViewChannel: MethodChannel
     private lateinit var inReadAdPlacementChannel: MethodChannel
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-
 
         //FLTAdPlacementSettings Handler
         adPlacementSettingsChannel = MethodChannel(
@@ -41,20 +40,24 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
             flutterPluginBinding.binaryMessenger,
             "teads_sdk_flutter/teads_inread_ad_placement"
         )
-
-        //FLTInReadAdView Hander
-        teadsAdView =
-            MethodChannel(flutterPluginBinding.binaryMessenger, "teads_sdk_flutter/teads_ad_view")
-
         inReadAdPlacementChannel.setMethodCallHandler(
             FLTInReadAdPlacement(
                 inReadAdPlacementChannel,
                 teadsAdChannel
             )
         )
+
+        //FLTInReadAdView Hander
+        teadsAdViewChannel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "teads_sdk_flutter/teads_ad_view"
+        )
+        val fltInReadAdView = FLTTeadsInReadAdView()
+        teadsAdViewChannel.setMethodCallHandler(fltInReadAdView)
+
         flutterPluginBinding
             .platformViewRegistry
-            .registerViewFactory("FLTTeadsInReadAdView", FLTTeadsInReadAdViewFactory())
+            .registerViewFactory("FLTTeadsInReadAdView", FLTTeadsInReadAdViewFactory(fltInReadAdView))
 
     }
 
