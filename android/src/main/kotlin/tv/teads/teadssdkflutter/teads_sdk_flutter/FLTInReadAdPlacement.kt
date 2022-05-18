@@ -1,6 +1,8 @@
 package tv.teads.teadssdkflutter.teads_sdk_flutter
 
 
+import android.os.Handler
+import android.os.Looper
 import androidx.annotation.NonNull
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -22,10 +24,9 @@ class FLTInReadAdPlacement(
             "requestAd" -> {
                 (call.arguments as List<*>).let { args ->
                     val settingsMap = args[0] as? Map<String, Any>
-                    val instanceIdentifier = UUID.randomUUID()
+                    val instanceIdentifier = UUID.randomUUID().toString()
                     if (settingsMap != null) {
-                        val requestIdentifier =
-                            FLTAdInstanceManager.shared.placement?.requestAd(AdRequestSettings.fromMap(
+                        FLTAdInstanceManager.shared.placement?.requestAd(AdRequestSettings.fromMap(
                                 settingsMap
                             ),
                                 object : InReadAdListener {
@@ -43,133 +44,116 @@ class FLTInReadAdPlacement(
                                                 instanceIdentifier
                                             )
                                         )
-                                        channelAdPlacement.invokeMethod(
-                                            "didReceiveAd",
-                                            listOf(inReadAdView.inReadAd.requestIdentifier.toString())
-                                        )
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdPlacement.invokeMethod(
+                                                "didReceiveAd",
+                                                listOf(instanceIdentifier)
+                                            )
+                                        }
                                     }
 
                                     override fun onAdClicked() {
-                                        channelAdRequest.invokeMethod(
-                                            "didRecordClick",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString()
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdRequest.invokeMethod(
+                                                "didRecordClick",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                     override fun onAdClosed() {
-                                        channelAdRequest.invokeMethod(
-                                            "didClose",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString()
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdRequest.invokeMethod(
+                                                "didClose",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                     override fun onAdError(code: Int, description: String) {
-                                        channelAdRequest.invokeMethod(
-                                            "didCatchError",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString(),
-                                                description
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdRequest.invokeMethod(
+                                                "didCatchError",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                     override fun onAdImpression() {
-                                        channelAdRequest.invokeMethod(
-                                            "didRecordImpression",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString()
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdRequest.invokeMethod(
+                                                "didRecordImpression",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                     override fun onAdExpandedToFullscreen() {
-                                        channelAdRequest.invokeMethod(
-                                            "didExpandedToFullscreen",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString()
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdRequest.invokeMethod(
+                                                "didExpandedToFullscreen",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                     override fun onAdCollapsedFromFullscreen() {
-                                        channelAdRequest.invokeMethod(
-                                            "didCollapsedFromFullscreen",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString()
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdRequest.invokeMethod(
+                                                "didCollapsedFromFullscreen",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                     override fun onAdRatioUpdate(adRatio: AdRatio) {
-                                        channelAdPlacement.invokeMethod(
-                                            "didUpdateRatio",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString()
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdPlacement.invokeMethod(
+                                                "didUpdateRatio",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                     override fun onFailToReceiveAd(failReason: String) {
-                                        channelAdPlacement.invokeMethod(
-                                            "didFailToReceiveAd",
-                                            listOf("")
-                                        )
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdPlacement.invokeMethod(
+                                                "didFailToReceiveAd",
+                                                listOf("")
+                                            )
+                                        }
                                     }
                                 },
                                 object : VideoPlaybackListener {
                                     override fun onVideoComplete() {
-                                        channelAdRequest.invokeMethod(
-                                            "didComplete",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString()
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdRequest.invokeMethod(
+                                                "didComplete",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                     override fun onVideoPause() {
-                                        channelAdRequest.invokeMethod(
-                                            "didPause",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString()
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdRequest.invokeMethod(
+                                                "didPause",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                     override fun onVideoPlay() {
-                                        channelAdRequest.invokeMethod(
-                                            "didPlay",
-                                            listOf(
-                                                FLTAdInstanceManager.shared.instance(
-                                                    instanceIdentifier
-                                                ).inReadAdView.inReadAd.requestIdentifier.toString()
+                                        Handler(Looper.getMainLooper()).post {
+                                            channelAdRequest.invokeMethod(
+                                                "didPlay",
+                                                listOf(instanceIdentifier)
                                             )
-                                        )
+                                        }
                                     }
 
                                 })
-                        result.success(requestIdentifier.toString())
+                            result.success(instanceIdentifier)
                     } else result.error("BAD_ARGS", "Wrong argument types", null)
                 }
             }

@@ -19,9 +19,6 @@ rootProject.allprojects {
         google()
         mavenCentral()
         maven {
-            url  "https://teads.jfrog.io/artifactory/SDKAndroid-maven-earlyAccess"
-        }
-        maven {
             url  "https://teads.jfrog.io/artifactory/SDKAndroid-maven-prod"
         }
     }
@@ -51,13 +48,13 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 28
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation("tv.teads.sdk.android:sdk:5.0.15-flutter-test") {
+    implementation("tv.teads.sdk.android:sdk:5.0.15") {
         transitive = true
     }
 

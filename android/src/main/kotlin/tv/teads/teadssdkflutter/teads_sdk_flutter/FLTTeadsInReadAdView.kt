@@ -1,10 +1,6 @@
 package tv.teads.teadssdkflutter.teads_sdk_flutter
 
-import android.content.Context
-import android.graphics.Color
-import android.util.Log
 import android.view.View
-import android.widget.TextView
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
@@ -19,9 +15,11 @@ internal class FLTTeadsInReadAdView : PlatformView, MethodChannel.MethodCallHand
             "bind" -> {
                 (call.arguments as List<*>).let { args ->
                     val requestIdentifier = args[0] as? String
-                    if (requestIdentifier != null)
-                        inReadAdView = FLTAdInstanceManager.shared.instance(requestIdentifier).inReadAdView
-                    else
+                    if (requestIdentifier != null) {
+                        inReadAdView =
+                            FLTAdInstanceManager.shared.instance(requestIdentifier).inReadAdView
+                        result.success(null)
+                    } else
                         result.error("BAD_ARGS", "Wrong argument types", null)
                 }
             }
