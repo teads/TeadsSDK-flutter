@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:teads_sdk_flutter_example/demo_main.dart';
+import 'demo_main.dart';
 
 class integration_list extends StatefulWidget {
   String integrationType;
@@ -132,7 +132,7 @@ class _integration_listState extends State<integration_list> {
                   iconSize: 100,
                   onPressed: () {
                     setState(() {
-                      widget.integrationType = "tableview";
+                      widget.integrationType = "tableView";
                     });
                     Navigator.push(
                       context,

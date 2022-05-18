@@ -70,6 +70,8 @@ class _demo_mainState extends State<demo_main> {
                   ),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(
                       child: Text(
@@ -85,6 +87,10 @@ class _demo_mainState extends State<demo_main> {
                             fontSize: 20,
                             fontWeight: FontWeight.w400),
                       ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                      height: 10,
                     ),
                     const Center(
                       child: Text(

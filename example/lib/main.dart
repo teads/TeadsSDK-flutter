@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teads_sdk_flutter_example/integration_list_native.dart';
 import 'integration_list.dart';
 import 'provider_list.dart';
 import 'title.dart';
@@ -91,20 +92,31 @@ class _homeState extends State<home> {
         provider_list(
           selectedProvider: _selectedProvider,
           notifyParent: refreshProvider,
+          selectedFormat: _selectedFormat,
         ),
         const title(giventitle: "Creatives"),
         creative_list(
             selectedCreative: _selectedCreative,
             selectedPID: _selectedPID,
             notifyParentCreative: refreshCreative,
-            notifyParentPID: refreshPID),
+            notifyParentPID: refreshPID,
+            selectedFormat: _selectedFormat),
         const title(giventitle: "Integrations"),
-        integration_list(
-            integrationType: _integrationType,
-            selectedProvider: _selectedProvider,
-            selectedCreative: _selectedCreative,
-            selectedFormat: _selectedFormat,
-            selectedPID: _selectedPID),
+        _selectedFormat == "inread"
+            ? integration_list(
+                integrationType: _integrationType,
+                selectedProvider: _selectedProvider,
+                selectedCreative:
+                    _selectedFormat == "inread" ? _selectedCreative : "display",
+                selectedFormat: _selectedFormat,
+                selectedPID: _selectedPID)
+            : integration_list_native(
+                integrationType: _integrationType,
+                selectedProvider: _selectedProvider,
+                selectedCreative:
+                    _selectedFormat == "inread" ? _selectedCreative : "display",
+                selectedFormat: _selectedFormat,
+                selectedPID: _selectedPID)
       ]),
     );
   }
