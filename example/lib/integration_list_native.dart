@@ -1,15 +1,16 @@
-import 'dart:developer';
+// ignore_for_file: must_be_immutable
 
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:teads_sdk_flutter_example/demo_native.dart';
 
-class integration_list_native extends StatefulWidget {
+class IntegrationListNative extends StatefulWidget {
   String integrationType;
   String selectedProvider;
   String selectedCreative;
   String selectedFormat;
   String selectedPID;
-  integration_list_native(
+  IntegrationListNative(
       {Key? key,
       required this.integrationType,
       required this.selectedProvider,
@@ -19,11 +20,10 @@ class integration_list_native extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<integration_list_native> createState() =>
-      _integration_list_nativeState();
+  State<IntegrationListNative> createState() => _IntegrationListNativeState();
 }
 
-class _integration_list_nativeState extends State<integration_list_native> {
+class _IntegrationListNativeState extends State<IntegrationListNative> {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -53,7 +53,7 @@ class _integration_list_nativeState extends State<integration_list_native> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => demo_native(
+                          builder: (context) => DemoNative(
                               integrationType: widget.integrationType,
                               selectedProvider: widget.selectedProvider,
                               selectedCreative: widget.selectedCreative,
@@ -96,7 +96,7 @@ class _integration_list_nativeState extends State<integration_list_native> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => demo_native(
+                                builder: (context) => DemoNative(
                                     integrationType: widget.integrationType,
                                     selectedProvider: widget.selectedProvider,
                                     selectedCreative: widget.selectedCreative,

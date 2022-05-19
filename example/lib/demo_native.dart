@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:teads_sdk_flutter_example/in_feed_demo.dart';
 
-class demo_native extends StatefulWidget {
-  String integrationType;
-  String selectedProvider;
-  String selectedCreative;
-  String selectedFormat;
-  String selectedPID;
-  demo_native(
+class DemoNative extends StatefulWidget {
+  final String integrationType;
+  final String selectedProvider;
+  final String selectedCreative;
+  final String selectedFormat;
+  final String selectedPID;
+  const DemoNative(
       {Key? key,
       required this.integrationType,
       required this.selectedProvider,
@@ -18,10 +17,10 @@ class demo_native extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<demo_native> createState() => _demo_nativeState();
+  State<DemoNative> createState() => _DemoNativeState();
 }
 
-class _demo_nativeState extends State<demo_native> {
+class _DemoNativeState extends State<DemoNative> {
   @override
   @override
   Widget build(BuildContext context) {
@@ -106,7 +105,7 @@ class _demo_nativeState extends State<demo_native> {
                   ],
                 ),
               ),
-              in_feed_demo(
+              InFeedDemo(
                 source: "nyt",
                 icon:
                     'https://www.theminotvoice.com/wp-content/uploads/sites/2/2016/10/NYT-icon.png',
@@ -118,7 +117,7 @@ class _demo_nativeState extends State<demo_native> {
                 time: "5",
                 textButton: "Follow",
               ),
-              in_feed_demo(
+              InFeedDemo(
                 source: "wsj",
                 icon:
                     'https://play-lh.googleusercontent.com/eksxaPfxbTVb6VTl5aj1sXLpKc_N9Z6AZ3_5Oq6JhTXmgEQza-1v58a66p_ID0phE2Zv',
@@ -130,7 +129,7 @@ class _demo_nativeState extends State<demo_native> {
                 time: "7",
                 textButton: "Follow",
               ),
-              in_feed_demo(
+              InFeedDemo(
                 source: "ign",
                 icon:
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrPAc5tHzqDURqjTaA9Ud_28G37V4Tbch060AubCB6TeNvarlHG5yWSujrNx-uk4du2ic&usqp=CAU',
@@ -142,7 +141,7 @@ class _demo_nativeState extends State<demo_native> {
                 time: "12",
                 textButton: "Follow",
               ),
-              in_feed_demo(
+              InFeedDemo(
                 source: "espn",
                 icon:
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrPAc5tHzqDURqjTaA9Ud_28G37V4Tbch060AubCB6TeNvarlHG5yWSujrNx-uk4du2ic&usqp=CAU',
@@ -155,7 +154,7 @@ class _demo_nativeState extends State<demo_native> {
                 time: "15",
                 textButton: "Follow",
               ),
-              in_feed_demo(
+              InFeedDemo(
                 source: "vice",
                 icon:
                     'https://marketingreport.eu/Article%20Images/Key%20Logos/Vice.jpg',

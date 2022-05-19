@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class title extends StatelessWidget {
-  const title({
+class TitleCategories extends StatelessWidget {
+  const TitleCategories({
     Key? key,
-    required this.giventitle,
+    required this.givenTitleCategories,
   }) : super(key: key);
 
-  final String giventitle;
+  final String givenTitleCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class title extends StatelessWidget {
           vertical: 10,
         ),
         child: Text(
-          giventitle,
+          givenTitleCategories,
           style: const TextStyle(
             fontWeight: FontWeight.w700,
             color: Color.fromARGB(255, 0, 0, 0),

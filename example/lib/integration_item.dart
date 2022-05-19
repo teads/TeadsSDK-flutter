@@ -1,17 +1,19 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'demo_main.dart';
 
-class integration_item extends StatefulWidget {
-  String item_type;
+class IntegrationItem extends StatefulWidget {
+  String itemType;
   String integrationType;
   String selectedProvider;
   String selectedCreative;
   String selectedFormat;
   String selectedPID;
 
-  integration_item(
+  IntegrationItem(
       {Key? key,
-      required this.item_type,
+      required this.itemType,
       required this.integrationType,
       required this.selectedProvider,
       required this.selectedCreative,
@@ -20,10 +22,10 @@ class integration_item extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<integration_item> createState() => _integration_itemState();
+  State<IntegrationItem> createState() => _IntegrationItemState();
 }
 
-class _integration_itemState extends State<integration_item> {
+class _IntegrationItemState extends State<IntegrationItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,20 +38,20 @@ class _integration_itemState extends State<integration_item> {
       child: Column(children: [
         IconButton(
           icon: Image.asset("assets/" +
-              widget.item_type +
+              widget.itemType +
               ".imageset/" +
-              widget.item_type +
+              widget.itemType +
               "150.png"),
           iconSize: 100,
           onPressed: () {
             setState(() {
-              widget.integrationType = widget.item_type;
+              widget.integrationType = widget.itemType;
             });
 
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => demo_main(
+                builder: (context) => DemoMain(
                     integrationType: widget.integrationType,
                     selectedProvider: widget.selectedProvider,
                     selectedCreative: widget.selectedCreative,
@@ -60,8 +62,8 @@ class _integration_itemState extends State<integration_item> {
           },
         ),
         Text(
-          widget.item_type,
-          style: TextStyle(
+          widget.itemType,
+          style: const TextStyle(
             color: Color.fromRGBO(170, 184, 205, 1),
           ),
         ),

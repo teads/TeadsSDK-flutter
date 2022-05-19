@@ -1,10 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
-class provider_list extends StatefulWidget {
+class ProviderList extends StatefulWidget {
   String selectedProvider;
   String selectedFormat;
   final Function(dynamic) notifyParent;
-  provider_list(
+  ProviderList(
       {Key? key,
       required this.selectedProvider,
       required this.notifyParent,
@@ -12,10 +14,10 @@ class provider_list extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<provider_list> createState() => _provider_listState();
+  State<ProviderList> createState() => _ProviderListState();
 }
 
-class _provider_listState extends State<provider_list> {
+class _ProviderListState extends State<ProviderList> {
   @override
   Widget build(BuildContext context) {
     int items = 1;

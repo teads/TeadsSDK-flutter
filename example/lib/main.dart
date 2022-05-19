@@ -16,20 +16,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: home(),
+      home: Home(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class home extends StatefulWidget {
-  const home({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  State<home> createState() => _homeState();
+  State<Home> createState() => _HomeState();
 }
 
-class _homeState extends State<home> {
+class _HomeState extends State<Home> {
   //default values
   String _selectedFormat = "inread";
   String _selectedProvider = "direct";
@@ -83,34 +83,34 @@ class _homeState extends State<home> {
             ),
           ),
         ),
-        const title(giventitle: "Formats"),
-        format_list(
+        const TitleCategories(givenTitleCategories: "Formats"),
+        FormatList(
           selectedFormat: _selectedFormat,
           notifyParent: refreshFormat,
         ),
-        const title(giventitle: "Providers"),
-        provider_list(
+        const TitleCategories(givenTitleCategories: "Providers"),
+        ProviderList(
           selectedProvider: _selectedProvider,
           notifyParent: refreshProvider,
           selectedFormat: _selectedFormat,
         ),
-        const title(giventitle: "Creatives"),
-        creative_list(
+        const TitleCategories(givenTitleCategories: "Creatives"),
+        CreativeList(
             selectedCreative: _selectedCreative,
             selectedPID: _selectedPID,
             notifyParentCreative: refreshCreative,
             notifyParentPID: refreshPID,
             selectedFormat: _selectedFormat),
-        const title(giventitle: "Integrations"),
+        const TitleCategories(givenTitleCategories: "Integrations"),
         _selectedFormat == "inread"
-            ? integration_list(
+            ? IntegrationList(
                 integrationType: _integrationType,
                 selectedProvider: _selectedProvider,
                 selectedCreative:
                     _selectedFormat == "inread" ? _selectedCreative : "display",
                 selectedFormat: _selectedFormat,
                 selectedPID: _selectedPID)
-            : integration_list_native(
+            : IntegrationListNative(
                 integrationType: _integrationType,
                 selectedProvider: _selectedProvider,
                 selectedCreative:

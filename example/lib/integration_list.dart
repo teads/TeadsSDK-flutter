@@ -1,13 +1,15 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:teads_sdk_flutter_example/integration_item.dart';
 
-class integration_list extends StatefulWidget {
+class IntegrationList extends StatefulWidget {
   String integrationType;
   String selectedProvider;
   String selectedCreative;
   String selectedFormat;
   String selectedPID;
-  integration_list(
+  IntegrationList(
       {Key? key,
       required this.integrationType,
       required this.selectedProvider,
@@ -17,10 +19,10 @@ class integration_list extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<integration_list> createState() => _integration_listState();
+  State<IntegrationList> createState() => _IntegrationListState();
 }
 
-class _integration_listState extends State<integration_list> {
+class _IntegrationListState extends State<IntegrationList> {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -29,8 +31,8 @@ class _integration_listState extends State<integration_list> {
           const SizedBox(width: 20),
           Column(
             children: [
-              integration_item(
-                  item_type: "ScrollView",
+              IntegrationItem(
+                  itemType: "ScrollView",
                   integrationType: widget.integrationType,
                   selectedProvider: widget.selectedProvider,
                   selectedCreative: widget.selectedCreative,
@@ -38,8 +40,8 @@ class _integration_listState extends State<integration_list> {
                   selectedPID: widget.selectedPID),
               const SizedBox(height: 10),
               widget.selectedProvider == "admob"
-                  ? integration_item(
-                      item_type: "WebView",
+                  ? IntegrationItem(
+                      itemType: "WebView",
                       integrationType: widget.integrationType,
                       selectedProvider: widget.selectedProvider,
                       selectedCreative: widget.selectedCreative,
@@ -50,8 +52,8 @@ class _integration_listState extends State<integration_list> {
                       ? const SizedBox(
                           height: 185,
                         )
-                      : integration_item(
-                          item_type: "CollectionView",
+                      : IntegrationItem(
+                          itemType: "CollectionView",
                           integrationType: widget.integrationType,
                           selectedProvider: widget.selectedProvider,
                           selectedCreative: widget.selectedCreative,
@@ -61,8 +63,8 @@ class _integration_listState extends State<integration_list> {
           ),
           const SizedBox(width: 10),
           Column(children: [
-            integration_item(
-                item_type: "TableView",
+            IntegrationItem(
+                itemType: "TableView",
                 integrationType: widget.integrationType,
                 selectedProvider: widget.selectedProvider,
                 selectedCreative: widget.selectedCreative,
@@ -78,8 +80,8 @@ class _integration_listState extends State<integration_list> {
                     ? const SizedBox(
                         height: 185,
                       )
-                    : integration_item(
-                        item_type: "WebView",
+                    : IntegrationItem(
+                        itemType: "WebView",
                         integrationType: widget.integrationType,
                         selectedProvider: widget.selectedProvider,
                         selectedCreative: widget.selectedCreative,

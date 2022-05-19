@@ -1,19 +1,19 @@
-import 'dart:developer';
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 
-class format_list extends StatefulWidget {
+class FormatList extends StatefulWidget {
   String selectedFormat;
   final Function(dynamic) notifyParent;
-  format_list(
+  FormatList(
       {Key? key, required this.selectedFormat, required this.notifyParent})
       : super(key: key);
 
   @override
-  State<format_list> createState() => _format_listState();
+  State<FormatList> createState() => _FormatListState();
 }
 
-class _format_listState extends State<format_list> {
+class _FormatListState extends State<FormatList> {
   @override
   Widget build(BuildContext context) {
     int items = 1;

@@ -1,12 +1,14 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
-class demo_main extends StatefulWidget {
+class DemoMain extends StatefulWidget {
   String integrationType;
   String selectedProvider;
   String selectedCreative;
   String selectedFormat;
   String selectedPID;
-  demo_main(
+  DemoMain(
       {Key? key,
       required this.integrationType,
       required this.selectedProvider,
@@ -16,10 +18,10 @@ class demo_main extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<demo_main> createState() => _demo_mainState();
+  State<DemoMain> createState() => _DemoMainState();
 }
 
-class _demo_mainState extends State<demo_main> {
+class _DemoMainState extends State<DemoMain> {
   @override
   @override
   Widget build(BuildContext context) {

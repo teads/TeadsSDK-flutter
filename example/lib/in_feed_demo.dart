@@ -1,7 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class in_feed_demo extends StatefulWidget {
+class InFeedDemo extends StatefulWidget {
   String icon;
   String text;
   String title;
@@ -10,7 +12,7 @@ class in_feed_demo extends StatefulWidget {
   String source;
   String textButton;
 
-  in_feed_demo({
+  InFeedDemo({
     Key? key,
     required this.icon,
     required this.text,
@@ -22,10 +24,10 @@ class in_feed_demo extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<in_feed_demo> createState() => _in_feed_demoState();
+  State<InFeedDemo> createState() => _InFeedDemoState();
 }
 
-class _in_feed_demoState extends State<in_feed_demo> {
+class _InFeedDemoState extends State<InFeedDemo> {
   @override
   Widget build(BuildContext context) {
     return Container(

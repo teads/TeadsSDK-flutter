@@ -1,12 +1,14 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
-class creative_list extends StatefulWidget {
+class CreativeList extends StatefulWidget {
   String selectedCreative;
   String selectedPID;
   String selectedFormat;
   final Function(dynamic) notifyParentPID;
   final Function(dynamic) notifyParentCreative;
-  creative_list(
+  CreativeList(
       {Key? key,
       required this.selectedCreative,
       required this.selectedPID,
@@ -15,10 +17,10 @@ class creative_list extends StatefulWidget {
       required this.selectedFormat})
       : super(key: key);
   @override
-  State<creative_list> createState() => _creative_listState();
+  State<CreativeList> createState() => _CreativeListState();
 }
 
-class _creative_listState extends State<creative_list> {
+class _CreativeListState extends State<CreativeList> {
   @override
   Widget build(BuildContext context) {
     TextEditingController _controller =
