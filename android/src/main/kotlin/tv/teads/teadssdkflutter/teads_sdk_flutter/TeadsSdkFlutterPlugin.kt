@@ -12,33 +12,34 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
     private lateinit var teadsAdChannel: MethodChannel
     private lateinit var teadsAdViewChannel: MethodChannel
     private lateinit var inReadAdPlacementChannel: MethodChannel
+    private lateinit var adRatioChannel: MethodChannel
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        //FLTAdPlacementSettings Handler
+        // FLTAdPlacementSettings Handler
         adPlacementSettingsChannel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
             "teads_sdk_flutter/teads_ad_placement_settings"
         )
         adPlacementSettingsChannel.setMethodCallHandler(FLTAdPlacementSettings())
 
-        //FLTAdRequestSettings Handler
+        // FLTAdRequestSettings Handler
         adRequestSettingsChannel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
             "teads_sdk_flutter/teads_ad_request_settings"
         )
         adRequestSettingsChannel.setMethodCallHandler(FLTAdRequestSettings())
 
-        //FLTTeads Handler
+        // FLTTeads Handler
         teadsChannel =
             MethodChannel(flutterPluginBinding.binaryMessenger, "teads_sdk_flutter/teads")
         teadsChannel.setMethodCallHandler(FLTTeads(flutterPluginBinding.applicationContext))
 
-        //FLTAd Handler
+        // FLTAd Handler
         teadsAdChannel =
             MethodChannel(flutterPluginBinding.binaryMessenger, "teads_sdk_flutter/teads_ad")
         teadsAdChannel.setMethodCallHandler(FLTAd())
 
-        //FLTInReadAdPlacement Handler
+        // FLTInReadAdPlacement Handler
         inReadAdPlacementChannel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
             "teads_sdk_flutter/teads_inread_ad_placement"
@@ -50,7 +51,14 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
             )
         )
 
-        //FLTInReadAdView Hander
+        // FLTAdRatio Handler
+        adRatioChannel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "teads_sdk_flutter/teads_ad_ratio"
+        )
+        adRatioChannel.setMethodCallHandler(FLTAdRatio())
+
+        // FLTInReadAdView Handler
         teadsAdViewChannel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
             "teads_sdk_flutter/teads_ad_view"
@@ -72,6 +80,8 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
         adRequestSettingsChannel.setMethodCallHandler(null)
         teadsChannel.setMethodCallHandler(null)
         teadsAdChannel.setMethodCallHandler(null)
+        teadsAdViewChannel.setMethodCallHandler(null)
         inReadAdPlacementChannel.setMethodCallHandler(null)
+        adRatioChannel.setMethodCallHandler(null)
     }
 }

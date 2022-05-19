@@ -22,7 +22,7 @@ class FLTAdRequestSettings : MethodCallHandler {
                     val urlString = args[0] as? String
                     if (urlString != null)
                         result.success(adRequestSettings.pageSlotUrl(urlString).build().toMap())
-                    else result.error("BAD_ARGS", "Wrong argument types", null)
+                    else result.error(PluginException.BadArguments)
                 }
             }
             "addExtras" -> {
@@ -31,10 +31,10 @@ class FLTAdRequestSettings : MethodCallHandler {
                     val key = args[1] as? String
                     if (value != null && key != null)
                         result.success(adRequestSettings.addExtra(value, key).build().toMap())
-                    else result.error("BAD_ARGS", "Wrong argument types", null)
+                    else result.error(PluginException.BadArguments)
                 }
             }
-            else -> result.error("NO_AD_INSTANCE", "Unable to find an ad instance", null)
+            else -> result.notImplemented()
         }
     }
 

@@ -11,7 +11,14 @@ import tv.teads.sdk.utils.userConsent.TCFVersion
 /** FLTAdPlacementSettings */
 class FLTAdPlacementSettings : MethodCallHandler {
 
-    var placementSettingsBuilder = AdPlacementSettings.Builder()
+    private var placementSettingsBuilder = AdPlacementSettings.Builder()
+
+    init {
+        placementSettingsBuilder.addPlacementExtra(
+            AdPlacementSettings.PLATFORM_KEY,
+            AdPlacementSettings.PLATFORM_FLUTTER
+        ).build()
+    }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
@@ -19,7 +26,8 @@ class FLTAdPlacementSettings : MethodCallHandler {
                 result.success(placementSettingsBuilder.disableCrashMonitoring().build().toMap())
             }
             "disableTeadsAudioSessionManagement" -> {
-                //no method in android sdk
+                // iOS Only
+                result.success(placementSettingsBuilder.build().toMap())
             }
             "enableDebug" -> {
                 result.success(placementSettingsBuilder.enableDebug().build().toMap())
@@ -37,7 +45,7 @@ class FLTAdPlacementSettings : MethodCallHandler {
                                 TCFVersion.fromInt(tcfVersion), cmpSdkId
                             ).build().toMap()
                         )
-                    else result.error("BAD_ARGS", "Wrong argument types", null)
+                    else result.error(PluginException.BadArguments)
                 }
             }
             "setUsPrivacy" -> {
@@ -47,11 +55,12 @@ class FLTAdPlacementSettings : MethodCallHandler {
                         result.success(
                             placementSettingsBuilder.setUsPrivacy(consent).build().toMap()
                         )
-                    else result.error("BAD_ARGS", "Wrong argument types", null)
+                    else result.error(PluginException.BadArguments)
                 }
             }
             "disableBatteryMonitoring" -> {
-                //no method in android sdk
+                // iOS Only
+                result.success(placementSettingsBuilder.build().toMap())
             }
             "addExtras" -> {
                 (call.arguments as List<*>).let { args ->
@@ -61,10 +70,29 @@ class FLTAdPlacementSettings : MethodCallHandler {
                         result.success(
                             placementSettingsBuilder.addPlacementExtra(value, key).build().toMap()
                         )
-                    else result.error("BAD_ARGS", "Wrong argument types", null)
+                    else result.error(PluginException.BadArguments)
                 }
             }
-            else -> result.error("NO_AD_INSTANCE", "Unable to find an ad instance", null)
+            "enableLocation" -> {
+                result.success(placementSettingsBuilder.enableLocation().build().toMap())
+            }
+            "useLightEndScreen" -> {
+                result.success(placementSettingsBuilder.useLightEndScreen().build().toMap())
+            }
+            "hideBrowserUrl" -> {
+                result.success(placementSettingsBuilder.hideBrowserUrl().build().toMap())
+            }
+            "toolBarBackgroundColor" -> {
+                (call.arguments as List<*>).let { args ->
+                    val color = args[0] as? Int
+                    if (color != null)
+                        result.success(
+                            placementSettingsBuilder.toolBarBackgroundColor(color).build().toMap()
+                        )
+                    else result.error(PluginException.BadArguments)
+                }
+            }
+            else -> result.notImplemented()
         }
     }
 }

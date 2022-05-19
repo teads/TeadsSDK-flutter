@@ -37,6 +37,22 @@ class TeadsAdPlacementSettings {
   Future<void> addExtras(String value, String key) async {
     mapValue = await _channel.invokeMethod('addExtras', [value, key]);
   }
+
+  Future<void> enableLocation() async {
+    mapValue = await _channel.invokeMethod('enableLocation');
+  }
+
+  Future<void> useLightEndScreen() async {
+    mapValue = await _channel.invokeMethod('useLightEndScreen');
+  }
+
+  Future<void> hideBrowserUrl() async {
+    mapValue = await _channel.invokeMethod('hideBrowserUrl');
+  }
+
+  Future<void> toolBarBackgroundColor(int color) async {
+    mapValue = await _channel.invokeMethod('toolBarBackgroundColor', [color]);
+  }
 }
 
 enum TCFVersion { v1, v2 }

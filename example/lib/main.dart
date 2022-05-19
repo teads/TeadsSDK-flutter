@@ -38,7 +38,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlacementDelegate, TeadsAdDelegate, TeadsPlaybackDelegate {
-  TeadsInReadAdView? inReadAdView;
+  TeadsInReadAdView inReadAdView = TeadsInReadAdView();
   double adViewHeight = 0;
   TeadsInReadAdPlacement? placement;
 
@@ -70,7 +70,6 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
           children: <Widget>[
             ElevatedButton(
               onPressed: () async {
-                inReadAdView = null;
                 TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
                 await requestSettings.pageUrl("https://example.com");
                 await placement?.requestAd(requestSettings);
@@ -88,10 +87,10 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
 
   void resizeAd(TeadsAdRatio adRatio) async {
     double width = MediaQuery.of(context).size.width;
-    // double height = await adRatio.calculateHeight(width);
+    double height = await adRatio.calculateHeight(width);
 
     setState(() {
-      adViewHeight = 800;
+      adViewHeight = height;
     });
   }
 
@@ -100,8 +99,7 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
     log('didReceiveAd');
     ad.setDelegate(this);
     ad.setPlaybackDelegate(this);
-    inReadAdView = TeadsInReadAdView();
-    inReadAdView?.bind(ad);
+    inReadAdView.bind(ad);
     resizeAd(adRatio);
   }
 

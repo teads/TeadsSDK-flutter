@@ -20,7 +20,7 @@ internal class FLTTeadsInReadAdView : PlatformView, MethodChannel.MethodCallHand
                             FLTAdInstanceManager.shared.instance(requestIdentifier).inReadAdView
                         result.success(null)
                     } else
-                        result.error("BAD_ARGS", "Wrong argument types", null)
+                        result.error(PluginException.BadArguments)
                 }
             }
         }

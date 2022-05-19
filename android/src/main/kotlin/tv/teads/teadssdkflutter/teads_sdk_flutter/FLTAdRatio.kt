@@ -13,25 +13,39 @@ class FLTAdRatio : MethodCallHandler {
         when (call.method) {
             "calculateHeight" -> {
                 (call.arguments as List<*>).let { args ->
-                    val with = args[0] as? Float
+                    val width = args[0] as? Double
                     val requestIdentifier = args[1] as? String
-                    if (with != null && requestIdentifier != null)
-                        result.success("ok")
-                    //FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.calculateHeight(for: width)
-                    else result.error("BAD_ARGS", "Wrong argument types", null)
+                    if (width != null && requestIdentifier != null)
+                        try {
+                            result.success(
+                                FLTAdInstanceManager.shared.instance(requestIdentifier)
+                                    .inReadAdView.inReadAd.adRatio.calculateHeight(width.toInt())
+                                    .toDouble()
+                            )
+                        } catch (e: Exception) {
+                            result.error(PluginException.NoAdInstance)
+                        }
+                    else result.error(PluginException.BadArguments)
                 }
             }
             "value" -> {
                 (call.arguments as List<*>).let { args ->
-                    val with = args[0] as? Float
+                    val width = args[0] as? Double
                     val requestIdentifier = args[1] as? String
-                    if (with != null && requestIdentifier != null)
-                        result.success("ok")
-                    //FLTTeadsAdInstanceManager.shared.instance(for: requestIdentifier).adRatio.value(for: width)
-                    else result.error("BAD_ARGS", "Wrong argument types", null)
+                    if (width != null && requestIdentifier != null)
+                        try {
+                            result.success(
+                                FLTAdInstanceManager.shared.instance(requestIdentifier)
+                                    .inReadAdView.inReadAd.adRatio.getAdSlotRatio(width.toInt())
+                                    .toDouble()
+                            )
+                        } catch (e: Exception) {
+                            result.error(PluginException.NoAdInstance)
+                        }
+                    else result.error(PluginException.BadArguments)
                 }
             }
-            else -> result.error("NO_AD_INSTANCE", "Unable to find an ad instance", null)
+            else -> result.notImplemented()
         }
     }
 }

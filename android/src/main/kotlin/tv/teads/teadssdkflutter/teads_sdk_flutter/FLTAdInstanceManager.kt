@@ -7,19 +7,19 @@ class AdInstanceMap constructor(val inReadAdView: InReadAdView, val id: String)
 
 class FLTAdInstanceManager {
     var placement: InReadAdPlacement? = null
-    private var list: MutableList<AdInstanceMap> = mutableListOf()
-
+    private var adViewInstancesMapList: MutableList<AdInstanceMap> = mutableListOf()
 
     fun new(instance: AdInstanceMap) {
-        list.add(instance)
+        adViewInstancesMapList.add(instance)
     }
 
-    fun instance(requestIdentifier: String): AdInstanceMap {
-        val instance = list.firstOrNull { it.id == requestIdentifier }
+    @Throws()
+    fun instance(requestIdentifier: String) : AdInstanceMap {
+        val instance = adViewInstancesMapList.firstOrNull { it.id == requestIdentifier }
         if (instance != null) {
             return instance
         } else {
-            throw Error()
+            throw Exception()
         }
     }
 
