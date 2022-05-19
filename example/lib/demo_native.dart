@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 import 'package:teads_sdk_flutter_example/in_feed_demo.dart';
 
@@ -108,15 +107,17 @@ class _demo_nativeState extends State<demo_native> {
                 ),
               ),
               in_feed_demo(
-                  source: "nyt",
-                  icon:
-                      'https://www.theminotvoice.com/wp-content/uploads/sites/2/2016/10/NYT-icon.png',
-                  media:
-                      'https://static01.nyt.com/images/2021/12/17/arts/16spider-man-review/merlin_199080312_33263efe-93b3-432c-84ca-6e040624dfdf-superJumbo.jpg?quality=75&auto=webp',
-                  text:
-                      'In the latest installment of the “Spider-Man” series, Tom Holland faces the past and a very secure franchise future.',
-                  title: "‘Spider-Man: No Way Home’ Review'",
-                  time: "5"),
+                source: "nyt",
+                icon:
+                    'https://www.theminotvoice.com/wp-content/uploads/sites/2/2016/10/NYT-icon.png',
+                media:
+                    'https://static01.nyt.com/images/2021/12/17/arts/16spider-man-review/merlin_199080312_33263efe-93b3-432c-84ca-6e040624dfdf-superJumbo.jpg?quality=75&auto=webp',
+                text:
+                    'In the latest installment of the “Spider-Man” series, Tom Holland faces the past and a very secure franchise future.',
+                title: "‘Spider-Man: No Way Home’ Review'",
+                time: "5",
+                textButton: "Follow",
+              ),
               in_feed_demo(
                 source: "wsj",
                 icon:
@@ -127,6 +128,7 @@ class _demo_nativeState extends State<demo_native> {
                     'Once gas-powered engines are banned, how will Porsche keep its lucrative club-racing business alive? The Mission R is a first stab at the answer.',
                 title: "Porsche Mission R: The All-Electric Future of Racing?",
                 time: "7",
+                textButton: "Follow",
               ),
               in_feed_demo(
                 source: "ign",
@@ -138,6 +140,7 @@ class _demo_nativeState extends State<demo_native> {
                     'The Elden Ring was broken. But by whom? And why? Mysteries abound in the latest cinematic trailer for the hotly anticipated Elden Ring.',
                 title: "Elden Ring Cinematic Trailer - The Game Awards 2021",
                 time: "12",
+                textButton: "Follow",
               ),
               in_feed_demo(
                 source: "espn",
@@ -150,6 +153,7 @@ class _demo_nativeState extends State<demo_native> {
                 title:
                     "How Max Verstappen won the controversial Abu Dhabi Grand Prix",
                 time: "15",
+                textButton: "Follow",
               ),
               in_feed_demo(
                 source: "vice",
@@ -162,6 +166,7 @@ class _demo_nativeState extends State<demo_native> {
                 title:
                     "A Boomer, Millennial and Zoomer Argue Over Their Music of the Year",
                 time: "16",
+                textButton: "Follow",
               ),
             ],
           ),

@@ -8,6 +8,7 @@ class in_feed_demo extends StatefulWidget {
   String media;
   String time;
   String source;
+  String textButton;
 
   in_feed_demo({
     Key? key,
@@ -17,6 +18,7 @@ class in_feed_demo extends StatefulWidget {
     required this.media,
     required this.time,
     required this.source,
+    required this.textButton,
   }) : super(key: key);
 
   @override
@@ -27,7 +29,7 @@ class _in_feed_demoState extends State<in_feed_demo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         clipBehavior: Clip.antiAlias,
@@ -41,16 +43,31 @@ class _in_feed_demoState extends State<in_feed_demo> {
                         .withOpacity(1.0),
               ),
               title: Text(widget.source),
+              trailing: TextButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      side: const BorderSide(
+                          color: Colors.lightBlue,
+                          width: 1,
+                          style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(10.0))),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.lightBlue),
+                ),
+                onPressed: () {},
+                child: Text(widget.textButton),
+              ),
               subtitle: Text(
                 widget.time + "min",
                 style: TextStyle(color: Colors.black.withOpacity(0.6)),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Text(
                 widget.title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
@@ -61,7 +78,7 @@ class _in_feed_demoState extends State<in_feed_demo> {
               ),
             ),
             Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20), // Image border
                   child: SizedBox.fromSize(
