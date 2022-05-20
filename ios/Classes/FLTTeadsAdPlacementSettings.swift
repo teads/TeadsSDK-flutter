@@ -12,6 +12,11 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
     
     let placementSettings = TeadsAdPlacementSettings()
     
+    public override init() {
+        super.init()
+        placementSettings.addExtras(TeadsAdPlacementSettings.platformKey, for: TeadsAdPlacementSettings.platformFlutter)
+    }
+    
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_placement_settings", binaryMessenger: registrar.messenger())
         let instance = FLTTeadsAdPlacementSettings()
@@ -61,6 +66,18 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
             } else {
                 result(FlutterError.badArguments)
             }
+        case "enableLocation":
+            // Android only
+            result(try? placementSettings.asDictionary())
+        case "useLightEndScreen":
+            // Android only
+            result(try? placementSettings.asDictionary())
+        case "hideBrowserUrl":
+            // Android only
+            result(try? placementSettings.asDictionary())
+        case "toolBarBackgroundColor":
+            // Android only
+            result(try? placementSettings.asDictionary())
         default:
             result(FlutterMethodNotImplemented)
         }

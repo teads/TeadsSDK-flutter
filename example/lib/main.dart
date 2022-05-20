@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
   Future<void> initTeadsAd() async {
     TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
     await placementSettings.enableDebug();
-    placement = await Teads.createInReadPlacement(84242, placementSettings, this);
+    placement = await Teads.createInReadPlacement(128779, placementSettings, this);
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling

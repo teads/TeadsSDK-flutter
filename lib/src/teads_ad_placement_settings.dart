@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
 
 class TeadsAdPlacementSettings {
-
-  final MethodChannel _channel = const MethodChannel('teads_sdk_flutter/teads_ad_placement_settings');
+  final MethodChannel _channel =
+      const MethodChannel('teads_sdk_flutter/teads_ad_placement_settings');
   Map mapValue = {};
 
   TeadsAdPlacementSettings();
@@ -12,15 +12,18 @@ class TeadsAdPlacementSettings {
   }
 
   Future<void> disableTeadsAudioSessionManagement() async {
-    mapValue = await _channel.invokeMethod('disableTeadsAudioSessionManagement');
+    mapValue =
+        await _channel.invokeMethod('disableTeadsAudioSessionManagement');
   }
 
   Future<void> enableDebug() async {
     mapValue = await _channel.invokeMethod('enableDebug');
   }
 
-  Future<void> userConsent(String subjectToGDPR, String consent, { TCFVersion tcfVersion = TCFVersion.v2, int cmpSdkID = 0 }) async {
-    mapValue = await _channel.invokeMethod('userConsent', [subjectToGDPR, consent, tcfVersion.value, cmpSdkID]);
+  Future<void> userConsent(String subjectToGDPR, String consent,
+      {TCFVersion tcfVersion = TCFVersion.v2, int cmpSdkID = 0}) async {
+    mapValue = await _channel.invokeMethod(
+        'userConsent', [subjectToGDPR, consent, tcfVersion.value, cmpSdkID]);
   }
 
   Future<void> setUsPrivacy(String consent) async {
@@ -34,12 +37,25 @@ class TeadsAdPlacementSettings {
   Future<void> addExtras(String value, String key) async {
     mapValue = await _channel.invokeMethod('addExtras', [value, key]);
   }
+
+  Future<void> enableLocation() async {
+    mapValue = await _channel.invokeMethod('enableLocation');
+  }
+
+  Future<void> useLightEndScreen() async {
+    mapValue = await _channel.invokeMethod('useLightEndScreen');
+  }
+
+  Future<void> hideBrowserUrl() async {
+    mapValue = await _channel.invokeMethod('hideBrowserUrl');
+  }
+
+  Future<void> toolBarBackgroundColor(int color) async {
+    mapValue = await _channel.invokeMethod('toolBarBackgroundColor', [color]);
+  }
 }
 
-enum TCFVersion {
-  v1,
-  v2
-}
+enum TCFVersion { v1, v2 }
 
 extension TCFVersionExtension on TCFVersion {
   int get value {

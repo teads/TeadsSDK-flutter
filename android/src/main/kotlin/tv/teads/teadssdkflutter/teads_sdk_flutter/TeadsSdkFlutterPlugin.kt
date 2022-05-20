@@ -1,35 +1,87 @@
 package tv.teads.teadssdkflutter.teads_sdk_flutter
 
 import androidx.annotation.NonNull
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
-import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 
 /** TeadsSdkFlutterPlugin */
-class TeadsSdkFlutterPlugin: FlutterPlugin, MethodCallHandler {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
-  private lateinit var channel : MethodChannel
+class TeadsSdkFlutterPlugin : FlutterPlugin {
+    private lateinit var adPlacementSettingsChannel: MethodChannel
+    private lateinit var adRequestSettingsChannel: MethodChannel
+    private lateinit var teadsChannel: MethodChannel
+    private lateinit var teadsAdChannel: MethodChannel
+    private lateinit var teadsAdViewChannel: MethodChannel
+    private lateinit var inReadAdPlacementChannel: MethodChannel
+    private lateinit var adRatioChannel: MethodChannel
 
-  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "teads_sdk_flutter")
-    channel.setMethodCallHandler(this)
-  }
+    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        // FLTAdPlacementSettings Handler
+        adPlacementSettingsChannel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "teads_sdk_flutter/teads_ad_placement_settings"
+        )
+        adPlacementSettingsChannel.setMethodCallHandler(FLTAdPlacementSettings())
 
-  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method == "sdkVersion") {
-      result.success("${android.os.Build.VERSION.RELEASE}")
-    } else {
-      result.notImplemented()
+        // FLTAdRequestSettings Handler
+        adRequestSettingsChannel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "teads_sdk_flutter/teads_ad_request_settings"
+        )
+        adRequestSettingsChannel.setMethodCallHandler(FLTAdRequestSettings())
+
+        // FLTTeads Handler
+        teadsChannel =
+            MethodChannel(flutterPluginBinding.binaryMessenger, "teads_sdk_flutter/teads")
+        teadsChannel.setMethodCallHandler(FLTTeads(flutterPluginBinding.applicationContext))
+
+        // FLTAd Handler
+        teadsAdChannel =
+            MethodChannel(flutterPluginBinding.binaryMessenger, "teads_sdk_flutter/teads_ad")
+        teadsAdChannel.setMethodCallHandler(FLTAd())
+
+        // FLTInReadAdPlacement Handler
+        inReadAdPlacementChannel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "teads_sdk_flutter/teads_inread_ad_placement"
+        )
+        inReadAdPlacementChannel.setMethodCallHandler(
+            FLTInReadAdPlacement(
+                inReadAdPlacementChannel,
+                teadsAdChannel
+            )
+        )
+
+        // FLTAdRatio Handler
+        adRatioChannel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "teads_sdk_flutter/teads_ad_ratio"
+        )
+        adRatioChannel.setMethodCallHandler(FLTAdRatio())
+
+        // FLTInReadAdView Handler
+        teadsAdViewChannel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "teads_sdk_flutter/teads_ad_view"
+        )
+        val fltInReadAdView = FLTTeadsInReadAdView()
+        teadsAdViewChannel.setMethodCallHandler(fltInReadAdView)
+
+        flutterPluginBinding
+            .platformViewRegistry
+            .registerViewFactory(
+                "FLTTeadsInReadAdView",
+                FLTTeadsInReadAdViewFactory(fltInReadAdView)
+            )
+
     }
-  }
 
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-    channel.setMethodCallHandler(null)
-  }
+    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+        adPlacementSettingsChannel.setMethodCallHandler(null)
+        adRequestSettingsChannel.setMethodCallHandler(null)
+        teadsChannel.setMethodCallHandler(null)
+        teadsAdChannel.setMethodCallHandler(null)
+        teadsAdViewChannel.setMethodCallHandler(null)
+        inReadAdPlacementChannel.setMethodCallHandler(null)
+        adRatioChannel.setMethodCallHandler(null)
+    }
 }
