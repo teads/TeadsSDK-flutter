@@ -12,6 +12,11 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
     
     let placementSettings = TeadsAdPlacementSettings()
     
+    public override init() {
+        super.init()
+        placementSettings.addExtras(TeadsAdPlacementSettings.platformKey, for: TeadsAdPlacementSettings.platformFlutter)
+    }
+    
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_placement_settings", binaryMessenger: registrar.messenger())
         let instance = FLTTeadsAdPlacementSettings()
