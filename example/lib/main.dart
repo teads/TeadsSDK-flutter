@@ -1,12 +1,14 @@
 import 'dart:developer';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:teads_sdk_flutter/teads_sdk_flutter.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  GestureBinding.instance.resamplingEnabled = true;
   runApp(const MyApp());
 }
 
@@ -41,6 +43,16 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
   TeadsInReadAdView inReadAdView = TeadsInReadAdView();
   double adViewHeight = 0;
   TeadsInReadAdPlacement? placement;
+  String loremIpsum =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
+      "sed do eiusmod tempor incididunt ut labore et dolore "
+      "magna aliqua. Ut enim ad minim veniam, quis nostrud "
+      "exercitation ullamco laboris nisi ut aliquip ex ea "
+      "commodo consequat. Duis aute irure dolor in reprehenderit "
+      "in voluptate velit esse cillum dolore eu fugiat nulla "
+      "pariatur. Excepteur sint occaecat cupidatat non proident, "
+      "sunt in culpa qui officia deserunt mollit anim id est "
+      "laborum.";
 
   @override
   void initState() {
@@ -52,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
   Future<void> initTeadsAd() async {
     TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
     await placementSettings.enableDebug();
-    placement = await Teads.createInReadPlacement(128779, placementSettings, this);
+    placement = await Teads.createInReadPlacement(127546, placementSettings, this);
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -76,10 +88,12 @@ class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlaceme
               },
               child: const Text('Load ad'),
             ),
+            Text(loremIpsum + loremIpsum + loremIpsum + loremIpsum),
             SizedBox(
               height: adViewHeight,
               child: inReadAdView,
-            )
+            ),
+            Text(loremIpsum + loremIpsum + loremIpsum + loremIpsum)
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.
     );

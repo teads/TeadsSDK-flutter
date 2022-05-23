@@ -10,12 +10,13 @@ import TeadsSDK
 
 public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
     
-    let placementSettings = TeadsAdPlacementSettings()
-    
-    public override init() {
-        super.init()
-        placementSettings.addExtras(TeadsAdPlacementSettings.platformKey, for: TeadsAdPlacementSettings.platformFlutter)
-    }
+    let placementSettings: TeadsAdPlacementSettings = {
+        let settings = TeadsAdPlacementSettings()
+        settings.addExtras(TeadsAdPlacementSettings.pluginFlutter, for: TeadsAdPlacementSettings.pluginKey)
+        // Fluter version is always 1.0.0
+        settings.addExtras("1.0.0", for: TeadsAdPlacementSettings.pluginVersionKey)
+        return settings
+    }()
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_placement_settings", binaryMessenger: registrar.messenger())
