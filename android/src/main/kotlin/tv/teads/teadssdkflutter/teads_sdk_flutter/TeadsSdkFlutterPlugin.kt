@@ -42,7 +42,7 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
         // FLTInReadAdPlacement Handler
         inReadAdPlacementChannel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
-            "teads_sdk_flutter/teads_inread_ad_placement"
+            "teads_sdk_flutter/teads_ad_placement/inread"
         )
         inReadAdPlacementChannel.setMethodCallHandler(
             FLTInReadAdPlacement(

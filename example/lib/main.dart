@@ -1,14 +1,14 @@
-import 'dart:developer';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:teads_sdk_flutter/teads_sdk_flutter.dart';
+import 'package:teads_sdk_flutter_example/src/models/creative.dart';
+import 'package:teads_sdk_flutter_example/src/models/format.dart';
+import 'package:teads_sdk_flutter_example/src/models/integration.dart';
+import 'package:teads_sdk_flutter_example/src/models/provider.dart';
+import 'package:teads_sdk_flutter_example/src/presentation/item.dart';
+import 'src/presentation/integration_list.dart';
+import 'src/presentation/title.dart';
+import 'src/presentation/creative_list.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  GestureBinding.instance.resamplingEnabled = true;
   runApp(const MyApp());
 }
 
@@ -17,179 +17,89 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Teads Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: const MyHomePage(title: 'Teads Demo'),
+    return const MaterialApp(
+      home: Home(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-
-class MyHomePage extends StatefulWidget {
-
-  final String title;
-
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> implements TeadsInReadAdPlacementDelegate, TeadsAdDelegate, TeadsPlaybackDelegate {
-  TeadsInReadAdView inReadAdView = TeadsInReadAdView();
-  double adViewHeight = 0;
-  TeadsInReadAdPlacement? placement;
-  String loremIpsum =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-      "sed do eiusmod tempor incididunt ut labore et dolore "
-      "magna aliqua. Ut enim ad minim veniam, quis nostrud "
-      "exercitation ullamco laboris nisi ut aliquip ex ea "
-      "commodo consequat. Duis aute irure dolor in reprehenderit "
-      "in voluptate velit esse cillum dolore eu fugiat nulla "
-      "pariatur. Excepteur sint occaecat cupidatat non proident, "
-      "sunt in culpa qui officia deserunt mollit anim id est "
-      "laborum.";
+class _HomeState extends State<Home> {
 
-  @override
-  void initState() {
-    super.initState();
-    initTeadsAd();
+  final Format _selectedFormat = Format(FormatType.inRead, Provider(ProviderType.direct, CreativeType.landscape, IntegrationType.listView));
+
+  //update state
+  refreshFormat(dynamic childValue) {
+    setState(() {
+      _selectedFormat.type = childValue;
+      _selectedFormat.provider.creativeType = _selectedFormat.creatives.first;
+    });
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initTeadsAd() async {
-    TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
-    await placementSettings.enableDebug();
-    placement = await Teads.createInReadPlacement(127546, placementSettings, this);
+  refreshProvider(dynamic childValue) {
+    setState(() {
+      _selectedFormat.provider.type = childValue;
+    });
+  }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
+  refreshCreative(dynamic childValue) {
+    setState(() {
+      _selectedFormat.provider.creativeType = childValue;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
+      body: CustomScrollView(slivers: [
+        SliverAppBar(
+          pinned: true,
+          title: SizedBox(
+            height: 30,
+            child: (Image.asset(
+                "assets/Teads-Sample-App.imageset/Teads-Sample-App-black.png")),
+          ),
+          leading: SizedBox(
+            height: 30,
+            child: (Image.asset("assets/logo.png")),
+          ),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+            ),
+          ),
         ),
-        body: ListView(
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () async {
-                TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
-                await requestSettings.pageUrl("https://example.com");
-                await placement?.requestAd(requestSettings);
-              },
-              child: const Text('Load ad'),
-            ),
-            Text(loremIpsum + loremIpsum + loremIpsum + loremIpsum),
-            SizedBox(
-              height: adViewHeight,
-              child: inReadAdView,
-            ),
-            Text(loremIpsum + loremIpsum + loremIpsum + loremIpsum)
-          ],
-        ) // This trailing comma makes auto-formatting nicer for build methods.
+        const TitleCategories(givenTitleCategories: "Formats"),
+        Item(
+          selectedFormat: _selectedFormat,
+          type: _selectedFormat.type,
+          list: FormatType.values,
+          notifyParent: refreshFormat,
+        ),
+        const TitleCategories(givenTitleCategories: "Providers"),
+        Item(
+          selectedFormat: _selectedFormat,
+          type: _selectedFormat.provider.type,
+          list: _selectedFormat.providers,
+          notifyParent: refreshProvider,
+        ),
+        const TitleCategories(givenTitleCategories: "Creatives"),
+        Item(
+          selectedFormat: _selectedFormat,
+          type: _selectedFormat.provider.creativeType,
+          list: _selectedFormat.creatives,
+          notifyParent: refreshCreative,
+        ),
+        const TitleCategories(givenTitleCategories: "Integrations"),
+        IntegrationList(selectedFormat: _selectedFormat)
+      ]),
     );
-  }
-
-  void resizeAd(TeadsAdRatio adRatio) async {
-    double width = MediaQuery.of(context).size.width;
-    double height = await adRatio.calculateHeight(width);
-
-    setState(() {
-      adViewHeight = height;
-    });
-  }
-
-  @override
-  void didReceiveAd(TeadsInReadAd ad, TeadsAdRatio adRatio) {
-    log('didReceiveAd');
-    ad.setDelegate(this);
-    ad.setPlaybackDelegate(this);
-    inReadAdView.bind(ad);
-    resizeAd(adRatio);
-  }
-
-  @override
-  void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio) {
-    log('didUpdateRatio');
-    resizeAd(adRatio);
-  }
-
-  @override
-  void adOpportunityTrackerView(String trackerView) {
-    log('adOpportunityTrackerView');
-  }
-
-  @override
-  void didFailToReceiveAd(String reason) {
-    log('didFailToReceiveAd');
-  }
-
-  @override
-  void willPresentModalView(TeadsAd ad) {
-    log('willPresentModalView');
-  }
-
-  @override
-  void adStartPlayingAudio(TeadsAd ad) {
-    log('adStartPlayingAudio');
-  }
-
-  @override
-  void adStopPlayingAudio(TeadsAd ad) {
-    log('adStopPlayingAudio');
-  }
-
-  @override
-  void didCatchError(TeadsAd ad, Error error) {
-    log('didCatchError');
-  }
-
-  @override
-  void didClose(TeadsAd ad) {
-    log('didClose');
-  }
-
-  @override
-  void didCollapsedFromFullscreen(TeadsAd ad) {
-    log('didCollapsedFromFullscreen');
-  }
-
-  @override
-  void didComplete(TeadsAd ad) {
-    log('didComplete');
-  }
-
-  @override
-  void didExpandedToFullscreen(TeadsAd ad) {
-    log('didExpandedToFullscreen');
-  }
-
-  @override
-  void didPause(TeadsAd ad) {
-    log('didPause');
-  }
-
-  @override
-  void didPlay(TeadsAd ad) {
-    log('didPlay');
-  }
-
-  @override
-  void didRecordClick(TeadsAd ad) {
-    log('didRecordClick');
-  }
-
-  @override
-  void didRecordImpression(TeadsAd ad) {
-    log('didRecordImpression');
   }
 }

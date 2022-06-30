@@ -1,8 +1,8 @@
 //
-//  FLTTeadsInReadAdView.swift
+//  FLTTeadsNativeAdView.swift
 //  teads_sdk_flutter
 //
-//  Created by Thibaud Saint-Etienne on 28/04/2022.
+//  Created by Thibaud Saint-Etienne on 29/06/2022.
 //
 
 import Flutter
@@ -10,7 +10,7 @@ import UIKit
 import TeadsSDK
 
 @objc
-public class FLTTeadsInReadAdViewFactory: NSObject, FlutterPlatformViewFactory {
+public class FLTTeadsNativeAdViewFactory: NSObject, FlutterPlatformViewFactory {
     private var messenger: FlutterBinaryMessenger
 
     @objc
@@ -24,7 +24,7 @@ public class FLTTeadsInReadAdViewFactory: NSObject, FlutterPlatformViewFactory {
         viewIdentifier viewId: Int64,
         arguments args: Any?
     ) -> FlutterPlatformView {
-        return FLTTeadsInReadAdView(
+        return FLTTeadsNativeAdView(
             frame: frame,
             viewIdentifier: viewId,
             arguments: args,
@@ -32,8 +32,8 @@ public class FLTTeadsInReadAdViewFactory: NSObject, FlutterPlatformViewFactory {
     }
 }
 
-public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
-    private var inReadAdView: TeadsInReadAdView
+public class FLTTeadsNativeAdView: NSObject, FlutterPlatformView {
+    private var nativeAdView: TeadsNativeAdView
 
     init(
         frame: CGRect,
@@ -41,18 +41,18 @@ public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
         arguments args: Any?,
         binaryMessenger messenger: FlutterBinaryMessenger?
     ) {
-        inReadAdView = TeadsInReadAdView()
+        nativeAdView = TeadsNativeAdView()
         
         super.init()
         
-        let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_view/inread", binaryMessenger: messenger!)
+        let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_view/native", binaryMessenger: messenger!)
            channel.setMethodCallHandler({ [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
                switch(call.method) {
                case "bind":
                    if let args = call.arguments as? [Any],
                       let requestIdentifier = args[0] as? String {
-                       if let instance = try? FLTTeadsInReadAdInstanceManager.shared.instance(for: requestIdentifier) {
-                           self?.inReadAdView.bind(instance.teadsAd)
+                       if let ad = try? FLTTeadsNativeAdInstanceManager.shared.ad(for: requestIdentifier) {
+                           self?.nativeAdView.bind(ad)
                        }
                        result(nil)
                    } else {
@@ -65,7 +65,8 @@ public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
     }
 
     public func view() -> UIView {
-        return inReadAdView
+        return nativeAdView
     }
     
 }
+

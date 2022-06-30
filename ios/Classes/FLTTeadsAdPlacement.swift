@@ -8,7 +8,7 @@
 import Flutter
 import TeadsSDK
 
-public class FLTTeadsAdPlacement: NSObject, TeadsdPlacementDelegate {
+public class FLTTeadsAdPlacement: NSObject, TeadsAdPlacementDelegate {
     
     let channel: FlutterMethodChannel
     

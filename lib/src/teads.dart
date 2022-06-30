@@ -1,5 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:teads_sdk_flutter/teads_sdk_flutter.dart';
+import 'package:teads_sdk_flutter/src/inread/teads_inread_ad_placement.dart';
+import 'package:teads_sdk_flutter/src/native/teads_native_ad_placement.dart';
+import 'package:teads_sdk_flutter/src/teads_ad_placement_settings.dart';
 
 class Teads {
   static const MethodChannel _channel =
