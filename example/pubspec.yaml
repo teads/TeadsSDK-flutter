@@ -53,10 +53,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/ScrollView.imageset/ScrollView150.png
-    - assets/CollectionView.imageset/CollectionView150.png
-    - assets/TableView.imageset/TableView150.png
-    - assets/WebView.imageset/WebView150.png
+    - assets/ListView.imageset/ListView150.png
     - assets/Teads-Sample-App.imageset/Teads-Sample-App-white.png
     - assets/Teads-Sample-App.imageset/Teads-Sample-App-black.png
     - assets/logo.png

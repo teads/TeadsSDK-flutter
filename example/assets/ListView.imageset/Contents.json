@@ -1,0 +1,23 @@
+{
+  "images": [
+    {
+      "filename": "ListView50.png",
+      "idiom": "universal",
+      "scale": "1x"
+    },
+    {
+      "filename": "ListView100.png",
+      "idiom": "universal",
+      "scale": "2x"
+    },
+    {
+      "filename": "ListView150.png",
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}

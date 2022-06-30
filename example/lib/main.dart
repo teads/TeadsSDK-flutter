@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:teads_sdk_flutter_example/integration_list_native.dart';
-import 'integration_list.dart';
-import 'provider_list.dart';
-import 'title.dart';
-import 'format_list.dart';
-import 'creative_list.dart';
+import 'package:teads_sdk_flutter_example/src/models/creative.dart';
+import 'package:teads_sdk_flutter_example/src/models/format.dart';
+import 'package:teads_sdk_flutter_example/src/models/integration.dart';
+import 'package:teads_sdk_flutter_example/src/models/provider.dart';
+import 'package:teads_sdk_flutter_example/src/presentation/item.dart';
+import 'src/presentation/integration_list.dart';
+import 'src/presentation/title.dart';
+import 'src/presentation/creative_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,35 +32,26 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  //default values
-  String _selectedFormat = "inread";
-  String _selectedProvider = "direct";
-  String _integrationType = "scrollview";
-  String _selectedPID = "84242";
-  String _selectedCreative = "landscape";
+
+  final Format _selectedFormat = Format(FormatType.inRead, Provider(ProviderType.direct, CreativeType.landscape, IntegrationType.listView));
 
   //update state
   refreshFormat(dynamic childValue) {
     setState(() {
-      _selectedFormat = childValue;
+      _selectedFormat.type = childValue;
+      _selectedFormat.provider.creativeType = _selectedFormat.creatives.first;
     });
   }
 
   refreshProvider(dynamic childValue) {
     setState(() {
-      _selectedProvider = childValue;
+      _selectedFormat.provider.type = childValue;
     });
   }
 
   refreshCreative(dynamic childValue) {
     setState(() {
-      _selectedCreative = childValue;
-    });
-  }
-
-  refreshPID(dynamic childValue) {
-    setState(() {
-      _selectedPID = childValue;
+      _selectedFormat.provider.creativeType = childValue;
     });
   }
 
@@ -84,39 +77,28 @@ class _HomeState extends State<Home> {
           ),
         ),
         const TitleCategories(givenTitleCategories: "Formats"),
-        FormatList(
+        Item(
           selectedFormat: _selectedFormat,
+          type: _selectedFormat.type,
+          list: FormatType.values,
           notifyParent: refreshFormat,
         ),
         const TitleCategories(givenTitleCategories: "Providers"),
-        ProviderList(
-          selectedProvider: _selectedProvider,
-          notifyParent: refreshProvider,
+        Item(
           selectedFormat: _selectedFormat,
+          type: _selectedFormat.provider.type,
+          list: _selectedFormat.providers,
+          notifyParent: refreshProvider,
         ),
         const TitleCategories(givenTitleCategories: "Creatives"),
-        CreativeList(
-            selectedCreative: _selectedCreative,
-            selectedPID: _selectedPID,
-            notifyParentCreative: refreshCreative,
-            notifyParentPID: refreshPID,
-            selectedFormat: _selectedFormat),
+        Item(
+          selectedFormat: _selectedFormat,
+          type: _selectedFormat.provider.creativeType,
+          list: _selectedFormat.creatives,
+          notifyParent: refreshCreative,
+        ),
         const TitleCategories(givenTitleCategories: "Integrations"),
-        _selectedFormat == "inread"
-            ? IntegrationList(
-                integrationType: _integrationType,
-                selectedProvider: _selectedProvider,
-                selectedCreative:
-                    _selectedFormat == "inread" ? _selectedCreative : "display",
-                selectedFormat: _selectedFormat,
-                selectedPID: _selectedPID)
-            : IntegrationListNative(
-                integrationType: _integrationType,
-                selectedProvider: _selectedProvider,
-                selectedCreative:
-                    _selectedFormat == "inread" ? _selectedCreative : "display",
-                selectedFormat: _selectedFormat,
-                selectedPID: _selectedPID)
+        IntegrationList(selectedFormat: _selectedFormat)
       ]),
     );
   }

@@ -1,22 +1,58 @@
-typedef BuildTeadsAdSettings = void Function(TeadsAdPlacementSettings _);
+import 'package:flutter/services.dart';
 
 class TeadsAdPlacementSettings {
-  TeadsAdPlacementSettings(BuildTeadsAdSettings build);
+  final MethodChannel _channel =
+      const MethodChannel('teads_sdk_flutter/teads_ad_placement_settings');
+  Map mapValue = {};
 
-  void disableCrashMonitoring() {}
+  TeadsAdPlacementSettings();
 
-  void disableTeadsAudioSessionManagement() {}
+  Future<void> disableCrashMonitoring() async {
+    mapValue = await _channel.invokeMethod('disableCrashMonitoring');
+  }
 
-  void enableDebug() {}
+  Future<void> disableTeadsAudioSessionManagement() async {
+    mapValue =
+        await _channel.invokeMethod('disableTeadsAudioSessionManagement');
+  }
 
-  void userConsent(String subjectToGDPR, String consent,
-      {TCFVersion tcfVersion = TCFVersion.v2, int cmpSdkID = 0}) {}
+  Future<void> enableDebug() async {
+    mapValue = await _channel.invokeMethod('enableDebug');
+  }
 
-  void setUsPrivacy(String consent) {}
+  Future<void> userConsent(String subjectToGDPR, String consent,
+      {TCFVersion tcfVersion = TCFVersion.v2, int cmpSdkID = 0}) async {
+    mapValue = await _channel.invokeMethod(
+        'userConsent', [subjectToGDPR, consent, tcfVersion.value, cmpSdkID]);
+  }
 
-  void disableBatteryMonitoring() {}
+  Future<void> setUsPrivacy(String consent) async {
+    mapValue = await _channel.invokeMethod('setUsPrivacy', [consent]);
+  }
 
-  void addExtras(String value, String key) {}
+  Future<void> disableBatteryMonitoring() async {
+    mapValue = await _channel.invokeMethod('disableBatteryMonitoring');
+  }
+
+  Future<void> addExtras(String value, String key) async {
+    mapValue = await _channel.invokeMethod('addExtras', [value, key]);
+  }
+
+  Future<void> enableLocation() async {
+    mapValue = await _channel.invokeMethod('enableLocation');
+  }
+
+  Future<void> useLightEndScreen() async {
+    mapValue = await _channel.invokeMethod('useLightEndScreen');
+  }
+
+  Future<void> hideBrowserUrl() async {
+    mapValue = await _channel.invokeMethod('hideBrowserUrl');
+  }
+
+  Future<void> toolBarBackgroundColor(int color) async {
+    mapValue = await _channel.invokeMethod('toolBarBackgroundColor', [color]);
+  }
 }
 
 enum TCFVersion { v1, v2 }
