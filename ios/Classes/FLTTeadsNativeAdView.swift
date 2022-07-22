@@ -10,6 +10,13 @@ import UIKit
 import TeadsSDK
 
 @objc
+public protocol FLTTeadsNativeAdViewFactoryProtocol {
+    /// Creates a `TeadsNativeAdView`.
+    /// - returns: A `TeadsNativeAdView` that is overlaid on top of the FlutterView.
+    func teadsNativeAdView() -> TeadsNativeAdView?
+}
+
+@objc
 public class FLTTeadsNativeAdViewFactory: NSObject, FlutterPlatformViewFactory {
     private var messenger: FlutterBinaryMessenger
 
@@ -30,10 +37,14 @@ public class FLTTeadsNativeAdViewFactory: NSObject, FlutterPlatformViewFactory {
             arguments: args,
             binaryMessenger: messenger)
     }
+    
+    public func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {
+        return FlutterStandardMessageCodec.sharedInstance()
+    }
 }
 
 public class FLTTeadsNativeAdView: NSObject, FlutterPlatformView {
-    private var nativeAdView: TeadsNativeAdView
+    private var nativeAdView: TeadsNativeAdView?
 
     init(
         frame: CGRect,
@@ -41,7 +52,10 @@ public class FLTTeadsNativeAdView: NSObject, FlutterPlatformView {
         arguments args: Any?,
         binaryMessenger messenger: FlutterBinaryMessenger?
     ) {
-        nativeAdView = TeadsNativeAdView()
+        if let args = args as? [String: Any],
+           let factoryId = args["factoryId"] as? String {
+            nativeAdView = FLTTeadsSDKFlutterPlugin.shared.nativeAdViewFactories[factoryId]?.teadsNativeAdView()
+        }
         
         super.init()
         
@@ -52,7 +66,7 @@ public class FLTTeadsNativeAdView: NSObject, FlutterPlatformView {
                    if let args = call.arguments as? [Any],
                       let requestIdentifier = args[0] as? String {
                        if let ad = try? FLTTeadsNativeAdInstanceManager.shared.ad(for: requestIdentifier) {
-                           self?.nativeAdView.bind(ad)
+                           self?.nativeAdView?.bind(ad)
                        }
                        result(nil)
                    } else {
@@ -65,7 +79,7 @@ public class FLTTeadsNativeAdView: NSObject, FlutterPlatformView {
     }
 
     public func view() -> UIView {
-        return nativeAdView
+        return nativeAdView ?? UIView()
     }
     
 }

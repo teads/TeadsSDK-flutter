@@ -8,8 +8,9 @@ import 'teads_native_ad.dart';
 
 class TeadsNativeAdView extends StatefulWidget {
   final _TeadsNativeAdViewState state = _TeadsNativeAdViewState();
+  final String factoryId;
 
-  TeadsNativeAdView({Key? key}) : super(key: key);
+  TeadsNativeAdView({Key? key, required this.factoryId}) : super(key: key);
 
   @override
   State<TeadsNativeAdView> createState() => _TeadsNativeAdViewState();
@@ -30,7 +31,9 @@ class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
     // This is used in the platform side to register the view.
     const String viewType = 'FLTTeadsNativeAdView';
     // Pass parameters to the platform side.
-    final Map<String, dynamic> creationParams = <String, dynamic>{};
+    final Map<String, dynamic> creationParams = <String, dynamic>{
+      'factoryId': widget.factoryId
+    };
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
       // return widget on Android.

@@ -22,7 +22,7 @@ class DemoNative extends StatefulWidget {
 
 class _DemoNativeState extends State<DemoNative> implements TeadsNativeAdPlacementDelegate {
 
-  TeadsNativeAdView nativeAdView = TeadsNativeAdView();
+  TeadsNativeAdView nativeAdView = TeadsNativeAdView(factoryId: 'exampleNativeAd');
   TeadsNativeAdPlacement? placement;
 
   @override
@@ -163,9 +163,16 @@ class _DemoNativeState extends State<DemoNative> implements TeadsNativeAdPlaceme
                 time: "12",
                 textButton: "Follow",
               ),
-              SizedBox(
-                height: 400,
-                child: nativeAdView,
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  clipBehavior: Clip.antiAlias,
+                  child: SizedBox(
+                    height: 400,
+                    child: nativeAdView,
+                  )
+                )
               ),
               InFeedDemo(
                 source: "espn",

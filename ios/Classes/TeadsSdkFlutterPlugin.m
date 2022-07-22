@@ -10,16 +10,6 @@
 
 @implementation TeadsSdkFlutterPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [FLTTeads registerWithRegistrar:registrar];
-  [FLTTeadsAdPlacementSettings registerWithRegistrar:registrar];
-  [FLTTeadsAdRequestSettings registerWithRegistrar:registrar];
-  [FLTTeadsInReadAdPlacement registerWithRegistrar:registrar];
-  [FLTTeadsNativeAdPlacement registerWithRegistrar:registrar];
-  [FLTTeadsAd registerWithRegistrar:registrar];
-  [FLTTeadsAdRatio registerWithRegistrar:registrar];
-  FLTTeadsInReadAdViewFactory* inReadAdViewFactory = [[FLTTeadsInReadAdViewFactory alloc] initWithMessenger:registrar.messenger];
-  [registrar registerViewFactory:inReadAdViewFactory withId:@"FLTTeadsInReadAdView"];
-  FLTTeadsNativeAdViewFactory* nativeAdViewFactory = [[FLTTeadsNativeAdViewFactory alloc] initWithMessenger:registrar.messenger];
-  [registrar registerViewFactory:nativeAdViewFactory withId:@"FLTTeadsNativeAdView"];
+  [FLTTeadsSDKFlutterPlugin registerWithRegistrar:registrar];
 }
 @end

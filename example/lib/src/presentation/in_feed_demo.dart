@@ -1,7 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
+
+import 'package:teads_sdk_flutter_example/src/extensions/colors.dart';
 
 class InFeedDemo extends StatefulWidget {
   String icon;
@@ -40,21 +41,14 @@ class _InFeedDemoState extends State<InFeedDemo> {
             ListTile(
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(widget.icon),
-                backgroundColor:
-                    Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-                        .withOpacity(1.0),
               ),
               title: Text(widget.source),
               trailing: TextButton(
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      side: const BorderSide(
-                          color: Colors.lightBlue,
-                          width: 1,
-                          style: BorderStyle.solid),
-                      borderRadius: BorderRadius.circular(10.0))),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.lightBlue),
+                      borderRadius: BorderRadius.circular(20.0))),
+                  foregroundColor: MaterialStateProperty.all<Color>(blueColor),
+                  backgroundColor: MaterialStateProperty.all<Color>(lightGrayColor)
                 ),
                 onPressed: () {},
                 child: Text(widget.textButton),
