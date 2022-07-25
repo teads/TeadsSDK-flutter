@@ -6,7 +6,6 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-/** FLTAdRatio */
 class FLTAdRatio : MethodCallHandler {
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -18,7 +17,7 @@ class FLTAdRatio : MethodCallHandler {
                     if (width != null && requestIdentifier != null)
                         try {
                             result.success(
-                                FLTAdInstanceManager.shared.instance(requestIdentifier)
+                                FLTTeadsInReadAdInstanceManager.shared.instance(requestIdentifier)
                                     .inReadAdView.inReadAd.adRatio.calculateHeight(width.toInt())
                                     .toDouble()
                             )
@@ -35,7 +34,7 @@ class FLTAdRatio : MethodCallHandler {
                     if (width != null && requestIdentifier != null)
                         try {
                             result.success(
-                                FLTAdInstanceManager.shared.instance(requestIdentifier)
+                                FLTTeadsInReadAdInstanceManager.shared.instance(requestIdentifier)
                                     .inReadAdView.inReadAd.adRatio.getAdSlotRatio(width.toInt())
                                     .toDouble()
                             )

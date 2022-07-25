@@ -1,8 +1,10 @@
 package tv.teads.teadssdkflutter.teads_sdk_flutter
 
+import android.util.Log
 import androidx.annotation.NonNull
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodChannel
+import io.flutter.plugin.common.PluginRegistry
 
 /** TeadsSdkFlutterPlugin */
 class TeadsSdkFlutterPlugin : FlutterPlugin {
@@ -10,9 +12,32 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
     private lateinit var adRequestSettingsChannel: MethodChannel
     private lateinit var teadsChannel: MethodChannel
     private lateinit var teadsAdChannel: MethodChannel
-    private lateinit var teadsAdViewChannel: MethodChannel
+    private lateinit var inReadAdViewChannel: MethodChannel
+    private lateinit var nativeAdViewChannel: MethodChannel
     private lateinit var inReadAdPlacementChannel: MethodChannel
+    private lateinit var nativeAdPlacementChannel: MethodChannel
     private lateinit var adRatioChannel: MethodChannel
+    val nativeAdViewFactories: MutableMap<String, FLTNativeAdViewFactoryInterface> = mutableMapOf()
+
+    companion object {
+        val shared = TeadsSdkFlutterPlugin()
+
+        fun registerNativeAdViewFactory(factoryId: String, nativeAdViewFactory: FLTNativeAdViewFactoryInterface) : Boolean {
+            return if (shared.nativeAdViewFactories[factoryId] != null) {
+                Log.e("TeadsSdkFlutterPlugin", "A NativeAdViewFactory with the following factoryId already exists: $factoryId")
+                false
+            } else {
+                shared.nativeAdViewFactories[factoryId] = nativeAdViewFactory
+                true
+            }
+        }
+
+        fun unregisterNativeAdViewFactory(factoryId: String) : FLTNativeAdViewFactoryInterface? {
+            val factory = shared.nativeAdViewFactories[factoryId]
+            shared.nativeAdViewFactories.remove(factoryId)
+            return factory
+        }
+    }
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         // FLTAdPlacementSettings Handler
@@ -51,6 +76,18 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
             )
         )
 
+        // FLTInReadAdPlacement Handler
+        nativeAdPlacementChannel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "teads_sdk_flutter/teads_ad_placement/native"
+        )
+        nativeAdPlacementChannel.setMethodCallHandler(
+            FLTNativeAdPlacement(
+                nativeAdPlacementChannel,
+                teadsAdChannel
+            )
+        )
+
         // FLTAdRatio Handler
         adRatioChannel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
@@ -59,18 +96,28 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
         adRatioChannel.setMethodCallHandler(FLTAdRatio())
 
         // FLTInReadAdView Handler
-        teadsAdViewChannel = MethodChannel(
+        inReadAdViewChannel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
-            "teads_sdk_flutter/teads_ad_view"
+            "teads_sdk_flutter/teads_ad_view/inread"
         )
-        val fltInReadAdView = FLTTeadsInReadAdView()
-        teadsAdViewChannel.setMethodCallHandler(fltInReadAdView)
 
         flutterPluginBinding
             .platformViewRegistry
             .registerViewFactory(
                 "FLTTeadsInReadAdView",
-                FLTTeadsInReadAdViewFactory(fltInReadAdView)
+                FLTInReadAdViewFactory(inReadAdViewChannel)
+            )
+
+        // FLTInReadAdView Handler
+        nativeAdViewChannel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "teads_sdk_flutter/teads_ad_view/native"
+        )
+        flutterPluginBinding
+            .platformViewRegistry
+            .registerViewFactory(
+                "FLTTeadsNativeAdView",
+                FLTNativeAdViewFactory(nativeAdViewChannel)
             )
 
     }
@@ -80,7 +127,7 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
         adRequestSettingsChannel.setMethodCallHandler(null)
         teadsChannel.setMethodCallHandler(null)
         teadsAdChannel.setMethodCallHandler(null)
-        teadsAdViewChannel.setMethodCallHandler(null)
+        inReadAdViewChannel.setMethodCallHandler(null)
         inReadAdPlacementChannel.setMethodCallHandler(null)
         adRatioChannel.setMethodCallHandler(null)
     }

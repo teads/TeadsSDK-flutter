@@ -29,7 +29,7 @@ public class FLTTeadsSDKFlutterPlugin: NSObject, FlutterPlugin {
     
     @discardableResult
     public static func registerNativeAdViewFactory(registry: FlutterPluginRegistry, factoryId: String, nativeAdViewFactory: FLTTeadsNativeAdViewFactoryProtocol) -> Bool {
-        if (Self.shared.nativeAdViewFactories[factoryId] != nil) {
+        if Self.shared.nativeAdViewFactories[factoryId] != nil {
             print("A NativeAdFactory with the following factoryId already exists: \(factoryId)")
             return false
         } else {

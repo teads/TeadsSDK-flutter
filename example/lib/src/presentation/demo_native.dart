@@ -23,6 +23,7 @@ class DemoNative extends StatefulWidget {
 class _DemoNativeState extends State<DemoNative> implements TeadsNativeAdPlacementDelegate {
 
   TeadsNativeAdView nativeAdView = TeadsNativeAdView(factoryId: 'exampleNativeAd');
+  double adViewHeight = 0;
   TeadsNativeAdPlacement? placement;
 
   @override
@@ -128,19 +129,19 @@ class _DemoNativeState extends State<DemoNative> implements TeadsNativeAdPlaceme
                 ),
               ),
               InFeedDemo(
-                source: "nyt",
+                source: "@nytimes",
                 icon:
                     'https://www.theminotvoice.com/wp-content/uploads/sites/2/2016/10/NYT-icon.png',
                 media:
                     'https://static01.nyt.com/images/2021/12/17/arts/16spider-man-review/merlin_199080312_33263efe-93b3-432c-84ca-6e040624dfdf-superJumbo.jpg?quality=75&auto=webp',
                 text:
-                    'In the latest installment of the “Spider-Man” series, Tom Holland faces the past and a very secure franchise future.',
-                title: "‘Spider-Man: No Way Home’ Review'",
+                    'In the latest installment of the Spider-Man series, Tom Holland faces the past and a very secure franchise future.',
+                title: "'Spider-Man: No Way Home' Review",
                 time: "5",
                 textButton: "Follow",
               ),
               InFeedDemo(
-                source: "wsj",
+                source: "@wsj",
                 icon:
                     'https://play-lh.googleusercontent.com/eksxaPfxbTVb6VTl5aj1sXLpKc_N9Z6AZ3_5Oq6JhTXmgEQza-1v58a66p_ID0phE2Zv',
                 media:
@@ -152,14 +153,14 @@ class _DemoNativeState extends State<DemoNative> implements TeadsNativeAdPlaceme
                 textButton: "Follow",
               ),
               InFeedDemo(
-                source: "ign",
+                source: "@ign",
                 icon:
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrPAc5tHzqDURqjTaA9Ud_28G37V4Tbch060AubCB6TeNvarlHG5yWSujrNx-uk4du2ic&usqp=CAU',
                 media:
                     'https://static.bandainamcoent.eu/high/elden-ring/elden-ring/00-page-setup/elden-ring-new-header-mobile.jpg',
                 text:
                     'The Elden Ring was broken. But by whom? And why? Mysteries abound in the latest cinematic trailer for the hotly anticipated Elden Ring.',
-                title: "Elden Ring Cinematic Trailer - The Game Awards 2021",
+                title: "New Elden Ring Trailer Premieres Brand New Cinematic Story Trailer",
                 time: "12",
                 textButton: "Follow",
               ),
@@ -169,13 +170,13 @@ class _DemoNativeState extends State<DemoNative> implements TeadsNativeAdPlaceme
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   clipBehavior: Clip.antiAlias,
                   child: SizedBox(
-                    height: 400,
+                    height: adViewHeight,
                     child: nativeAdView,
                   )
                 )
               ),
               InFeedDemo(
-                source: "espn",
+                source: "@espn",
                 icon:
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrPAc5tHzqDURqjTaA9Ud_28G37V4Tbch060AubCB6TeNvarlHG5yWSujrNx-uk4du2ic&usqp=CAU',
                 media:
@@ -188,7 +189,7 @@ class _DemoNativeState extends State<DemoNative> implements TeadsNativeAdPlaceme
                 textButton: "Follow",
               ),
               InFeedDemo(
-                source: "vice",
+                source: "@vice",
                 icon:
                     'https://marketingreport.eu/Article%20Images/Key%20Logos/Vice.jpg',
                 media:
@@ -210,6 +211,7 @@ class _DemoNativeState extends State<DemoNative> implements TeadsNativeAdPlaceme
   @override
   void didReceiveAd(TeadsNativeAd ad) {
     nativeAdView.bind(ad);
+    adViewHeight = 400;
     log('didReceiveAd');
   }
 

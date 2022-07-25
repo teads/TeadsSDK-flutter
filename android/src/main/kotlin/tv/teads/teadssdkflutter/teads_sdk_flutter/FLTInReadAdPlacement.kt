@@ -12,10 +12,9 @@ import tv.teads.sdk.*
 import tv.teads.sdk.renderer.InReadAdView
 import java.util.*
 
-/** FLTInReadAdPlacement */
 class FLTInReadAdPlacement(
-    val channelAdPlacement: MethodChannel,
-    val channelAdRequest: MethodChannel
+    val channel: MethodChannel,
+    val adChannel: MethodChannel
 ) : MethodCallHandler {
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -26,7 +25,7 @@ class FLTInReadAdPlacement(
                     val settingsMap = args[0] as? Map<String, Any>
                     val instanceIdentifier = UUID.randomUUID().toString()
                     if (settingsMap != null) {
-                        FLTAdInstanceManager.shared.placement?.requestAd(
+                        FLTTeadsInReadAdInstanceManager.shared.placement?.requestAd(
                             AdRequestSettings.fromMap(settingsMap),
                             object : InReadAdListener {
                                 override fun adOpportunityTrackerView(trackerView: AdOpportunityTrackerView) {
@@ -37,14 +36,14 @@ class FLTInReadAdPlacement(
                                     inReadAdView: InReadAdView,
                                     adRatio: AdRatio
                                 ) {
-                                    FLTAdInstanceManager.shared.new(
-                                        AdInstanceMap(
+                                    FLTTeadsInReadAdInstanceManager.shared.new(
+                                        InReadAdViewInstanceMap(
                                             inReadAdView,
                                             instanceIdentifier
                                         )
                                     )
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdPlacement.invokeMethod(
+                                        channel.invokeMethod(
                                             "didReceiveAd",
                                             listOf(instanceIdentifier)
                                         )
@@ -53,7 +52,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onAdClicked() {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdRequest.invokeMethod(
+                                        adChannel.invokeMethod(
                                             "didRecordClick",
                                             listOf(instanceIdentifier)
                                         )
@@ -62,7 +61,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onAdClosed() {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdRequest.invokeMethod(
+                                        adChannel.invokeMethod(
                                             "didClose",
                                             listOf(instanceIdentifier)
                                         )
@@ -71,7 +70,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onAdError(code: Int, description: String) {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdRequest.invokeMethod(
+                                        adChannel.invokeMethod(
                                             "didCatchError",
                                             listOf(instanceIdentifier)
                                         )
@@ -80,7 +79,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onAdImpression() {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdRequest.invokeMethod(
+                                        adChannel.invokeMethod(
                                             "didRecordImpression",
                                             listOf(instanceIdentifier)
                                         )
@@ -89,7 +88,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onAdExpandedToFullscreen() {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdRequest.invokeMethod(
+                                        adChannel.invokeMethod(
                                             "didExpandedToFullscreen",
                                             listOf(instanceIdentifier)
                                         )
@@ -98,7 +97,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onAdCollapsedFromFullscreen() {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdRequest.invokeMethod(
+                                        adChannel.invokeMethod(
                                             "didCollapsedFromFullscreen",
                                             listOf(instanceIdentifier)
                                         )
@@ -107,7 +106,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onAdRatioUpdate(adRatio: AdRatio) {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdPlacement.invokeMethod(
+                                        channel.invokeMethod(
                                             "didUpdateRatio",
                                             listOf(instanceIdentifier)
                                         )
@@ -116,7 +115,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onFailToReceiveAd(failReason: String) {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdPlacement.invokeMethod(
+                                        channel.invokeMethod(
                                             "didFailToReceiveAd",
                                             listOf("")
                                         )
@@ -126,7 +125,7 @@ class FLTInReadAdPlacement(
                             object : VideoPlaybackListener {
                                 override fun onVideoComplete() {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdRequest.invokeMethod(
+                                        adChannel.invokeMethod(
                                             "didComplete",
                                             listOf(instanceIdentifier)
                                         )
@@ -135,7 +134,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onVideoPause() {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdRequest.invokeMethod(
+                                        adChannel.invokeMethod(
                                             "didPause",
                                             listOf(instanceIdentifier)
                                         )
@@ -144,7 +143,7 @@ class FLTInReadAdPlacement(
 
                                 override fun onVideoPlay() {
                                     Handler(Looper.getMainLooper()).post {
-                                        channelAdRequest.invokeMethod(
+                                        adChannel.invokeMethod(
                                             "didPlay",
                                             listOf(instanceIdentifier)
                                         )

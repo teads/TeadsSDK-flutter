@@ -8,16 +8,15 @@ import io.flutter.plugin.common.MethodChannel.Result
 import tv.teads.sdk.AdPlacementSettings
 import tv.teads.sdk.utils.userConsent.TCFVersion
 
-/** FLTAdPlacementSettings */
 class FLTAdPlacementSettings : MethodCallHandler {
 
     private var placementSettingsBuilder = AdPlacementSettings.Builder()
 
     init {
-        placementSettingsBuilder.addPlacementExtra(
-            AdPlacementSettings.PLATFORM_KEY,
-            AdPlacementSettings.PLATFORM_FLUTTER
-        ).build()
+//        placementSettingsBuilder.addPlacementExtra(
+//            AdPlacementSettings.PLATFORM_KEY,
+//            AdPlacementSettings.PLATFORM_FLUTTER
+//        ).build()
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
