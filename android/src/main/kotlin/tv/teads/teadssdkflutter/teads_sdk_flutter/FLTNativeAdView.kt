@@ -9,28 +9,29 @@ import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import tv.teads.sdk.renderer.NativeAdView
 
-class FLTNativeAdViewFactory(private val platformView: PlatformView) :
+class FLTNativeAdViewFactory(private val methodChannel: MethodChannel) :
     PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView {
-        return platformView
+        val view = FLTNativeAdView(context, viewId, args)
+        methodChannel.setMethodCallHandler(view)
+        return view
     }
 }
 
-internal class FLTNativeAdView() : PlatformView, MethodChannel.MethodCallHandler {
-    private lateinit var nativeAdView: NativeAdView
+internal class FLTNativeAdView(private val context: Context?, private val viewId: Int, private val args: Any?) : PlatformView, MethodChannel.MethodCallHandler {
+    private var nativeAdView: NativeAdView?
 
     init {
-        //        (args as HashMap<*, *>).let {
-//            (args["factoryId"] as? String).let { factoryId ->
-//                nativeAdView = TeadsSdkFlutterPlugin.shared.nativeAdViewFactories[factoryId]?.teadsNativeAdView()
-//            }
-//        }
+        (args as HashMap<*, *>).let {
+            (args["factoryId"] as? String).let { factoryId ->
+                nativeAdView = TeadsSdkFlutterPlugin.shared.nativeAdViewFactories[factoryId]?.teadsNativeAdView()
+            }
+        }
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
             "bind" -> {
-                nativeAdView = TeadsSdkFlutterPlugin.shared.nativeAdViewFactories["exampleNativeAd"]?.teadsNativeAdView()!!
                 (call.arguments as List<*>).let { args ->
                     val requestIdentifier = args[0] as? String
                     if (requestIdentifier != null) {
@@ -46,7 +47,7 @@ internal class FLTNativeAdView() : PlatformView, MethodChannel.MethodCallHandler
     }
 
     override fun getView(): View {
-        return nativeAdView
+        return nativeAdView ?: View(context)
     }
 
     override fun dispose() { }

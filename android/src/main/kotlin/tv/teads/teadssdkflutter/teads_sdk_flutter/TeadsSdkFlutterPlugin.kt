@@ -116,14 +116,12 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
             flutterPluginBinding.binaryMessenger,
             "teads_sdk_flutter/teads_ad_view/native"
         )
-        val fltNativeAdView = FLTNativeAdView()
-        nativeAdViewChannel.setMethodCallHandler(fltNativeAdView)
 
         flutterPluginBinding
             .platformViewRegistry
             .registerViewFactory(
                 "FLTTeadsNativeAdView",
-                FLTNativeAdViewFactory(fltNativeAdView)
+                FLTNativeAdViewFactory(nativeAdViewChannel)
             )
 
     }
