@@ -95,29 +95,35 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
         )
         adRatioChannel.setMethodCallHandler(FLTAdRatio())
 
+
         // FLTInReadAdView Handler
         inReadAdViewChannel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
             "teads_sdk_flutter/teads_ad_view/inread"
         )
+        val fltInReadAdView = FLTInReadAdView()
+        inReadAdViewChannel.setMethodCallHandler(fltInReadAdView)
 
         flutterPluginBinding
             .platformViewRegistry
             .registerViewFactory(
                 "FLTTeadsInReadAdView",
-                FLTInReadAdViewFactory(inReadAdViewChannel)
+                FLTInReadAdViewFactory(fltInReadAdView)
             )
 
-        // FLTInReadAdView Handler
+        // FLTNativeAdView Handler
         nativeAdViewChannel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
             "teads_sdk_flutter/teads_ad_view/native"
         )
+        val fltNativeAdView = FLTNativeAdView()
+        nativeAdViewChannel.setMethodCallHandler(fltNativeAdView)
+
         flutterPluginBinding
             .platformViewRegistry
             .registerViewFactory(
                 "FLTTeadsNativeAdView",
-                FLTNativeAdViewFactory(nativeAdViewChannel)
+                FLTNativeAdViewFactory(fltNativeAdView)
             )
 
     }

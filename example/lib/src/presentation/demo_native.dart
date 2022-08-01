@@ -170,7 +170,7 @@ class _DemoNativeState extends State<DemoNative> implements TeadsNativeAdPlaceme
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   clipBehavior: Clip.antiAlias,
                   child: SizedBox(
-                    height: adViewHeight,
+                    height: 400,
                     child: nativeAdView,
                   )
                 )

@@ -9,12 +9,10 @@ import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import tv.teads.sdk.renderer.InReadAdView
 
-class FLTInReadAdViewFactory(private val channel: MethodChannel) :
+class FLTInReadAdViewFactory(private val platformView: PlatformView) :
     PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView {
-        val view = FLTInReadAdView()
-        channel.setMethodCallHandler(view)
-        return view
+        return platformView
     }
 }
 

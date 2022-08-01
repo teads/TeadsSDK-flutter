@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tv.teads.sdk.renderer.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nativeAdView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -39,6 +40,8 @@
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#8A8A8A"
+                    android:textSize="12sp"
                     android:text="Sponsored" />
 
             </LinearLayout>
@@ -50,9 +53,14 @@
 
             <Button
                 android:id="@+id/teads_native_call_to_action"
+                android:background="@drawable/button_background"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="" />
+                android:layout_height="40dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="Button"
+                android:textAppearance="@android:style/TextAppearance.Material.Body2"
+                android:textColor="#0E7AFE" />
 
         </LinearLayout>
 
@@ -61,14 +69,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="2"
-            android:text="" />
+            android:text=""
+            android:textColor="#000000"
+            android:textFontWeight="800"
+            android:textSize="16sp"
+            tools:text="Label" />
 
         <TextView
             android:id="@+id/teads_native_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="4"
-            android:text="" />
+            android:text=""
+            android:textColor="#000000"
+            tools:text="Label" />
 
         <tv.teads.sdk.renderer.MediaView
             android:id="@+id/teads_native_media"

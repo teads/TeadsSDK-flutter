@@ -23,7 +23,6 @@ class TeadsNativeAdView extends StatefulWidget {
 class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
   final MethodChannel _channel =
   const MethodChannel('teads_sdk_flutter/teads_ad_view/native');
-
   TeadsNativeAd? nativeAd;
 
   @override
