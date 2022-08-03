@@ -50,5 +50,7 @@ internal class FLTNativeAdView(private val context: Context?, private val viewId
         return nativeAdView ?: View(context)
     }
 
-    override fun dispose() { }
+    override fun dispose() {
+        nativeAdView?.clean()
+    }
 }
