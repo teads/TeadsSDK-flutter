@@ -16,7 +16,7 @@ class FLTTeadsInReadAdInstanceManager {
     }
 
     @Throws()
-    fun instance(requestIdentifier: String) : InReadAdViewInstanceMap {
+    fun instance(requestIdentifier: String): InReadAdViewInstanceMap {
         val instance = adViewInstancesMapList.firstOrNull { it.id == requestIdentifier }
         if (instance != null) {
             return instance
@@ -41,7 +41,7 @@ class FLTTeadsNativeAdInstanceManager {
     }
 
     @Throws()
-    fun instance(requestIdentifier: String) : NativeAdViewInstanceMap {
+    fun instance(requestIdentifier: String): NativeAdViewInstanceMap {
         val instance = list.firstOrNull { it.id == requestIdentifier }
         if (instance != null) {
             return instance

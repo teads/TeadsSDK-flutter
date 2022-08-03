@@ -18,13 +18,18 @@ class FLTNativeAdViewFactory(private val methodChannel: MethodChannel) :
     }
 }
 
-internal class FLTNativeAdView(private val context: Context?, private val viewId: Int, private val args: Any?) : PlatformView, MethodChannel.MethodCallHandler {
+internal class FLTNativeAdView(
+    private val context: Context?,
+    private val viewId: Int,
+    private val args: Any?
+) : PlatformView, MethodChannel.MethodCallHandler {
     private var nativeAdView: NativeAdView?
 
     init {
         (args as HashMap<*, *>).let {
             (args["factoryId"] as? String).let { factoryId ->
-                nativeAdView = TeadsSdkFlutterPlugin.shared.nativeAdViewFactories[factoryId]?.teadsNativeAdView()
+                nativeAdView =
+                    TeadsSdkFlutterPlugin.shared.nativeAdViewFactories[factoryId]?.teadsNativeAdView()
             }
         }
     }

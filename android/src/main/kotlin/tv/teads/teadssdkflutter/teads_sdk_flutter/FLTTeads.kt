@@ -9,7 +9,6 @@ import io.flutter.plugin.common.MethodChannel.Result
 import tv.teads.sdk.AdPlacementSettings
 import tv.teads.sdk.TeadsSDK
 
-/** FLTTeads */
 class FLTTeads constructor(private val context: Context) : MethodCallHandler {
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -23,11 +22,12 @@ class FLTTeads constructor(private val context: Context) : MethodCallHandler {
                     val pid = args[0] as? Int
                     val settingsMap = args[1] as? Map<String, Any>
                     if (pid != null && settingsMap != null) {
-                        FLTTeadsInReadAdInstanceManager.shared.placement = TeadsSDK.createInReadPlacement(
-                            context,
-                            pid,
-                            AdPlacementSettings.fromMap(settingsMap)
-                        )
+                        FLTTeadsInReadAdInstanceManager.shared.placement =
+                            TeadsSDK.createInReadPlacement(
+                                context,
+                                pid,
+                                AdPlacementSettings.fromMap(settingsMap)
+                            )
                         result.success(null)
                     } else result.error(PluginException.BadArguments)
                 }
@@ -37,11 +37,12 @@ class FLTTeads constructor(private val context: Context) : MethodCallHandler {
                     val pid = args[0] as? Int
                     val settingsMap = args[1] as? Map<String, Any>
                     if (pid != null && settingsMap != null) {
-                        FLTTeadsNativeAdInstanceManager.shared.placement = TeadsSDK.createNativePlacement(
-                            context,
-                            pid,
-                            AdPlacementSettings.fromMap(settingsMap)
-                        )
+                        FLTTeadsNativeAdInstanceManager.shared.placement =
+                            TeadsSDK.createNativePlacement(
+                                context,
+                                pid,
+                                AdPlacementSettings.fromMap(settingsMap)
+                            )
                         result.success(null)
                     } else result.error(PluginException.BadArguments)
                 }

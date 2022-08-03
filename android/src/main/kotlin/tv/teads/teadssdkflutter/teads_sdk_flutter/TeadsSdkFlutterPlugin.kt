@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.annotation.NonNull
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.PluginRegistry
 
-/** TeadsSdkFlutterPlugin */
 class TeadsSdkFlutterPlugin : FlutterPlugin {
     private lateinit var adPlacementSettingsChannel: MethodChannel
     private lateinit var adRequestSettingsChannel: MethodChannel
@@ -22,9 +20,15 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
     companion object {
         val shared = TeadsSdkFlutterPlugin()
 
-        fun registerNativeAdViewFactory(factoryId: String, nativeAdViewFactory: FLTNativeAdViewFactoryInterface) : Boolean {
+        fun registerNativeAdViewFactory(
+            factoryId: String,
+            nativeAdViewFactory: FLTNativeAdViewFactoryInterface
+        ): Boolean {
             return if (shared.nativeAdViewFactories[factoryId] != null) {
-                Log.e("TeadsSdkFlutterPlugin", "A NativeAdViewFactory with the following factoryId already exists: $factoryId")
+                Log.e(
+                    "TeadsSdkFlutterPlugin",
+                    "A NativeAdViewFactory with the following factoryId already exists: $factoryId"
+                )
                 false
             } else {
                 shared.nativeAdViewFactories[factoryId] = nativeAdViewFactory
@@ -32,7 +36,7 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
             }
         }
 
-        fun unregisterNativeAdViewFactory(factoryId: String) : FLTNativeAdViewFactoryInterface? {
+        fun unregisterNativeAdViewFactory(factoryId: String): FLTNativeAdViewFactoryInterface? {
             val factory = shared.nativeAdViewFactories[factoryId]
             shared.nativeAdViewFactories.remove(factoryId)
             return factory
@@ -101,14 +105,12 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
             flutterPluginBinding.binaryMessenger,
             "teads_sdk_flutter/teads_ad_view/inread"
         )
-        val fltInReadAdView = FLTInReadAdView()
-        inReadAdViewChannel.setMethodCallHandler(fltInReadAdView)
 
         flutterPluginBinding
             .platformViewRegistry
             .registerViewFactory(
                 "FLTTeadsInReadAdView",
-                FLTInReadAdViewFactory(fltInReadAdView)
+                FLTInReadAdViewFactory(inReadAdViewChannel)
             )
 
         // FLTNativeAdView Handler

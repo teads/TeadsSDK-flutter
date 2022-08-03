@@ -8,8 +8,10 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import tv.teads.sdk.*
-import tv.teads.sdk.renderer.InReadAdView
+import tv.teads.sdk.AdOpportunityTrackerView
+import tv.teads.sdk.AdRequestSettings
+import tv.teads.sdk.NativeAd
+import tv.teads.sdk.NativeAdListener
 import java.util.*
 
 class FLTNativeAdPlacement(

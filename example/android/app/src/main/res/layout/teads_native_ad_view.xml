@@ -64,6 +64,10 @@
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
         <TextView
             android:id="@+id/teads_native_title"
             android:layout_width="match_parent"
@@ -75,6 +79,10 @@
             android:textSize="16sp"
             tools:text="Label" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
         <TextView
             android:id="@+id/teads_native_content"
             android:layout_width="match_parent"
@@ -83,6 +91,10 @@
             android:text=""
             android:textColor="#000000"
             tools:text="Label" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
 
         <tv.teads.sdk.renderer.MediaView
             android:id="@+id/teads_native_media"

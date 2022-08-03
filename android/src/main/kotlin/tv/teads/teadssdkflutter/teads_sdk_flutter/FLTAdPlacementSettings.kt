@@ -5,7 +5,9 @@ import androidx.annotation.NonNull
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import tv.teads.sdk.AdPlacementExtraKey
 import tv.teads.sdk.AdPlacementSettings
+import tv.teads.sdk.plugin.PluginType
 import tv.teads.sdk.utils.userConsent.TCFVersion
 
 class FLTAdPlacementSettings : MethodCallHandler {
@@ -13,10 +15,10 @@ class FLTAdPlacementSettings : MethodCallHandler {
     private var placementSettingsBuilder = AdPlacementSettings.Builder()
 
     init {
-//        placementSettingsBuilder.addPlacementExtra(
-//            AdPlacementSettings.PLATFORM_KEY,
-//            AdPlacementSettings.PLATFORM_FLUTTER
-//        ).build()
+        placementSettingsBuilder.addPlacementExtra(
+            AdPlacementExtraKey.PLUGIN,
+            PluginType.FLUTTER
+        ).build()
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
