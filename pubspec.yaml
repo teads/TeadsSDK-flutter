@@ -1,6 +1,6 @@
 name: teads_sdk_flutter
 description: Teads allows you to integrate a single SDK into your app, and serve premium branded ads from Teads SSP.
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/teads/TeadsSDK-flutter
 
 environment:
