@@ -17,13 +17,11 @@ public class FLTTeadsAdPlacement: NSObject, TeadsAdPlacementDelegate {
     }
     
     public func didFailToReceiveAd(reason: AdFailReason) {
-        // TODO: ad reason
-        channel.invokeMethod("didFailToReceiveAd", arguments: [])
+        channel.invokeMethod("didFailToReceiveAd", arguments: [reason.localizedDescription])
     }
     
     public func adOpportunityTrackerView(trackerView: TeadsAdOpportunityTrackerView) {
-        // TODO: ad trackerview
-        channel.invokeMethod("adOpportunityTrackerView", arguments: [])
+        // Nothing for now
     }
     
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:teads_sdk_flutter/teads_sdk_flutter.dart';
 import 'package:teads_sdk_flutter_example/src/models/creative.dart';
@@ -8,19 +6,22 @@ import 'package:teads_sdk_flutter_example/src/models/integration.dart';
 import 'package:teads_sdk_flutter_example/src/models/provider.dart';
 
 class DemoMain extends StatefulWidget {
-  Format selectedFormat;
-  DemoMain(
-      {
-        Key? key,
-        required this.selectedFormat,
-      }) : super(key: key);
+  final Format selectedFormat;
+
+  const DemoMain({
+    Key? key,
+    required this.selectedFormat,
+  }) : super(key: key);
 
   @override
   State<DemoMain> createState() => _DemoMainState();
 }
 
-class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDelegate, TeadsAdDelegate, TeadsPlaybackDelegate {
-
+class _DemoMainState extends State<DemoMain>
+    implements
+        TeadsInReadAdPlacementDelegate,
+        TeadsAdDelegate,
+        TeadsPlaybackDelegate {
   TeadsInReadAdView inReadAdView = TeadsInReadAdView();
   double adViewHeight = 0;
   TeadsInReadAdPlacement? placement;
@@ -34,7 +35,8 @@ class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDe
   Future<void> initTeadsAd() async {
     TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
     await placementSettings.enableDebug();
-    placement = await Teads.createInReadPlacement(int.parse(widget.selectedFormat.pid), placementSettings, this);
+    placement = await Teads.createInReadPlacement(
+        int.parse(widget.selectedFormat.pid), placementSettings, this);
     TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
     await requestSettings.pageUrl("https://example.com");
     await placement?.requestAd(requestSettings);
@@ -105,7 +107,8 @@ class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDe
                             " " +
                             widget.selectedFormat.provider.creativeType.value +
                             " " +
-                            widget.selectedFormat.provider.integrationType.value,
+                            widget
+                                .selectedFormat.provider.integrationType.value,
                         style: const TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),
                             fontSize: 20,
@@ -128,7 +131,6 @@ class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDe
                   ],
                 ),
               ),
-
               Row(
                 children: [
                   Container(
@@ -153,7 +155,6 @@ class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDe
                   ),
                 ],
               ),
-
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10.0,
@@ -168,7 +169,6 @@ class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDe
                   ),
                 ),
               ),
-
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10.0,
@@ -183,7 +183,6 @@ class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDe
                   ),
                 ),
               ),
-
               for (int i = 0; i < 15; i++)
                 Container(
                   // fake article
@@ -204,7 +203,6 @@ class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDe
                 height: adViewHeight,
                 child: inReadAdView,
               ),
-
               for (int i = 0; i < 15; i++)
                 Container(
                   // fake article
@@ -239,7 +237,6 @@ class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDe
 
   @override
   void didReceiveAd(TeadsInReadAd ad, TeadsAdRatio adRatio) {
-    log('didReceiveAd');
     ad.setDelegate(this);
     ad.setPlaybackDelegate(this);
     inReadAdView.bind(ad);
@@ -248,77 +245,48 @@ class _DemoMainState extends State<DemoMain> implements TeadsInReadAdPlacementDe
 
   @override
   void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio) {
-    log('didUpdateRatio');
     resizeAd(adRatio);
   }
 
   @override
-  void adOpportunityTrackerView(String trackerView) {
-    log('adOpportunityTrackerView');
-  }
-
-  @override
   void didFailToReceiveAd(String reason) {
-    log('didFailToReceiveAd');
-  }
-
-  @override
-  void willPresentModalView(TeadsAd ad) {
-    log('willPresentModalView');
-  }
-
-  @override
-  void adStartPlayingAudio(TeadsAd ad) {
-    log('adStartPlayingAudio');
-  }
-
-  @override
-  void adStopPlayingAudio(TeadsAd ad) {
-    log('adStopPlayingAudio');
+    adViewHeight = 0;
   }
 
   @override
   void didCatchError(TeadsAd ad, Error error) {
-    log('didCatchError');
+    adViewHeight = 0;
   }
 
   @override
   void didClose(TeadsAd ad) {
-    log('didClose');
+    adViewHeight = 0;
   }
 
   @override
-  void didCollapsedFromFullscreen(TeadsAd ad) {
-    log('didCollapsedFromFullscreen');
-  }
+  void adStartPlayingAudio(TeadsAd ad) {}
 
   @override
-  void didComplete(TeadsAd ad) {
-    log('didComplete');
-  }
+  void adStopPlayingAudio(TeadsAd ad) {}
 
   @override
-  void didExpandedToFullscreen(TeadsAd ad) {
-    log('didExpandedToFullscreen');
-  }
+  void didCollapsedFromFullscreen(TeadsAd ad) {}
 
   @override
-  void didPause(TeadsAd ad) {
-    log('didPause');
-  }
+  void didComplete(TeadsAd ad) {}
 
   @override
-  void didPlay(TeadsAd ad) {
-    log('didPlay');
-  }
+  void didExpandedToFullscreen(TeadsAd ad) {}
 
   @override
-  void didRecordClick(TeadsAd ad) {
-    log('didRecordClick');
-  }
+  void didPause(TeadsAd ad) {}
 
   @override
-  void didRecordImpression(TeadsAd ad) {
-    log('didRecordImpression');
-  }
+  void didPlay(TeadsAd ad) {}
+
+  @override
+  void didRecordClick(TeadsAd ad) {}
+
+  @override
+  void didRecordImpression(TeadsAd ad) {}
 }

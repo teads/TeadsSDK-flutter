@@ -1,3 +1,10 @@
+//
+//  FLTExtensions.swift
+//  teads_sdk_flutter
+//
+//  Created by Thibaud Saint-Etienne on 28/04/2022.
+//
+
 import Flutter
 import UIKit
 import TeadsSDK

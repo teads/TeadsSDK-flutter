@@ -20,7 +20,7 @@ class TeadsInReadAdView extends StatefulWidget {
 
 class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
   final MethodChannel _channel =
-  const MethodChannel('teads_sdk_flutter/teads_ad_view/inread');
+      const MethodChannel('teads_sdk_flutter/teads_ad_view/inread');
   TeadsInReadAd? inReadAd;
 
   @override
@@ -31,10 +31,10 @@ class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
     final Map<String, dynamic> creationParams = <String, dynamic>{};
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-      // return widget on Android.
+        // return widget on Android.
         return _renderAndroid(viewType, creationParams);
       case TargetPlatform.iOS:
-      // return widget on iOS.
+        // return widget on iOS.
         return _renderiOS(viewType, creationParams);
       default:
         throw UnsupportedError('Unsupported platform view');

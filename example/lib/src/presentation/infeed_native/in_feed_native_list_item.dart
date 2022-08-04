@@ -1,19 +1,16 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
-
 import 'package:teads_sdk_flutter_example/src/extensions/colors.dart';
 
 class InFeedDemo extends StatefulWidget {
-  String icon;
-  String text;
-  String title;
-  String media;
-  String time;
-  String source;
-  String textButton;
+  final String icon;
+  final String text;
+  final String title;
+  final String media;
+  final String time;
+  final String source;
+  final String textButton;
 
-  InFeedDemo({
+  const InFeedDemo({
     Key? key,
     required this.icon,
     required this.text,
@@ -45,11 +42,12 @@ class _InFeedDemoState extends State<InFeedDemo> {
               title: Text(widget.source),
               trailing: TextButton(
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0))),
-                  foregroundColor: MaterialStateProperty.all<Color>(blueColor),
-                  backgroundColor: MaterialStateProperty.all<Color>(lightGrayColor)
-                ),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0))),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(blueColor),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(lightGrayColor)),
                 onPressed: () {},
                 child: Text(widget.textButton),
               ),

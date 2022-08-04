@@ -25,9 +25,9 @@ class Teads {
   static Future<TeadsNativeAdPlacement?> createNativePlacement(
       int pid,
       TeadsAdPlacementSettings settings,
-      TeadsNativeAdPlacementDelegate? delegate
-      ) async {
-    await _channel.invokeMethod('createNativePlacement', [pid, settings.mapValue]);
+      TeadsNativeAdPlacementDelegate? delegate) async {
+    await _channel
+        .invokeMethod('createNativePlacement', [pid, settings.mapValue]);
     final TeadsNativeAdPlacement placement = TeadsNativeAdPlacement(delegate);
     return placement;
   }

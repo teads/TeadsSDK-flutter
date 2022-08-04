@@ -7,7 +7,6 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import tv.teads.sdk.AdRequestSettings
 
-/** FLTAdRequestSettings */
 class FLTAdRequestSettings : MethodCallHandler {
 
     private val adRequestSettings = AdRequestSettings.Builder()

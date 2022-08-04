@@ -22,8 +22,7 @@ class TeadsNativeAdView extends StatefulWidget {
 
 class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
   final MethodChannel _channel =
-  const MethodChannel('teads_sdk_flutter/teads_ad_view/native');
-
+      const MethodChannel('teads_sdk_flutter/teads_ad_view/native');
   TeadsNativeAd? nativeAd;
 
   @override
@@ -36,10 +35,10 @@ class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
     };
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-      // return widget on Android.
+        // return widget on Android.
         return _renderAndroid(viewType, creationParams);
       case TargetPlatform.iOS:
-      // return widget on iOS.
+        // return widget on iOS.
         return _renderiOS(viewType, creationParams);
       default:
         throw UnsupportedError('Unsupported platform view');

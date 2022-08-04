@@ -54,11 +54,7 @@ public class FLTTeadsAd: NSObject, FlutterPlugin {
 
 extension FLTTeadsAd: TeadsAdDelegate {
     public func willPresentModalView(ad: TeadsAd) -> UIViewController? {
-        guard let viewController = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController else {
-            return UIViewController()
-        }
-        Self.channel?.invokeMethod("willPresentModalView", arguments: [ad.requestIdentifier.uuidString])
-        return viewController
+        return UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController
     }
     
     public func didCatchError(ad: TeadsAd, error: Error) {

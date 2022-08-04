@@ -2,10 +2,10 @@ PODS:
   - Flutter (1.0.0)
   - teads_sdk_flutter (0.0.1):
     - Flutter
-    - TeadsSDK (~> 5.0.14)
-  - TeadsSDK (5.0.17):
-    - TeadsSDK/Core (= 5.0.17)
-  - TeadsSDK/Core (5.0.17)
+    - TeadsSDK (~> 5.0.18)
+  - TeadsSDK (5.0.18):
+    - TeadsSDK/Core (= 5.0.18)
+  - TeadsSDK/Core (5.0.18)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -22,8 +22,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  teads_sdk_flutter: d6da52944d705b58d034686c402885735d5db607
-  TeadsSDK: 0d436bc21348eace249eac876ed4f5d2cb274276
+  teads_sdk_flutter: 290543aefb8700e9486036e687315728190c7914
+  TeadsSDK: 9877aeaabd05341ea43f2ff79786bfb96e2706ac
 
 PODFILE CHECKSUM: ed22d15c480c00345537ab76241490eab9f6d285
 

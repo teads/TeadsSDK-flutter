@@ -1,45 +1,56 @@
 import 'package:flutter/services.dart';
+import 'package:teads_sdk_flutter/src/inread/teads_ad_ratio.dart';
 import 'package:teads_sdk_flutter/src/inread/teads_inread_ad.dart';
 import 'package:teads_sdk_flutter/src/teads_ad_placement.dart';
-import 'package:teads_sdk_flutter/src/inread/teads_ad_ratio.dart';
 import 'package:teads_sdk_flutter/src/teads_ad_request_settings.dart';
 import 'package:teads_sdk_flutter/src/teads_errors.dart';
 
 class InReadAdAdRatioMap {
   TeadsInReadAd inReadAd;
   TeadsAdRatio adRatio;
+
   InReadAdAdRatioMap(this.inReadAd, this.adRatio);
 }
 
 mixin TeadsInReadAdPlacementDelegate implements TeadsAdPlacementDelegate {
+  // When the Teads inApp SDK has received an ad for you to display
   void didReceiveAd(TeadsInReadAd ad, TeadsAdRatio adRatio);
+
+  // When an ad has updated its ratio, you need to update your container view
   void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio);
 }
 
 class TeadsInReadAdPlacement extends TeadsAdPlacement {
-
   List<InReadAdAdRatioMap> inReadAdAdRatioMaps = [];
 
-  TeadsInReadAdPlacement(TeadsInReadAdPlacementDelegate? delegate) : super(delegate, const MethodChannel('teads_sdk_flutter/teads_ad_placement/inread')) {
+  TeadsInReadAdPlacement(TeadsInReadAdPlacementDelegate? delegate)
+      : super(
+            delegate,
+            const MethodChannel(
+                'teads_sdk_flutter/teads_ad_placement/inread')) {
     channel.setMethodCallHandler((call) async {
       switch (call.method) {
         case "didReceiveAd":
           try {
             final String requestIdentifier = call.arguments[0];
-            InReadAdAdRatioMap inReadAdAdRatioMap = inReadAdAdRatioMaps.firstWhere((element) => element.inReadAd.requestIdentifier == requestIdentifier);
-            delegate?.didReceiveAd(inReadAdAdRatioMap.inReadAd, inReadAdAdRatioMap.adRatio);
-          }
-          on StateError {
+            InReadAdAdRatioMap inReadAdAdRatioMap =
+                inReadAdAdRatioMaps.firstWhere((element) =>
+                    element.inReadAd.requestIdentifier == requestIdentifier);
+            delegate?.didReceiveAd(
+                inReadAdAdRatioMap.inReadAd, inReadAdAdRatioMap.adRatio);
+          } on StateError {
             throw Exception(badArgumentsErrorMessage);
           }
           break;
         case "didUpdateRatio":
           try {
             final String requestIdentifier = call.arguments[0];
-            InReadAdAdRatioMap inReadAdAdRatioMap = inReadAdAdRatioMaps.firstWhere((element) => element.inReadAd.requestIdentifier == requestIdentifier);
-            delegate?.didUpdateRatio(inReadAdAdRatioMap.inReadAd, inReadAdAdRatioMap.adRatio);
-          }
-          on StateError {
+            InReadAdAdRatioMap inReadAdAdRatioMap =
+                inReadAdAdRatioMaps.firstWhere((element) =>
+                    element.inReadAd.requestIdentifier == requestIdentifier);
+            delegate?.didUpdateRatio(
+                inReadAdAdRatioMap.inReadAd, inReadAdAdRatioMap.adRatio);
+          } on StateError {
             throw Exception(badArgumentsErrorMessage);
           }
           break;
@@ -51,9 +62,10 @@ class TeadsInReadAdPlacement extends TeadsAdPlacement {
 
   @override
   Future<String> requestAd(TeadsAdRequestSettings requestSettings) async {
-    final String id = await channel.invokeMethod('requestAd', [requestSettings.mapValue]);
-    inReadAdAdRatioMaps.add(InReadAdAdRatioMap(TeadsInReadAd(id), TeadsAdRatio(id)));
+    final String id =
+        await channel.invokeMethod('requestAd', [requestSettings.mapValue]);
+    inReadAdAdRatioMaps
+        .add(InReadAdAdRatioMap(TeadsInReadAd(id), TeadsAdRatio(id)));
     return id;
   }
-
 }

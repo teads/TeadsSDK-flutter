@@ -1,6 +1,4 @@
-enum IntegrationType {
-  listView
-}
+enum IntegrationType { listView }
 
 extension IntegrationTypeString on IntegrationType {
   String get value {

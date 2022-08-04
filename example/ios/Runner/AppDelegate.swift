@@ -11,7 +11,6 @@ import teads_sdk_flutter
         
         GeneratedPluginRegistrant.register(with: self)
         
-        // TODO: Register TeadsNativeAdViewFactory
         let nativeAdViewFactory = TeadsNativeAdViewFactory()
         FLTTeadsSDKFlutterPlugin.registerNativeAdViewFactory(registry: self, factoryId: "exampleNativeAd", nativeAdViewFactory: nativeAdViewFactory)
         

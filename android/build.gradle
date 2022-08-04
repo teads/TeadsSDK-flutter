@@ -54,8 +54,7 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation("tv.teads.sdk.android:sdk:5.0.15") {
+    implementation("tv.teads.sdk.android:sdk:5.0.16") {
         transitive = true
     }
-
 }
