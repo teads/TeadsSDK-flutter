@@ -80,7 +80,7 @@ class FLTNativeAdPlacement(
                                     Handler(Looper.getMainLooper()).post {
                                         channel.invokeMethod(
                                             "didFailToReceiveAd",
-                                            listOf("")
+                                            listOf(failReason)
                                         )
                                     }
                                 }

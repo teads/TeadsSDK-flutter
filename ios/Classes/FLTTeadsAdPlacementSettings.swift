@@ -12,9 +12,9 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
     
     let placementSettings: TeadsAdPlacementSettings = {
         let settings = TeadsAdPlacementSettings()
-//         settings.addExtras(TeadsAdPlacementSettings.pluginFlutter, for: TeadsAdPlacementSettings.pluginKey)
-//         // Fluter version is always 1.0.0
-//         settings.addExtras("1.0.0", for: TeadsAdPlacementSettings.pluginVersionKey)
+         settings.addExtras(TeadsAdPlacementSettings.pluginFlutter, for: TeadsAdPlacementSettings.pluginKey)
+         // Fluter version is always 1.0.0
+         settings.addExtras("1.0.0", for: TeadsAdPlacementSettings.pluginVersionKey)
         return settings
     }()
     

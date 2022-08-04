@@ -3,26 +3,48 @@ import 'package:flutter/services.dart';
 import 'package:teads_sdk_flutter/src/teads_errors.dart';
 
 mixin TeadsAdDelegate {
-  void willPresentModalView(TeadsAd ad);
+  // When the ad experience has experienced an issue
   void didCatchError(TeadsAd ad, FlutterError error);
+
+  // When the ad has been closed
   void didClose(TeadsAd ad);
+
+  // When an impression has occured
   void didRecordImpression(TeadsAd ad);
+
+  // When an event click has been fired
   void didRecordClick(TeadsAd ad);
+
+  // When the ad goes to fullscreen
   void didExpandedToFullscreen(TeadsAd ad);
+
+  // When the ad collapse from fullscreen
   void didCollapsedFromFullscreen(TeadsAd ad);
 }
 
 mixin TeadsPlaybackDelegate {
+  // When the ad has started playing audio
   void adStartPlayingAudio(TeadsAd ad);
+
+  // When the ad has stopped playing audio
   void adStopPlayingAudio(TeadsAd ad);
+
+  // When the ad has started playing
   void didPlay(TeadsAd ad);
+
+  // When the ad has stopped playing
   void didPause(TeadsAd ad);
+
+  // When the ad has complete
   void didComplete(TeadsAd ad);
 }
 
 class TeadsAd {
-  final MethodChannel _channel = const MethodChannel('teads_sdk_flutter/teads_ad');
-  @protected MethodChannel get channel => _channel;
+  final MethodChannel _channel =
+      const MethodChannel('teads_sdk_flutter/teads_ad');
+
+  @protected
+  MethodChannel get channel => _channel;
 
   TeadsAdDelegate? _delegate;
   TeadsPlaybackDelegate? _playbackDelegate;
@@ -30,17 +52,13 @@ class TeadsAd {
 
   TeadsAd(this.requestIdentifier) {
     channel.setMethodCallHandler((call) async {
-      switch(call.method) {
-        case "willPresentModalView":
-          _delegate?.willPresentModalView(this);
-          break;
+      switch (call.method) {
         case "didCatchError":
           try {
             final String errorLocalizedDescription = call.arguments[1];
             FlutterError error = FlutterError(errorLocalizedDescription);
             _delegate?.didCatchError(this, error);
-          }
-          on StateError {
+          } on StateError {
             throw Exception(badArgumentsErrorMessage);
           }
           break;
@@ -89,5 +107,4 @@ class TeadsAd {
     _playbackDelegate = playbackDelegate;
     await channel.invokeMethod('playbackDelegate', [requestIdentifier]);
   }
-
 }

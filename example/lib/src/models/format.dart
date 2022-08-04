@@ -1,10 +1,7 @@
 import 'creative.dart';
 import 'provider.dart';
 
-enum FormatType {
-  inRead,
-  native
-}
+enum FormatType { inRead, native }
 
 extension FormatTypeString on FormatType {
   String get value {
@@ -20,6 +17,7 @@ extension FormatTypeString on FormatType {
 class Format {
   FormatType type;
   Provider provider;
+  static String customPID = '84242';
 
   Format(this.type, this.provider);
 
@@ -38,20 +36,7 @@ class Format {
               case CreativeType.carousel:
                 return "128779";
               default:
-                return "0";
-            }
-          case ProviderType.admob:
-            switch (provider.creativeType) {
-              case CreativeType.landscape:
-                return "ca-app-pub-3068786746829754/2411019030";
-              case CreativeType.vertical:
-                return "ca-app-pub-3068786746829754/5776283742";
-              case CreativeType.square:
-                return "ca-app-pub-3068786746829754/1034598116";
-              case CreativeType.carousel:
-                return "ca-app-pub-3068786746829754/5832124062";
-              default:
-                return "0";
+                return Format.customPID;
             }
         }
       case FormatType.native:
@@ -59,16 +44,9 @@ class Format {
           case ProviderType.direct:
             switch (provider.creativeType) {
               case CreativeType.display:
-                return "162594";// "124859";
+                return "124859";
               default:
-                return "0";
-            }
-          case ProviderType.admob:
-            switch (provider.creativeType) {
-              case CreativeType.display:
-                return "ca-app-pub-3068786746829754/6007333247";
-              default:
-                return "0";
+                return Format.customPID;
             }
         }
     }
@@ -77,15 +55,9 @@ class Format {
   List<ProviderType> get providers {
     switch (type) {
       case FormatType.inRead:
-        return [
-          ProviderType.direct,
-          ProviderType.admob,
-        ];
+        return [ProviderType.direct];
       case FormatType.native:
-        return [
-          ProviderType.direct,
-          ProviderType.admob,
-        ];
+        return [ProviderType.direct];
     }
   }
 

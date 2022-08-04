@@ -29,7 +29,7 @@ class FLTInReadAdPlacement(
                             AdRequestSettings.fromMap(settingsMap),
                             object : InReadAdListener {
                                 override fun adOpportunityTrackerView(trackerView: AdOpportunityTrackerView) {
-                                    //TODO: add adOpportunityTrackerView
+                                    // Nothing for now
                                 }
 
                                 override fun onAdReceived(
@@ -117,7 +117,7 @@ class FLTInReadAdPlacement(
                                     Handler(Looper.getMainLooper()).post {
                                         channel.invokeMethod(
                                             "didFailToReceiveAd",
-                                            listOf("")
+                                            listOf(failReason)
                                         )
                                     }
                                 }

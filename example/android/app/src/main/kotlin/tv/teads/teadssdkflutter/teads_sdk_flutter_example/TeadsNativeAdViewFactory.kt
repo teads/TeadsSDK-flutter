@@ -8,11 +8,7 @@ import tv.teads.teadssdkflutter.teads_sdk_flutter.FLTNativeAdViewFactoryInterfac
 class TeadsNativeAdViewFactory(private val context: Context?): FLTNativeAdViewFactoryInterface {
 
     override fun teadsNativeAdView(): NativeAdView {
-        val nativeAdView = LayoutInflater.from(context)
+        return LayoutInflater.from(context)
             .inflate(R.layout.teads_native_ad_view, null) as NativeAdView
-
-
-
-        return nativeAdView
     }
 }

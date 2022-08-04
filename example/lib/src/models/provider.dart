@@ -1,18 +1,13 @@
-import 'integration.dart';
 import 'creative.dart';
+import 'integration.dart';
 
-enum ProviderType {
-  direct,
-  admob
-}
+enum ProviderType { direct }
 
 extension ProviderTypeString on ProviderType {
   String get value {
     switch (this) {
       case ProviderType.direct:
         return "Direct";
-      case ProviderType.admob:
-        return "Admob";
     }
   }
 }
