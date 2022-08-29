@@ -2,44 +2,49 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:teads_sdk_flutter/src/teads_errors.dart';
 
+/// Delegate methods needed to follow Teads ads lifecycle.
 mixin TeadsAdDelegate {
-  // When the ad experience has experienced an issue
+  /// When the ad experience has experienced an issue.
   void didCatchError(TeadsAd ad, FlutterError error);
 
-  // When the ad has been closed
+  /// When the ad has been closed.
   void didClose(TeadsAd ad);
 
-  // When an impression has occured
+  /// When an impression has occured.
   void didRecordImpression(TeadsAd ad);
 
-  // When an event click has been fired
+  /// When an event click has been fired.
   void didRecordClick(TeadsAd ad);
 
-  // When the ad goes to fullscreen
+  /// When the ad goes to fullscreen.
   void didExpandedToFullscreen(TeadsAd ad);
 
-  // When the ad collapse from fullscreen
+  /// When the ad collapse from fullscreen.
   void didCollapsedFromFullscreen(TeadsAd ad);
 }
 
+/// Delegate methods sending informations about Teads ads playback states.
 mixin TeadsPlaybackDelegate {
-  // When the ad has started playing audio
+  /// When the ad has started playing audio.
   void adStartPlayingAudio(TeadsAd ad);
 
-  // When the ad has stopped playing audio
+  /// When the ad has stopped playing audio.
   void adStopPlayingAudio(TeadsAd ad);
 
-  // When the ad has started playing
+  /// When the ad has started playing.
   void didPlay(TeadsAd ad);
 
-  // When the ad has stopped playing
+  /// When the ad has stopped playing.
   void didPause(TeadsAd ad);
 
-  // When the ad has complete
+  /// When the ad has complete.
   void didComplete(TeadsAd ad);
 }
 
+/// Root Ad Object inherited by [TeadsInReadAd] & [TeadsNativeAd].
 class TeadsAd {
+  /// The method channel used to communicate with the native part.
+  /// Internal use only.
   final MethodChannel _channel =
       const MethodChannel('teads_sdk_flutter/teads_ad');
 
