@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:teads_sdk_flutter/src/inread/teads_inread_ad.dart';
 
+/// The Teads inRead ad view is responsible to manage a [TeadsInReadAd] instance.
 class TeadsInReadAdView extends StatefulWidget {
   final _TeadsInReadAdViewState state = _TeadsInReadAdViewState();
 
@@ -19,9 +20,13 @@ class TeadsInReadAdView extends StatefulWidget {
 }
 
 class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
+  /// The method channel used to communicate with the native part.
+  /// Internal use only.
   final MethodChannel _channel =
       const MethodChannel('teads_sdk_flutter/teads_ad_view/inread');
-  TeadsInReadAd? inReadAd;
+
+  /// The [TeadsInReadAd] instance linked to [TeadsInReadAdView].
+  TeadsInReadAd? _inReadAd;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +46,7 @@ class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
     }
   }
 
+  /// Render the iOS component
   Widget _renderiOS(viewType, creationParams) {
     return UiKitView(
       viewType: viewType,
@@ -50,6 +56,7 @@ class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
     );
   }
 
+  /// Render the Android component
   Widget _renderAndroid(viewType, creationParams) {
     return PlatformViewLink(
       viewType: viewType,
@@ -79,7 +86,7 @@ class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
   }
 
   void bind(TeadsInReadAd ad) async {
-    inReadAd = ad;
+    _inReadAd = ad;
     await _channel.invokeMethod('bind', [ad.requestIdentifier]);
   }
 }

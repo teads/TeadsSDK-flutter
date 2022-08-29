@@ -1,9 +1,13 @@
 import 'package:flutter/services.dart';
 
 class TeadsAdPlacementSettings {
+  /// The method channel used to communicate with the native part.
+  /// Internal use only.
   final MethodChannel _channel =
       const MethodChannel('teads_sdk_flutter/teads_ad_placement_settings');
 
+  /// The [TeadsAdPlacementSettings] map represented value.
+  /// Internal use only.
   Map _mapValue = {};
   Map get mapValue => _mapValue;
 
@@ -66,6 +70,9 @@ class TeadsAdPlacementSettings {
   }
 }
 
+/// EU Transparency & Consent Framework versions
+/// Europe General Data Protection Regulation (GDPR) see [Transparency Consent Framework](https://iabeurope.eu/transparency-consent-framework/)
+/// Version 1 is no longer supported since 15 of August 2020.
 enum TCFVersion { v1, v2 }
 
 extension TCFVersionExtension on TCFVersion {
@@ -76,7 +83,7 @@ extension TCFVersionExtension on TCFVersion {
       case TCFVersion.v2:
         return 2;
       default:
-        return 1;
+        return 2;
     }
   }
 }

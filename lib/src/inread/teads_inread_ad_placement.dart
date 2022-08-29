@@ -5,22 +5,43 @@ import 'package:teads_sdk_flutter/src/teads_ad_placement.dart';
 import 'package:teads_sdk_flutter/src/teads_ad_request_settings.dart';
 import 'package:teads_sdk_flutter/src/teads_errors.dart';
 
+/// The map used to match a [TeadsInReadAd] instance with a [TeadsAdRatio] instance.
 class InReadAdAdRatioMap {
+  InReadAdAdRatioMap(this.inReadAd, this.adRatio);
+
   TeadsInReadAd inReadAd;
   TeadsAdRatio adRatio;
 
-  InReadAdAdRatioMap(this.inReadAd, this.adRatio);
 }
 
+/// Delegate methods needed to follow Teads inRead ad requests flow.
 mixin TeadsInReadAdPlacementDelegate implements TeadsAdPlacementDelegate {
-  // When the Teads inApp SDK has received an ad for you to display
+  /// Called when the Teads SDK has received an [ad] for you to display.
   void didReceiveAd(TeadsInReadAd ad, TeadsAdRatio adRatio);
 
-  // When an ad has updated its ratio, you need to update your container view
+  /// Called when the Teads SDK needs you to resize your adView the creative inform us of its new [adRatio].
+  ///
+  /// ``` dart
+  /// @override
+  /// void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio) {
+  ///   double width = MediaQuery.of(context).size.width;
+  ///   double height = await adRatio.calculateHeight(width);
+  ///   setState(() {
+  ///     yourAdViewHeight = height;
+  ///   });
+  /// }
+  /// ```
   void didUpdateRatio(TeadsInReadAd ad, TeadsAdRatio adRatio);
 }
 
+/// InRead ad placement to request inRead ads.
+///
+/// This class is reponsible for performing request and is tied to you PID (placement identifier).
+/// In order to create placement, you should call the [Teads] method [createInReadPlacement()].
+///
+/// See [InRead implementation guide](https://support.teads.tv/support/solutions/articles/36000388692-inread-classic-integration) documentation.
 class TeadsInReadAdPlacement extends TeadsAdPlacement {
+  /// The [InReadAdAdRatioMap] instance.
   List<InReadAdAdRatioMap> inReadAdAdRatioMaps = [];
 
   TeadsInReadAdPlacement(TeadsInReadAdPlacementDelegate? delegate)
@@ -60,6 +81,12 @@ class TeadsInReadAdPlacement extends TeadsAdPlacement {
     });
   }
 
+  /// Request an InRead ad on this placement
+  /// listen for events by implementing [TeadsInReadAdPlacementDelegate]
+  ///
+  /// Use [requestSettings] [TeadsInReadAdRequestSettings] to tweak your needs
+  /// Returns a unique request identifier, this identifier will be the same value of [TeadsInReadAd.requestIdentifier] property.
+  /// The [TeadsInReadAdPlacement] [delegate] property must be set to perform ad request, otherwise didReceiveAd will not be triggered.
   @override
   Future<String> requestAd(TeadsAdRequestSettings requestSettings) async {
     final String id =
