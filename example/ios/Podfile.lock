@@ -1,30 +1,31 @@
 PODS:
   - Flutter (1.0.0)
-  - teads_sdk_flutter (0.0.1):
+  - teads_sdk_flutter (1.0.0):
     - Flutter
-    - TeadsSDK (~> 5.0.18)
-  - TeadsSDK (5.0.18):
-    - TeadsSDK/Core (= 5.0.18)
-  - TeadsSDK/Core (5.0.18)
+    - TeadsSDK (>= 5.0.19)
+  - TeadsSDK (5.0.19):
+    - TeadsSDK/Core (= 5.0.19)
+  - TeadsSDK/Core (5.0.19)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - teads_sdk_flutter (from `.symlinks/plugins/teads_sdk_flutter/ios`)
-  - TeadsSDK (from `/Users/thibaud.saint-etienne/Projects/Teads/service-inapp-sdk-ios`)
+
+SPEC REPOS:
+  trunk:
+    - TeadsSDK
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   teads_sdk_flutter:
     :path: ".symlinks/plugins/teads_sdk_flutter/ios"
-  TeadsSDK:
-    :path: "/Users/thibaud.saint-etienne/Projects/Teads/service-inapp-sdk-ios"
 
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  teads_sdk_flutter: 290543aefb8700e9486036e687315728190c7914
-  TeadsSDK: 9877aeaabd05341ea43f2ff79786bfb96e2706ac
+  teads_sdk_flutter: adeca0a7c41afce06fb097ef9146ad8007ce8064
+  TeadsSDK: 5faaa31c86fdab304cef41ffa2bfd8a14a1c854f
 
-PODFILE CHECKSUM: ed22d15c480c00345537ab76241490eab9f6d285
+PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
 COCOAPODS: 1.11.2

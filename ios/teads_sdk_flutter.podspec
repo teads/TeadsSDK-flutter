@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'teads_sdk_flutter'
-  s.version          = '0.0.1'
+  s.version          = '1.0.0'
   s.summary          = 'Teads Flutter iOS plugin'
   s.description      = 'Teads allows you to integrate a single SDK into your app, and serve premium branded ads from Teads SSP'
   s.homepage         = 'https://github.com/teads/TeadsSDK-flutter'
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'TeadsSDK', '~> 5.0.19'
+  s.dependency 'TeadsSDK', '>= 5.0.19'
   s.platform = :ios, '10.0'
 
   # Flutter.framework does not contain a i386 slice.
