@@ -22,7 +22,7 @@ Teads allows you to integrate a single SDK into your app, and serve premium bran
 
 ## 🚀 Integration Documentation
 
-Integration instructions are available on [Teads SDK Documentation](https://support.teads.tv/support/solutions/articles/36000314785).
+Integration instructions are available on [Teads SDK Documentation](https://support.teads.tv/support/solutions/36000157079).
 
 ## 🚲 Run the sample app
 
