@@ -32,7 +32,6 @@ target 'Runner' do
   use_modular_headers!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
-  pod 'TeadsSDK', :path => '/Users/thibaud.saint-etienne/Projects/Teads/service-inapp-sdk-ios'
 end
 
 post_install do |installer|
