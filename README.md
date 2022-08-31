@@ -1,5 +1,3 @@
-
-
 <br/>
 <p align="center">
     <a href="https://teads.com/" target="_blank">
