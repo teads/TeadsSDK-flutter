@@ -25,9 +25,6 @@ class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
   final MethodChannel _channel =
       const MethodChannel('teads_sdk_flutter/teads_ad_view/inread');
 
-  /// The [TeadsInReadAd] instance linked to [TeadsInReadAdView].
-  TeadsInReadAd? _inReadAd;
-
   @override
   Widget build(BuildContext context) {
     // This is used in the platform side to register the view.
@@ -85,8 +82,7 @@ class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
     );
   }
 
-  void bind(TeadsInReadAd ad) async {
-    _inReadAd = ad;
-    await _channel.invokeMethod('bind', [ad.requestIdentifier]);
+  void bind(TeadsInReadAd ad) {
+    _channel.invokeMethod('bind', [ad.requestIdentifier]);
   }
 }
