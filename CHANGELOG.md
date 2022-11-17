@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Handle bind method synchronously.
+
 ## 1.0.1
 
 * Fix AdRatio bug happening on Android.

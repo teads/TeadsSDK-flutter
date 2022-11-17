@@ -30,8 +30,6 @@ class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
   /// Internal use only.
   final MethodChannel _channel =
       const MethodChannel('teads_sdk_flutter/teads_ad_view/native');
-  /// The [TeadsNativeAd] instance served by our servers.
-  TeadsNativeAd? _nativeAd;
 
   @override
   Widget build(BuildContext context) {
@@ -95,8 +93,7 @@ class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
   /// Call this function to bind a native [ad] to your [TeadsNativeAdView].
   ///
   /// This call is mandatory in order to monitor ad viewability for each components.
-  void bind(TeadsNativeAd ad) async {
-    _nativeAd = ad;
-    await _channel.invokeMethod('bind', [ad.requestIdentifier]);
+  void bind(TeadsNativeAd ad) {
+    _channel.invokeMethod('bind', [ad.requestIdentifier]);
   }
 }
