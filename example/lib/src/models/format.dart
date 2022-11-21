@@ -38,6 +38,13 @@ class Format {
               default:
                 return Format.customPID;
             }
+          case ProviderType.admob:
+            switch (provider.creativeType) {
+              case CreativeType.landscape:
+                return "ca-app-pub-3068786746829754/2411019030";
+              default:
+                return Format.customPID;
+            }
         }
       case FormatType.native:
         switch (provider.type) {
@@ -48,6 +55,8 @@ class Format {
               default:
                 return Format.customPID;
             }
+          case ProviderType.admob:
+            return "ca-app-pub-3068786746829754/6007333247";
         }
     }
   }
@@ -55,22 +64,32 @@ class Format {
   List<ProviderType> get providers {
     switch (type) {
       case FormatType.inRead:
-        return [ProviderType.direct];
+        return [ProviderType.direct, ProviderType.admob];
       case FormatType.native:
-        return [ProviderType.direct];
+        return [ProviderType.direct, ProviderType.admob];
     }
   }
 
   List<CreativeType> get creatives {
     switch (type) {
       case FormatType.inRead:
-        return [
-          CreativeType.landscape,
-          CreativeType.vertical,
-          CreativeType.square,
-          CreativeType.carousel,
-          CreativeType.custom,
-        ];
+        switch (provider.type) {
+          case ProviderType.direct:
+            return [
+              CreativeType.landscape,
+              CreativeType.vertical,
+              CreativeType.square,
+              CreativeType.carousel,
+              CreativeType.custom,
+            ];
+            break;
+          case ProviderType.admob:
+            return [
+              CreativeType.landscape,
+              CreativeType.custom,
+            ];
+        }
+        break;
       case FormatType.native:
         return [
           CreativeType.display,

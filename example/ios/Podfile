@@ -1,5 +1,6 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '10.0'
+install! 'cocoapods', :disable_input_output_paths => true
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -28,10 +29,11 @@ require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelpe
 flutter_ios_podfile_setup
 
 target 'Runner' do
-  use_frameworks!
   use_modular_headers!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+  pod 'TeadsAdMobAdapter', :path => '~/Projects/Teads/service-inapp-sdk-ios/MediationAdapters/MediationAdapters'
+  pod 'TeadsSDK', :path => '~/Projects/Teads/service-inapp-sdk-ios'
 end
 
 post_install do |installer|

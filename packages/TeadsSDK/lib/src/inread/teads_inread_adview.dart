@@ -14,8 +14,8 @@ class TeadsInReadAdView extends StatefulWidget {
   @override
   State<TeadsInReadAdView> createState() => _TeadsInReadAdViewState();
 
-  void bind(TeadsInReadAd ad) {
-    state.bind(ad);
+  void bind(TeadsInReadAd ad) async {
+    await state.bind(ad);
   }
 }
 
@@ -26,7 +26,14 @@ class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
       const MethodChannel('teads_sdk_flutter/teads_ad_view/inread');
 
   /// The [TeadsInReadAd] instance linked to [TeadsInReadAdView].
-  TeadsInReadAd? _inReadAd;
+  static TeadsInReadAd? _inReadAd;
+
+  @override
+  void dispose() {
+    _channel.invokeMethod('dispose', [_inReadAd?.requestIdentifier ?? ""]);
+    _inReadAd = null;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +92,7 @@ class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
     );
   }
 
-  void bind(TeadsInReadAd ad) async {
+  Future<void> bind(TeadsInReadAd ad) async {
     _inReadAd = ad;
     await _channel.invokeMethod('bind', [ad.requestIdentifier]);
   }

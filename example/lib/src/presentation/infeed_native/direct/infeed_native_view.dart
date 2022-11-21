@@ -6,38 +6,38 @@ import 'package:teads_sdk_flutter_example/src/models/integration.dart';
 import 'package:teads_sdk_flutter_example/src/models/provider.dart';
 import 'package:teads_sdk_flutter_example/src/presentation/infeed_native/in_feed_native_list_item.dart';
 
-class DemoNative extends StatefulWidget {
+class NativeDirect extends StatefulWidget {
   final Format selectedFormat;
 
-  const DemoNative({
+  const NativeDirect({
     Key? key,
     required this.selectedFormat,
   }) : super(key: key);
 
   @override
-  State<DemoNative> createState() => _DemoNativeState();
+  State<NativeDirect> createState() => _NativeDirectState();
 }
 
-class _DemoNativeState extends State<DemoNative>
+class _NativeDirectState extends State<NativeDirect>
     implements TeadsNativeAdPlacementDelegate {
-  TeadsNativeAdView nativeAdView =
+  final TeadsNativeAdView _nativeAdView =
       TeadsNativeAdView(factoryId: 'exampleNativeAd');
-  double adViewHeight = 0;
-  TeadsNativeAdPlacement? placement;
+  double _adViewHeight = 0;
+  TeadsNativeAdPlacement? _placement;
 
   @override
   void initState() {
     super.initState();
-    initTeadsAd();
+    _initTeadsAd();
   }
 
-  Future<void> initTeadsAd() async {
+  Future<void> _initTeadsAd() async {
     TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
     await placementSettings.enableDebug();
-    placement = await Teads.createNativePlacement(
+    _placement = await Teads.createNativePlacement(
         int.parse(widget.selectedFormat.pid), placementSettings, this);
     TeadsAdRequestSettings requestSettings = TeadsAdRequestSettings();
-    await placement?.requestAd(requestSettings);
+    await _placement?.requestAd(requestSettings);
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -175,7 +175,7 @@ class _DemoNativeState extends State<DemoNative>
                       clipBehavior: Clip.antiAlias,
                       child: SizedBox(
                         height: 400,
-                        child: nativeAdView,
+                        child: _nativeAdView,
                       ))),
               const InFeedDemo(
                 source: "@espn",
@@ -212,12 +212,12 @@ class _DemoNativeState extends State<DemoNative>
 
   @override
   void didReceiveAd(TeadsNativeAd ad) {
-    nativeAdView.bind(ad);
-    adViewHeight = 400;
+    _nativeAdView.bind(ad);
+    _adViewHeight = 400;
   }
 
   @override
   void didFailToReceiveAd(String reason) {
-    adViewHeight = 0;
+    _adViewHeight = 0;
   }
 }

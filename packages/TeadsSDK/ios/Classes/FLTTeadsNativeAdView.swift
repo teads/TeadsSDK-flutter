@@ -72,6 +72,14 @@ public class FLTTeadsNativeAdView: NSObject, FlutterPlatformView {
                    } else {
                        result(FlutterError.badArguments)
                    }
+               case "dispose":
+                   if let args = call.arguments as? [Any],
+                      let requestIdentifier = args[0] as? String {
+                       FLTTeadsNativeAdInstanceManager.shared.removeInstance(for: requestIdentifier)
+                       result(nil)
+                   } else {
+                       result(FlutterError.badArguments)
+                   }
                default:
                    result(FlutterMethodNotImplemented)
                }

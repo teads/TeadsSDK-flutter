@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:teads_sdk_flutter_example/src/extensions/string.dart';
 import 'package:teads_sdk_flutter_example/src/models/format.dart';
 import 'package:teads_sdk_flutter_example/src/models/integration.dart';
-import 'package:teads_sdk_flutter_example/src/presentation/infeed_native/infeed_native_view.dart';
-import 'package:teads_sdk_flutter_example/src/presentation/inread/inread_view.dart';
+import 'package:teads_sdk_flutter_example/src/models/provider.dart';
+import 'package:teads_sdk_flutter_example/src/presentation/infeed_native/admob/infeed_native_view.dart';
+import 'package:teads_sdk_flutter_example/src/presentation/infeed_native/direct/infeed_native_view.dart';
+import 'package:teads_sdk_flutter_example/src/presentation/inread/admob/inread_view.dart';
+import 'package:teads_sdk_flutter_example/src/presentation/inread/direct/inread_view.dart';
 
 class IntegrationList extends StatefulWidget {
   final Format selectedFormat;
@@ -47,20 +50,28 @@ class _IntegrationListState extends State<IntegrationList> {
                                                 .integrationType = item;
                                           });
 
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => widget
-                                                            .selectedFormat
-                                                            .type ==
-                                                        FormatType.inRead
-                                                    ? DemoMain(
-                                                        selectedFormat: widget
-                                                            .selectedFormat)
-                                                    : DemoNative(
-                                                        selectedFormat: widget
-                                                            .selectedFormat)),
-                                          );
+                                          switch (widget.selectedFormat.type) {
+                                            case FormatType.inRead:
+                                              switch (widget.selectedFormat.provider.type) {
+                                                case ProviderType.direct:
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => InReadDirect(selectedFormat: widget.selectedFormat)));
+                                                  break;
+                                                case ProviderType.admob:
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => InReadAdmob(selectedFormat: widget.selectedFormat)));
+                                                  break;
+                                              }
+                                              break;
+                                            case FormatType.native:
+                                              switch (widget.selectedFormat.provider.type) {
+                                                case ProviderType.direct:
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => NativeDirect(selectedFormat: widget.selectedFormat)));
+                                                  break;
+                                                case ProviderType.admob:
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => NativeAdMob(selectedFormat: widget.selectedFormat)));
+                                                  break;
+                                              }
+                                              break;
+                                          }
                                         },
                                         child: AspectRatio(
                                           aspectRatio: 1,

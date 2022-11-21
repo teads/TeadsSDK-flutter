@@ -5,19 +5,19 @@ import 'package:teads_sdk_flutter_example/src/models/format.dart';
 import 'package:teads_sdk_flutter_example/src/models/integration.dart';
 import 'package:teads_sdk_flutter_example/src/models/provider.dart';
 
-class DemoMain extends StatefulWidget {
+class InReadDirect extends StatefulWidget {
   final Format selectedFormat;
 
-  const DemoMain({
+  const InReadDirect({
     Key? key,
     required this.selectedFormat,
   }) : super(key: key);
 
   @override
-  State<DemoMain> createState() => _DemoMainState();
+  State<InReadDirect> createState() => _InReadDirectState();
 }
 
-class _DemoMainState extends State<DemoMain>
+class _InReadDirectState extends State<InReadDirect>
     implements
         TeadsInReadAdPlacementDelegate,
         TeadsAdDelegate,

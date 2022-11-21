@@ -33,7 +33,7 @@ public class FLTTeadsInReadAdViewFactory: NSObject, FlutterPlatformViewFactory {
 }
 
 public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
-    private var inReadAdView: TeadsInReadAdView
+    private var inReadAdView: TeadsInReadAdView?
 
     init(
         frame: CGRect,
@@ -52,8 +52,16 @@ public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
                    if let args = call.arguments as? [Any],
                       let requestIdentifier = args[0] as? String {
                        if let instance = try? FLTTeadsInReadAdInstanceManager.shared.instance(for: requestIdentifier) {
-                           self?.inReadAdView.bind(instance.teadsAd)
+                           self?.inReadAdView?.bind(instance.teadsAd)
                        }
+                       result(nil)
+                   } else {
+                       result(FlutterError.badArguments)
+                   }
+               case "dispose":
+                   if let args = call.arguments as? [Any],
+                      let requestIdentifier = args[0] as? String {
+                       FLTTeadsInReadAdInstanceManager.shared.removeInstance(for: requestIdentifier)
                        result(nil)
                    } else {
                        result(FlutterError.badArguments)
@@ -65,7 +73,7 @@ public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
     }
 
     public func view() -> UIView {
-        return inReadAdView
+        return inReadAdView ?? UIView()
     }
     
 }

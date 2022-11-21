@@ -31,7 +31,14 @@ class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
   final MethodChannel _channel =
       const MethodChannel('teads_sdk_flutter/teads_ad_view/native');
   /// The [TeadsNativeAd] instance served by our servers.
-  TeadsNativeAd? _nativeAd;
+  static TeadsNativeAd? _nativeAd;
+
+  @override
+  void dispose() {
+    _channel.invokeMethod('dispose', [_nativeAd?.requestIdentifier ?? ""]);
+    _nativeAd = null;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
