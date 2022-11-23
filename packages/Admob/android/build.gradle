@@ -1,4 +1,4 @@
-group 'com.example.teads_admob_adapter'
+group 'tv.teads.teadsadmobadapter.teads_admob_adapter'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -18,6 +18,9 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url  "https://teads.jfrog.io/artifactory/SDKAndroid-maven-prod"
+        }
     }
 }
 
@@ -41,10 +44,16 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 28
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Teads inApp SDK
+    implementation("tv.teads.sdk.android:sdk:[5.0.19, )@aar") {
+        transitive = true
+    }
+    // Teads Admob Adapter
+    implementation 'tv.teads.sdk.android:admobadapter:[5.0.19, )'
 }

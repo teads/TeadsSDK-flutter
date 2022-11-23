@@ -69,8 +69,6 @@ DEPENDENCIES:
   - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
   - teads_admob_adapter (from `.symlinks/plugins/teads_admob_adapter/ios`)
   - teads_sdk_flutter (from `.symlinks/plugins/teads_sdk_flutter/ios`)
-  - TeadsAdMobAdapter (from `~/Projects/Teads/service-inapp-sdk-ios/MediationAdapters/MediationAdapters`)
-  - TeadsSDK (from `~/Projects/Teads/service-inapp-sdk-ios`)
 
 SPEC REPOS:
   trunk:
@@ -80,6 +78,8 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - TeadsAdMobAdapter
+    - TeadsSDK
 
 EXTERNAL SOURCES:
   Flutter:
@@ -90,10 +90,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/teads_admob_adapter/ios"
   teads_sdk_flutter:
     :path: ".symlinks/plugins/teads_sdk_flutter/ios"
-  TeadsAdMobAdapter:
-    :path: "~/Projects/Teads/service-inapp-sdk-ios/MediationAdapters/MediationAdapters"
-  TeadsSDK:
-    :path: "~/Projects/Teads/service-inapp-sdk-ios"
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
@@ -106,9 +102,9 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   teads_admob_adapter: b15e15d20c64e05432dff302ab7fbc7c0cd64e40
   teads_sdk_flutter: 22f65f04001fa2015620f7c647080de08aa32806
-  TeadsAdMobAdapter: 19cf60ea9319132b7250ec1982ad2f4f8c889482
-  TeadsSDK: bb5057778abae974e98053840474703c2393d26d
+  TeadsAdMobAdapter: 84d7a53f5a3d5411b6710bf3741f6ebf1598b0ee
+  TeadsSDK: 9b1604339860b937a623e38c1a53ed42d38260c5
 
-PODFILE CHECKSUM: 5c49e421ef5342e782929dc06926f7079a455671
+PODFILE CHECKSUM: 3b1ab43565646616319d189e1b003811a177fe16
 
 COCOAPODS: 1.11.2

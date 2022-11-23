@@ -1,4 +1,4 @@
-package com.example.teads_admob_adapter
+package tv.teads.teadsadmobadapter.teads_admob_adapter
 
 import androidx.annotation.NonNull
 

@@ -67,7 +67,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.gms:play-services-base:17.5.0'
     implementation 'com.google.firebase:firebase-analytics:18.0.0'
-    implementation("tv.teads.sdk.android:sdk:5.0.16") {
+    // Teads inApp SDK
+    implementation("tv.teads.sdk.android:sdk:[5.0.19, )@aar") {
         transitive = true
     }
+    // Teads Admob Adapter
+    implementation 'tv.teads.sdk.android:admobadapter:[5.0.19, )'
 }
