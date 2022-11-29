@@ -31,6 +31,12 @@ class _DemoNativeState extends State<DemoNative>
     initTeadsAd();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    nativeAdView.clean();
+  }
+
   Future<void> initTeadsAd() async {
     TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
     await placementSettings.enableDebug();

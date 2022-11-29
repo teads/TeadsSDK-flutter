@@ -4,6 +4,7 @@ import tv.teads.sdk.InReadAdPlacement
 import tv.teads.sdk.NativeAd
 import tv.teads.sdk.NativeAdPlacement
 import tv.teads.sdk.renderer.InReadAdView
+import tv.teads.sdk.renderer.NativeAdView
 
 class InReadAdViewInstanceMap constructor(val inReadAdView: InReadAdView, val id: String)
 
@@ -23,6 +24,11 @@ class FLTTeadsInReadAdInstanceManager {
         } else {
             throw Exception()
         }
+    }
+
+    fun clean(inReadAdView: InReadAdView) {
+        inReadAdView.clean()
+        adViewInstancesMapList.removeIf { it.inReadAdView == inReadAdView }
     }
 
     companion object {
@@ -48,6 +54,11 @@ class FLTTeadsNativeAdInstanceManager {
         } else {
             throw Exception()
         }
+    }
+
+    fun clean(nativeAdView: NativeAdView) {
+        nativeAdView.clean()
+        list.removeIf { it.nativeAd == nativeAdView.nativeAd }
     }
 
     companion object {

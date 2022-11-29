@@ -29,6 +29,12 @@ class FLTTeadsInReadAdInstanceManager {
             throw NSError()
         }
     }
+    
+    func clean(with requestIdentifier: String) {
+        if let index = list.firstIndex(where: { $0.teadsAd.requestIdentifier.uuidString == requestIdentifier }) {
+             list.remove(at: index)
+         }
+    }
 }
 
 class FLTTeadsNativeAdInstanceManager {
@@ -46,5 +52,11 @@ class FLTTeadsNativeAdInstanceManager {
         } else {
             throw NSError()
         }
+    }
+    
+    func clean(with requestIdentifier: String) {
+        if let index = list.firstIndex(where: { $0.requestIdentifier.uuidString == requestIdentifier }) {
+             list.remove(at: index)
+         }
     }
 }
