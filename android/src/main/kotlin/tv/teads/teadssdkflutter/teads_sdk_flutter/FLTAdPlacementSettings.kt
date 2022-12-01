@@ -5,21 +5,12 @@ import androidx.annotation.NonNull
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import tv.teads.sdk.AdPlacementExtraKey
 import tv.teads.sdk.AdPlacementSettings
-import tv.teads.sdk.plugin.PluginType
 import tv.teads.sdk.utils.userConsent.TCFVersion
 
 class FLTAdPlacementSettings : MethodCallHandler {
 
     private var placementSettingsBuilder = AdPlacementSettings.Builder()
-
-    init {
-        placementSettingsBuilder.addPlacementExtra(
-            AdPlacementExtraKey.PLUGIN,
-            PluginType.FLUTTER
-        ).build()
-    }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
@@ -69,7 +60,7 @@ class FLTAdPlacementSettings : MethodCallHandler {
                     val key = args[1] as? String
                     if (value != null && key != null)
                         result.success(
-                            placementSettingsBuilder.addPlacementExtra(value, key).build().toMap()
+                            placementSettingsBuilder.addPlacementExtra(key, value).build().toMap()
                         )
                     else result.error(PluginException.BadArguments)
                 }
