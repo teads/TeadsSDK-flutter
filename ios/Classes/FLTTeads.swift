@@ -28,6 +28,7 @@ public class FLTTeads: NSObject, FlutterPlugin {
              let data = try? JSONSerialization.data(withJSONObject: settingsMap, options: .prettyPrinted) {
               let decoder = JSONDecoder()
               if let settings = try? decoder.decode(TeadsAdPlacementSettings.self, from: data) {
+                  settings.setFlutterExtras()
                   FLTTeadsInReadAdInstanceManager.shared.placement = Teads.createInReadPlacement(pid: pid, settings: settings)
                   result(nil)
               }
@@ -41,6 +42,7 @@ public class FLTTeads: NSObject, FlutterPlugin {
              let data = try? JSONSerialization.data(withJSONObject: settingsMap, options: .prettyPrinted) {
               let decoder = JSONDecoder()
               if let settings = try? decoder.decode(TeadsAdPlacementSettings.self, from: data) {
+                  settings.setFlutterExtras()
                   FLTTeadsNativeAdInstanceManager.shared.placement = Teads.createNativePlacement(pid: pid, settings: settings)
                   result(nil)
               }
@@ -51,4 +53,12 @@ public class FLTTeads: NSObject, FlutterPlugin {
           result(FlutterMethodNotImplemented)
       }
   }
+}
+
+extension TeadsAdPlacementSettings {
+    func setFlutterExtras() {
+        addExtras(TeadsAdPlacementSettings.pluginFlutter, for: TeadsAdPlacementSettings.pluginKey)
+         // Fluter version is always 1.0.0
+        addExtras("1.0.0", for: TeadsAdPlacementSettings.pluginVersionKey)
+    }
 }
