@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Fix for ListViewBuilder implementations.
+
 ## 1.0.2
 
 * Handle bind method synchronously.

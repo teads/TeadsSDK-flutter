@@ -24,6 +24,11 @@ public class FLTTeadsAdPlacement: NSObject, TeadsAdPlacementDelegate {
         // Nothing for now
     }
     
+    public func didLogMessage(message: String) {
+        debugPrint(message)
+        channel.invokeMethod("didLogMessage", arguments: [message])
+    }
+    
 }
 
 // MARK: InRead Ad Placement

@@ -11,12 +11,37 @@ import TeadsSDK
 
 @objc
 public class FLTTeadsInReadAdViewFactory: NSObject, FlutterPlatformViewFactory {
-    private var messenger: FlutterBinaryMessenger
+    private var methodChannel: FlutterMethodChannel
+    private var inReadAdView: TeadsInReadAdView
+    private var requestIdentifier: String = ""
 
     @objc
     public init(messenger: FlutterBinaryMessenger) {
-        self.messenger = messenger
+        methodChannel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_view/inread", binaryMessenger: messenger)
+        inReadAdView = TeadsInReadAdView()
         super.init()
+        methodChannel.setMethodCallHandler({ [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
+               switch(call.method) {
+               case "bind":
+                   if let args = call.arguments as? [Any],
+                      let requestIdentifier = args[0] as? String {
+                       if let instance = try? FLTTeadsInReadAdInstanceManager.shared.instance(for: requestIdentifier) {
+                           self?.requestIdentifier = requestIdentifier
+                           self?.inReadAdView.bind(instance.teadsAd)
+                       }
+                       result(nil)
+                   } else {
+                       result(FlutterError.badArguments)
+                   }
+               case "clean":
+                   if let requestIdentifier = self?.requestIdentifier {
+                       FLTTeadsInReadAdInstanceManager.shared.clean(with: requestIdentifier)
+                   }
+                   result(nil)
+               default:
+                   result(FlutterMethodNotImplemented)
+               }
+           })
     }
 
     public func create(
@@ -28,7 +53,7 @@ public class FLTTeadsInReadAdViewFactory: NSObject, FlutterPlatformViewFactory {
             frame: frame,
             viewIdentifier: viewId,
             arguments: args,
-            binaryMessenger: messenger)
+            inReadAdView: inReadAdView)
     }
 }
 
@@ -39,29 +64,10 @@ public class FLTTeadsInReadAdView: NSObject, FlutterPlatformView {
         frame: CGRect,
         viewIdentifier viewId: Int64,
         arguments args: Any?,
-        binaryMessenger messenger: FlutterBinaryMessenger?
+        inReadAdView: TeadsInReadAdView
     ) {
-        inReadAdView = TeadsInReadAdView()
-        
+        self.inReadAdView = inReadAdView
         super.init()
-        
-        let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_view/inread", binaryMessenger: messenger!)
-           channel.setMethodCallHandler({ [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
-               switch(call.method) {
-               case "bind":
-                   if let args = call.arguments as? [Any],
-                      let requestIdentifier = args[0] as? String {
-                       if let instance = try? FLTTeadsInReadAdInstanceManager.shared.instance(for: requestIdentifier) {
-                           self?.inReadAdView.bind(instance.teadsAd)
-                       }
-                       result(nil)
-                   } else {
-                       result(FlutterError.badArguments)
-                   }
-               default:
-                   result(FlutterMethodNotImplemented)
-               }
-           })
     }
 
     public func view() -> UIView {

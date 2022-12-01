@@ -23,6 +23,10 @@ class TeadsNativeAdView extends StatefulWidget {
   void bind(TeadsNativeAd ad) {
     state.bind(ad);
   }
+
+  void clean() {
+    state.clean();
+  }
 }
 
 class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
@@ -95,5 +99,9 @@ class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
   /// This call is mandatory in order to monitor ad viewability for each components.
   void bind(TeadsNativeAd ad) {
     _channel.invokeMethod('bind', [ad.requestIdentifier]);
+  }
+
+  void clean() {
+    _channel.invokeMethod('clean');
   }
 }
