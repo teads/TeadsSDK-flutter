@@ -61,16 +61,7 @@ public class FLTTeadsAdPlacementSettings: NSObject, FlutterPlugin {
             } else {
                 result(FlutterError.badArguments)
             }
-        case "enableLocation":
-            // Android only
-            result(try? placementSettings.asDictionary())
-        case "useLightEndScreen":
-            // Android only
-            result(try? placementSettings.asDictionary())
-        case "hideBrowserUrl":
-            // Android only
-            result(try? placementSettings.asDictionary())
-        case "toolBarBackgroundColor":
+        case "enableLocation", "useLightEndScreen", "hideBrowserUrl", "toolBarBackgroundColor":
             // Android only
             result(try? placementSettings.asDictionary())
         default:

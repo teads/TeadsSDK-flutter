@@ -18,7 +18,6 @@ mixin TeadsNativeAdPlacementDelegate implements TeadsAdPlacementDelegate {
 ///
 /// See [Native implementation guide](https://support.teads.tv/support/solutions/articles/36000388693-native-ad-classic-integration) documentation.
 class TeadsNativeAdPlacement extends TeadsAdPlacement {
-
   /// The list of [TeadsNativeAd] that have been served by our servers.
   final List<TeadsNativeAd> _nativeAds = [];
 
