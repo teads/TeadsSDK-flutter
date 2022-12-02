@@ -25,7 +25,6 @@ public class FLTTeadsAdPlacement: NSObject, TeadsAdPlacementDelegate {
     }
     
     public func didLogMessage(message: String) {
-        debugPrint(message)
         channel.invokeMethod("didLogMessage", arguments: [message])
     }
     
