@@ -11,7 +11,6 @@ class InReadAdAdRatioMap {
 
   TeadsInReadAd inReadAd;
   TeadsAdRatio adRatio;
-
 }
 
 /// Delegate methods needed to follow Teads inRead ad requests flow.
