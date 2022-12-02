@@ -1,10 +1,8 @@
-<br/>
 <p align="center">
     <a href="https://teads.com/" target="_blank">
         <img width="75%" src="https://raw.githubusercontent.com/teads/TeadsSDK-flutter/main/ReadmeResources/teads_logo.png" alt="Teads logo">
     </a>
 </p>
-<br/>
 
 ----
 
@@ -14,7 +12,7 @@ Teads allows you to integrate a single SDK into your app, and serve premium bran
 
 - [Integration Documentation](#-integration-documentation)
 - [Run the sample app](#-run-the-sample-app)
-- [Installation](#-install-the-teads-sdk-ios-framework)
+- [Installation](#-install-the-teads-sdk-flutter-framework)
 - [Certifications](#-certifications)
 - [Changelog](#%EF%B8%8F-changelog)
 
@@ -28,7 +26,7 @@ Clone this repository, open it with Android Studio, and run project.
 
 ## 📦 Install the Teads SDK Flutter framework
 
-Teads SDK is currently distributed through Pub. It includes everything you need to serve "outstream" video ads.
+Teads SDK is currently distributed through [Pub](https://pub.dev/packages/teads_sdk_flutter). It includes everything you need to serve "outstream" video ads.
 
 ### Using packages
 
@@ -54,4 +52,4 @@ Teads SDK supports the [IAB](https://www.iabcertification.com/) [Open Measuremen
 
 ## ⌚️ Changelog
 
-See [changelog here](https://github.com/teads/TeadsSDK-flutter/releases). 
+See [changelog here](https://pub.dev/packages/teads_sdk_flutter/changelog). 
