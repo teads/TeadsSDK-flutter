@@ -42,6 +42,7 @@ abstract class TeadsAdPlacement {
         break;
     }
   }
+
   TeadsAdPlacement(this.delegate, this._channel);
 
   /// Request a Teads ad.
