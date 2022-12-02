@@ -50,6 +50,7 @@ class TeadsInReadAdPlacement extends TeadsAdPlacement {
             const MethodChannel(
                 'teads_sdk_flutter/teads_ad_placement/inread')) {
     channel.setMethodCallHandler((call) async {
+      methodCallHandler(call);
       switch (call.method) {
         case "didReceiveAd":
           try {

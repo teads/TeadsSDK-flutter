@@ -32,6 +32,12 @@ class _InReadDirectState extends State<InReadDirect>
     initTeadsAd();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    inReadAdView.clean();
+  }
+
   Future<void> initTeadsAd() async {
     TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
     await placementSettings.enableDebug();

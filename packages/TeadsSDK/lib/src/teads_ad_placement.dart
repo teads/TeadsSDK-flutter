@@ -20,22 +20,29 @@ abstract class TeadsAdPlacement {
   /// The delegate needed to follow the ad placement lifecycle.
   TeadsAdPlacementDelegate? delegate;
 
-  TeadsAdPlacement(this.delegate, this._channel) {
-    _channel.setMethodCallHandler((call) async {
-      switch (call.method) {
-        case "didFailToReceiveAd":
-          try {
-            final String errorReason = call.arguments[0];
-            delegate?.didFailToReceiveAd(errorReason);
-          } on StateError {
-            throw Exception(badArgumentsErrorMessage);
-          }
-          break;
-        default:
-          break;
-      }
-    });
+  void methodCallHandler(MethodCall call) {
+    switch (call.method) {
+      case "didFailToReceiveAd":
+        try {
+          final String errorReason = call.arguments[0];
+          delegate?.didFailToReceiveAd(errorReason);
+        } on StateError {
+          throw Exception(badArgumentsErrorMessage);
+        }
+        break;
+      case "didLogMessage":
+        try {
+          final String message = call.arguments[0];
+          debugPrint(message);
+        } on StateError {
+          throw Exception(badArgumentsErrorMessage);
+        }
+        break;
+      default:
+        break;
+    }
   }
+  TeadsAdPlacement(this.delegate, this._channel);
 
   /// Request a Teads ad.
   Future<String> requestAd(TeadsAdRequestSettings requestSettings);

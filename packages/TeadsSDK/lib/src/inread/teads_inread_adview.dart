@@ -17,6 +17,10 @@ class TeadsInReadAdView extends StatefulWidget {
   void bind(TeadsInReadAd ad) async {
     await state.bind(ad);
   }
+
+  void clean() {
+    state.clean();
+  }
 }
 
 class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
@@ -95,5 +99,9 @@ class _TeadsInReadAdViewState extends State<TeadsInReadAdView> {
   Future<void> bind(TeadsInReadAd ad) async {
     _inReadAd = ad;
     await _channel.invokeMethod('bind', [ad.requestIdentifier]);
+  }
+
+  void clean() {
+    _channel.invokeMethod('clean');
   }
 }

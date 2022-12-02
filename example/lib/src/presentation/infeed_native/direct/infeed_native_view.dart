@@ -31,7 +31,13 @@ class _NativeDirectState extends State<NativeDirect>
     _initTeadsAd();
   }
 
-  Future<void> _initTeadsAd() async {
+  @override
+  void dispose() {
+    super.dispose();
+    nativeAdView.clean();
+  }
+
+  Future<void> initTeadsAd() async {
     TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
     await placementSettings.enableDebug();
     _placement = await Teads.createNativePlacement(

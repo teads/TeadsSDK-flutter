@@ -30,10 +30,10 @@ class FLTTeadsInReadAdInstanceManager {
         }
     }
     
-    func removeInstance(for requestIdentifier: String) {
+    func clean(with requestIdentifier: String) {
         if let index = list.firstIndex(where: { $0.teadsAd.requestIdentifier.uuidString == requestIdentifier }) {
-            list.remove(at: index)
-        }
+             list.remove(at: index)
+         }
     }
 }
 
@@ -54,9 +54,9 @@ class FLTTeadsNativeAdInstanceManager {
         }
     }
     
-    func removeInstance(for requestIdentifier: String) {
+    func clean(with requestIdentifier: String) {
         if let index = list.firstIndex(where: { $0.requestIdentifier.uuidString == requestIdentifier }) {
-            list.remove(at: index)
-        }
+             list.remove(at: index)
+         }
     }
 }

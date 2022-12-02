@@ -106,14 +106,11 @@ class TeadsSdkFlutterPlugin : FlutterPlugin {
             "teads_sdk_flutter/teads_ad_view/inread"
         )
 
-        val fltInReadAdView = FLTInReadAdView()
-        inReadAdViewChannel.setMethodCallHandler(fltInReadAdView)
-
         flutterPluginBinding
             .platformViewRegistry
             .registerViewFactory(
                 "FLTTeadsInReadAdView",
-                FLTInReadAdViewFactory(fltInReadAdView)
+                FLTInReadAdViewFactory(inReadAdViewChannel)
             )
 
         // FLTNativeAdView Handler

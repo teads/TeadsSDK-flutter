@@ -18,12 +18,35 @@ public protocol FLTTeadsNativeAdViewFactoryProtocol {
 
 @objc
 public class FLTTeadsNativeAdViewFactory: NSObject, FlutterPlatformViewFactory {
-    private var messenger: FlutterBinaryMessenger
+    private var nativeAdView: TeadsNativeAdView?
+    private var requestIdentifier: String = ""
 
     @objc
     public init(messenger: FlutterBinaryMessenger) {
-        self.messenger = messenger
         super.init()
+        let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_view/native", binaryMessenger: messenger)
+        channel.setMethodCallHandler({ [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
+            switch(call.method) {
+            case "bind":
+                if let args = call.arguments as? [Any],
+                   let requestIdentifier = args[0] as? String {
+                    if let ad = try? FLTTeadsNativeAdInstanceManager.shared.ad(for: requestIdentifier) {
+                        self?.requestIdentifier = requestIdentifier
+                        self?.nativeAdView?.bind(ad)
+                    }
+                    result(nil)
+                } else {
+                    result(FlutterError.badArguments)
+                }
+            case "clean":
+                if let requestIdentifier = self?.requestIdentifier {
+                    FLTTeadsNativeAdInstanceManager.shared.clean(with: requestIdentifier)
+                }
+                result(nil)
+            default:
+                result(FlutterMethodNotImplemented)
+            }
+        })
     }
 
     public func create(
@@ -31,11 +54,11 @@ public class FLTTeadsNativeAdViewFactory: NSObject, FlutterPlatformViewFactory {
         viewIdentifier viewId: Int64,
         arguments args: Any?
     ) -> FlutterPlatformView {
-        return FLTTeadsNativeAdView(
-            frame: frame,
-            viewIdentifier: viewId,
-            arguments: args,
-            binaryMessenger: messenger)
+        if let args = args as? [String: Any],
+           let factoryId = args["factoryId"] as? String {
+            nativeAdView = FLTTeadsSDKFlutterPlugin.shared.nativeAdViewFactories[factoryId]?.teadsNativeAdView()
+        }
+        return FLTTeadsNativeAdView(nativeAdView)
     }
     
     public func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {
@@ -45,45 +68,9 @@ public class FLTTeadsNativeAdViewFactory: NSObject, FlutterPlatformViewFactory {
 
 public class FLTTeadsNativeAdView: NSObject, FlutterPlatformView {
     private var nativeAdView: TeadsNativeAdView?
-
-    init(
-        frame: CGRect,
-        viewIdentifier viewId: Int64,
-        arguments args: Any?,
-        binaryMessenger messenger: FlutterBinaryMessenger?
-    ) {
-        if let args = args as? [String: Any],
-           let factoryId = args["factoryId"] as? String {
-            nativeAdView = FLTTeadsSDKFlutterPlugin.shared.nativeAdViewFactories[factoryId]?.teadsNativeAdView()
-        }
-        
-        super.init()
-        
-        let channel = FlutterMethodChannel(name: "teads_sdk_flutter/teads_ad_view/native", binaryMessenger: messenger!)
-           channel.setMethodCallHandler({ [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
-               switch(call.method) {
-               case "bind":
-                   if let args = call.arguments as? [Any],
-                      let requestIdentifier = args[0] as? String {
-                       if let ad = try? FLTTeadsNativeAdInstanceManager.shared.ad(for: requestIdentifier) {
-                           self?.nativeAdView?.bind(ad)
-                       }
-                       result(nil)
-                   } else {
-                       result(FlutterError.badArguments)
-                   }
-               case "dispose":
-                   if let args = call.arguments as? [Any],
-                      let requestIdentifier = args[0] as? String {
-                       FLTTeadsNativeAdInstanceManager.shared.removeInstance(for: requestIdentifier)
-                       result(nil)
-                   } else {
-                       result(FlutterError.badArguments)
-                   }
-               default:
-                   result(FlutterMethodNotImplemented)
-               }
-           })
+    
+    init(_ nativeAdView: TeadsNativeAdView? = nil) {
+        self.nativeAdView = nativeAdView
     }
 
     public func view() -> UIView {

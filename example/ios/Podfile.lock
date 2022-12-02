@@ -56,13 +56,10 @@ PODS:
     - TeadsAdMobAdapter (>= 5.0.20)
   - teads_sdk_flutter (1.0.1):
     - Flutter
-    - TeadsSDK (>= 5.0.20)
-  - TeadsAdMobAdapter (5.0.20):
-    - Google-Mobile-Ads-SDK (>= 8.0)
-    - TeadsSDK (= 5.0.20)
-  - TeadsSDK (5.0.20):
-    - TeadsSDK/Core (= 5.0.20)
-  - TeadsSDK/Core (5.0.20)
+    - TeadsSDK (>= 5.0.22)
+  - TeadsSDK (5.0.22):
+    - TeadsSDK/Core (= 5.0.22)
+  - TeadsSDK/Core (5.0.22)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)

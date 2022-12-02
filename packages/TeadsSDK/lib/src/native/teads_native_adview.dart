@@ -23,6 +23,10 @@ class TeadsNativeAdView extends StatefulWidget {
   void bind(TeadsNativeAd ad) {
     state.bind(ad);
   }
+
+  void clean() {
+    state.clean();
+  }
 }
 
 class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
@@ -105,5 +109,9 @@ class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
   void bind(TeadsNativeAd ad) async {
     _nativeAd = ad;
     await _channel.invokeMethod('bind', [ad.requestIdentifier]);
+  }
+
+  void clean() {
+    _channel.invokeMethod('clean');
   }
 }
