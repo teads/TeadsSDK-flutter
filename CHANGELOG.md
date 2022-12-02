@@ -1,3 +1,7 @@
+## 1.0.4
+
+* Fix missing FLTTeadsAdPlacementSettings iOS initialization.
+
 ## 1.0.3
 
 * Fix for ListViewBuilder implementations.
