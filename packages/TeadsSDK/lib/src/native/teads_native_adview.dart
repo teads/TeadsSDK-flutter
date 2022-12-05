@@ -9,6 +9,7 @@ import 'teads_native_ad.dart';
 /// The Teads native ad view is responsible to manage a Teads native ad.
 class TeadsNativeAdView extends StatefulWidget {
   final _TeadsNativeAdViewState state = _TeadsNativeAdViewState();
+
   /// The factory identifier used to match the native design implementation.
   final String factoryId;
 
