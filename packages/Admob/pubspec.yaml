@@ -1,7 +1,8 @@
 name: teads_admob_adapter
 description: A new Flutter plugin project.
-version: 0.0.1
-homepage:
+repository: https://github.com/teads/TeadsSDK-flutter
+homepage: https://github.com/teads/TeadsSDK-flutter
+version: 1.0.0
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -12,8 +13,7 @@ dependencies:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
   google_mobile_ads: ^2.0.1
-  teads_sdk_flutter:
-    path: ../TeadsSDK
+  teads_sdk_flutter: ^1.0.4
 
 dev_dependencies:
   flutter_test:
