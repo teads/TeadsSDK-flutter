@@ -39,13 +39,6 @@ class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
   static TeadsNativeAd? _nativeAd;
 
   @override
-  void dispose() {
-    _channel.invokeMethod('dispose', [_nativeAd?.requestIdentifier ?? ""]);
-    _nativeAd = null;
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     // This is used in the platform side to register the view.
     const String viewType = 'FLTTeadsNativeAdView';
