@@ -7,19 +7,6 @@ class TeadsAdapterSettings {
   /// Internal use only.
   final MethodChannel _channel =
   const MethodChannel('teads_admob_adapter/teads_adapter_settings');
-  TeadsMediatedAdViewDelegate? delegate;
-
-  TeadsAdapterSettings() {
-    _channel.setMethodCallHandler((call) async {
-      switch (call.method) {
-        case "didUpdateRatio":
-          delegate?.didUpdateRatio(TeadsAdRatio("adRequestIdentifier"));
-          break;
-        default:
-          break;
-      }
-    });
-  }
 
   /// The [TeadsAdapterSettings] map represented value.
   /// Internal use only.
@@ -103,9 +90,4 @@ class TeadsAdapterSettings {
   Future<void> toolBarBackgroundColor(int color) async {
     _mapValue = await _channel.invokeMethod('toolBarBackgroundColor', [color]);
   }
-}
-
-mixin TeadsMediatedAdViewDelegate {
-  /// Called when the ad ratio is udpated. (only for mediation)
-  void didUpdateRatio(TeadsAdRatio adRatio);
 }
