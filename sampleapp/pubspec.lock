@@ -152,7 +152,7 @@ packages:
   teads_admob_adapter:
     dependency: "direct main"
     description:
-      path: "../packages/Admob"
+      path: "../packages/TeadsAdmobAdapter"
       relative: true
     source: path
     version: "1.0.0"

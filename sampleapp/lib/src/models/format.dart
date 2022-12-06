@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'creative.dart';
 import 'provider.dart';
 
@@ -41,7 +43,9 @@ class Format {
           case ProviderType.admob:
             switch (provider.creativeType) {
               case CreativeType.landscape:
-                return "ca-app-pub-3068786746829754/2411019030";
+                return Platform.isAndroid
+                    ? "ca-app-pub-3068786746829754/3486435166"
+                    : "ca-app-pub-3068786746829754/2411019030";
               default:
                 return Format.customPID;
             }
@@ -56,7 +60,9 @@ class Format {
                 return Format.customPID;
             }
           case ProviderType.admob:
-            return "ca-app-pub-3068786746829754/6007333247";
+            return Platform.isAndroid
+                ? "ca-app-pub-3068786746829754/9820813147"
+                : "ca-app-pub-3068786746829754/6007333247";
         }
     }
   }
