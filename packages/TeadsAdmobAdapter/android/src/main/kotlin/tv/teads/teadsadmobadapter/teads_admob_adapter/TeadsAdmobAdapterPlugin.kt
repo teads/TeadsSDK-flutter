@@ -9,7 +9,7 @@ class TeadsAdmobAdapterPlugin: FlutterPlugin {
 
   override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     adapterSettingsChannel = MethodChannel(flutterPluginBinding.binaryMessenger, "teads_admob_adapter/teads_adapter_settings")
-    adapterSettingsChannel.setMethodCallHandler(FLTTeadsAdapterSettings())
+    adapterSettingsChannel.setMethodCallHandler(FLTTeadsAdapterSettings.instance)
   }
 
   override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {

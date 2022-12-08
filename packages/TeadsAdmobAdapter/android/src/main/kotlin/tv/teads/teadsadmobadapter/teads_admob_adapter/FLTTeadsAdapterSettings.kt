@@ -7,13 +7,13 @@ import tv.teads.sdk.TeadsMediationSettings
 import tv.teads.sdk.plugin.PluginType
 import tv.teads.sdk.renderer.MediaScale
 import tv.teads.sdk.utils.userConsent.TCFVersion
-import tv.teads.teadssdkflutter.teads_sdk_flutter.PluginException
-import tv.teads.teadssdkflutter.teads_sdk_flutter.error
+import tv.teads.flutter.teads_sdk_flutter.PluginException
+import tv.teads.flutter.teads_sdk_flutter.error
 
 class FLTTeadsAdapterSettings : MethodChannel.MethodCallHandler {
 
     companion object {
-        val instance = FLTTeadsAdapterSettings()
+        val instance by lazy { FLTTeadsAdapterSettings() }
     }
 
     internal var mediationSettingsBuilder = TeadsMediationSettings.Builder()
