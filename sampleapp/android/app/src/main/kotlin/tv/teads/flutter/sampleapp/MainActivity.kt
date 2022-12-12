@@ -5,7 +5,8 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
 import tv.teads.teadssdkflutter.teads_sdk_flutter.TeadsSdkFlutterPlugin
-import tv.teads.teadsadmobadapter.teads_admob_adapter.FLTTeadsMediationNetworkExtras
+import tv.teads.teadsadmobadapter.teads_admob_adapter.FLTTeadsMediationInReadNetworkExtras
+import tv.teads.teadsadmobadapter.teads_admob_adapter.FLTTeadsMediationNativeNetworkExtras
 
 class MainActivity: FlutterActivity() {
 
@@ -19,7 +20,8 @@ class MainActivity: FlutterActivity() {
         GoogleMobileAdsPlugin.registerNativeAdFactory(
             flutterEngine, admobNativeAdFactoryId, AdMobNativeAdViewFactory(LayoutInflater.from(context))
         )
-        GoogleMobileAdsPlugin.registerMediationNetworkExtrasProvider(flutterEngine, FLTTeadsMediationNetworkExtras())
+        GoogleMobileAdsPlugin.registerMediationNetworkExtrasProvider(flutterEngine, FLTTeadsMediationInReadNetworkExtras())
+        GoogleMobileAdsPlugin.registerMediationNetworkExtrasProvider(flutterEngine, FLTTeadsMediationNativeNetworkExtras())
     }
 
     override fun cleanUpFlutterEngine(flutterEngine: FlutterEngine) {
