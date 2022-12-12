@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
-import tv.teads.flutter.teads_sdk_flutter.TeadsSdkFlutterPlugin
+import tv.teads.teadssdkflutter.teads_sdk_flutter.TeadsSdkFlutterPlugin
 import tv.teads.teadsadmobadapter.teads_admob_adapter.FLTTeadsMediationNetworkExtras
 
 class MainActivity: FlutterActivity() {

@@ -3,7 +3,7 @@ package tv.teads.flutter.sampleapp
 import android.content.Context
 import android.view.LayoutInflater
 import tv.teads.sdk.renderer.NativeAdView
-import tv.teads.flutter.teads_sdk_flutter.FLTNativeAdViewFactoryInterface
+import tv.teads.teadssdkflutter.teads_sdk_flutter.FLTNativeAdViewFactoryInterface
 
 class TeadsNativeAdViewFactory(private val context: Context?): FLTNativeAdViewFactoryInterface {
     override fun teadsNativeAdView(): NativeAdView {
