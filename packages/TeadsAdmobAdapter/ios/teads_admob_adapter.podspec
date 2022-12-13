@@ -4,14 +4,12 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'teads_admob_adapter'
-  s.version          = '0.0.1'
-  s.summary          = 'A new Flutter plugin project.'
-  s.description      = <<-DESC
-A new Flutter plugin project.
-                       DESC
-  s.homepage         = 'http://example.com'
+  s.version          = '1.0.0'
+  s.summary          = 'AdMob Adapter for Teads\' iOS SDK'
+  s.description      = 'Use this adapter to include AdMob as a demand source in your mediation waterfall'
+  s.homepage         = 'https://github.com/teads/TeadsSDK-flutter'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { "Teads" => "support-sdk@teads.tv" }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'

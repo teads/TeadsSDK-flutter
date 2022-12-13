@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'teads_sdk_flutter'
-  s.version          = '1.0.1'
+  s.version          = '1.0.4'
   s.summary          = 'Teads Flutter iOS plugin'
   s.description      = 'Teads allows you to integrate a single SDK into your app, and serve premium branded ads from Teads SSP'
   s.homepage         = 'https://github.com/teads/TeadsSDK-flutter'

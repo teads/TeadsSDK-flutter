@@ -31,9 +31,7 @@ class FLTTeadsInReadAdInstanceManager {
     }
     
     func clean(with requestIdentifier: String) {
-        if let index = list.firstIndex(where: { $0.teadsAd.requestIdentifier.uuidString == requestIdentifier }) {
-             list.remove(at: index)
-         }
+        list.removeAll { $0.teadsAd.requestIdentifier.uuidString == requestIdentifier }
     }
 }
 
@@ -55,8 +53,6 @@ class FLTTeadsNativeAdInstanceManager {
     }
     
     func clean(with requestIdentifier: String) {
-        if let index = list.firstIndex(where: { $0.requestIdentifier.uuidString == requestIdentifier }) {
-             list.remove(at: index)
-         }
+        list.removeAll { $0.requestIdentifier.uuidString == requestIdentifier }
     }
 }

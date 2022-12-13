@@ -51,9 +51,9 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     // Teads inApp SDK
-    api("tv.teads.sdk.android:sdk:[5.0.21, )@aar") {
+    api("tv.teads.sdk.android:sdk:[5.0.22, )@aar") {
         transitive = true
     }
     // Teads Admob Adapter
-    api('tv.teads.sdk.android:admobadapter:[5.0.21, )')
+    api('tv.teads.sdk.android:admobadapter:[5.0.22, )')
 }
