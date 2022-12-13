@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Encodable {
+public extension Encodable {
   func asDictionary() throws -> [String: Any] {
     let data = try JSONEncoder().encode(self)
     guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
@@ -17,7 +17,7 @@ extension Encodable {
   }
 }
 
-extension FlutterError {
+public extension FlutterError {
     static let noAdInstance = FlutterError(
         code: "NO_AD_INSTANCE",
         message: "Unable to find an ad instance",

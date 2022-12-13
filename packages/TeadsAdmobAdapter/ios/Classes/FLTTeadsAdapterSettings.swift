@@ -8,6 +8,7 @@
 import Flutter
 import TeadsSDK
 import GoogleMobileAds
+import teads_sdk_flutter
 
 public class FLTTeadsAdapterSettings: NSObject, FlutterPlugin {
 

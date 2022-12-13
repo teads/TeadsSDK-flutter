@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
   s.dependency 'Flutter'
   s.dependency 'TeadsAdMobAdapter', '>= 5.0.22'
   s.dependency 'google_mobile_ads'
+  s.dependency 'teads_sdk_flutter'
   s.platform = :ios, '10.0'
 
   # Flutter.framework does not contain a i386 slice.
