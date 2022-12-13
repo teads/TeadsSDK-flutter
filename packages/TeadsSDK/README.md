@@ -6,15 +6,15 @@
 
 ----
 
-Teads allows you to integrate a single SDK into your app, and serve premium branded "outstream" video ads from Teads SSP ad server. 
-This sample app shows you how to use our official TeadsSDK and TeadsAdmobAdapter with Flutter.
+Teads allows you to integrate a single SDK into your app, and serve premium branded "outstream" video ads from Teads SSP ad server. This sample app includes Teads Flutter framework and is showing integration examples.
 
 ## 📃 Table of Contents
 
 - [Integration Documentation](#-integration-documentation)
 - [Run the sample app](#-run-the-sample-app)
-- [Packages](#-packages)
+- [Installation](#-install-the-teads-sdk-flutter-framework)
 - [Certifications](#-certifications)
+- [Changelog](#%EF%B8%8F-changelog)
 
 ## 🚀 Integration Documentation
 
@@ -24,11 +24,24 @@ Integration instructions are available on [Teads SDK Documentation](https://supp
 
 Clone this repository, open it with Android Studio, and run the `sampleapp` project.
 
-## 📦 Packages
+## 📦 Install the Teads SDK Flutter framework
 
-The repository contains:
-- [teads_sdk_flutter](packages/TeadsSDK)
-- [teads_admob_adapter](packages/TeadsAdmobAdapter)
+Teads SDK is currently distributed through [Pub](https://pub.dev/packages/teads_sdk_flutter). It includes everything you need to serve "outstream" video ads.
+
+### Using packages
+
+To add the package, `teads_sdk_flutter`, to an app:
+
+1. Depend on it
+    - Open the pubspec.yaml file located inside the app folder, and add `teads_sdk_flutter`: under dependencies.
+2. Install it
+    - From the **terminal**: Run `flutter pub get`.<br>
+      **OR**
+    - From **Android Studio/IntelliJ**: Click Packages get in the action ribbon at the top of pubspec.yaml.<br>
+      **OR**
+    - From **VS Code**: Click Get Packages located in right side of the action ribbon at the top of pubspec.yaml.
+3. Import it
+    - Add a corresponding import statement in the Dart code.
 
 ## 🎓 Certifications
 

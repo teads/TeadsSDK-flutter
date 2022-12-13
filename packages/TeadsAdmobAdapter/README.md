@@ -6,15 +6,16 @@
 
 ----
 
-Teads allows you to integrate a single SDK into your app, and serve premium branded "outstream" video ads from Teads SSP ad server. 
-This sample app shows you how to use our official TeadsSDK and TeadsAdmobAdapter with Flutter.
+Mediation adapter to be used in conjunction with AdMob to deliver Teads ads on iOS devices.
+If you want to display Teads ads in your iOS application through Google Mobile Ads mediation, you’re at the right place.
 
 ## 📃 Table of Contents
 
 - [Integration Documentation](#-integration-documentation)
 - [Run the sample app](#-run-the-sample-app)
-- [Packages](#-packages)
+- [Installation](#-install-the-teads-sdk-flutter-framework)
 - [Certifications](#-certifications)
+- [Changelog](#%EF%B8%8F-changelog)
 
 ## 🚀 Integration Documentation
 
@@ -24,11 +25,25 @@ Integration instructions are available on [Teads SDK Documentation](https://supp
 
 Clone this repository, open it with Android Studio, and run the `sampleapp` project.
 
-## 📦 Packages
+## 📦 Install the Teads Admob Adapter Flutter framework
 
-The repository contains:
-- [teads_sdk_flutter](packages/TeadsSDK)
-- [teads_admob_adapter](packages/TeadsAdmobAdapter)
+Teads SDK is currently distributed through [Pub](https://pub.dev/packages/teads_admob_adapter). 
+It includes everything you need to serve "outstream" video ads through Google Mobile Ads.
+
+### Using packages
+
+To add the package, `teads_admob_adapter`, to an app:
+
+1. Depend on it
+    - Open the pubspec.yaml file located inside the app folder, and add `teads_admob_adapter`: under dependencies.
+2. Install it
+    - From the **terminal**: Run `flutter pub get`.<br>
+      **OR**
+    - From **Android Studio/IntelliJ**: Click Packages get in the action ribbon at the top of pubspec.yaml.<br>
+      **OR**
+    - From **VS Code**: Click Get Packages located in right side of the action ribbon at the top of pubspec.yaml.
+3. Import it
+    - Add a corresponding import statement in the Dart code.
 
 ## 🎓 Certifications
 
@@ -39,4 +54,4 @@ Teads SDK supports the [IAB](https://www.iabcertification.com/) [Open Measuremen
 
 ## ⌚️ Changelog
 
-See [changelog here](https://pub.dev/packages/teads_sdk_flutter/changelog). 
+See [changelog here](https://pub.dev/packages/teads_admob_adapter/changelog). 
