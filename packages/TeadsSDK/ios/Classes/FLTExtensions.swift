@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Flutter
 
 public extension Encodable {
   func asDictionary() throws -> [String: Any] {

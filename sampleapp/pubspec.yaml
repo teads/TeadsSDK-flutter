@@ -19,7 +19,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  teads_sdk_flutter: ^1.0.4
+  teads_sdk_flutter: ^1.0.5
   teads_admob_adapter: ^1.0.0
   google_mobile_ads: ^2.0.1
 
