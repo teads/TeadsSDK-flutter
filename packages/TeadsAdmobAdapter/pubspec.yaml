@@ -1,0 +1,29 @@
+name: teads_admob_adapter
+description: AdMob Adapter for Teads' Flutter SDK
+repository: https://github.com/teads/TeadsSDK-flutter
+homepage: https://github.com/teads/TeadsSDK-flutter
+version: 1.0.0
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_mobile_ads: ^2.0.1
+  teads_sdk_flutter: ^1.0.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: tv.teads.teadsadmobadapter.teads_admob_adapter
+        pluginClass: TeadsAdmobAdapterPlugin
+      ios:
+        pluginClass: TeadsAdmobAdapterPlugin
