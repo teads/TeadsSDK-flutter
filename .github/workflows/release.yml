@@ -1,0 +1,43 @@
+name: 🚀 Release a new plugin version
+on: 
+  workflow_dispatch:
+    inputs:
+      plugin:
+        type: choice
+        description: Plugin
+        options:
+        - teads_sdk_flutter
+        - teads_admob_adapter
+      version:
+        description: Plugin version
+        required: true
+      changelog:
+        description: Changelog (semicolon separated)
+        required: true
+jobs:
+  release:
+    name: Release ${{ github.event.inputs.plugin }} ${{ github.event.inputs.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3
+      - name: Change directory
+        run: |
+          if [ ${{ github.event.inputs.plugin }} == "teads_sdk_flutter" ]; then
+            cd packages/TeadsSDK
+          elif [ ${{ github.event.inputs.plugin }} == "teads_admob_adapter" ]; then
+            cd packages/TeadsAdmobAdapter
+          fi
+      - name: Update changelog
+        run: |
+          CHANGELOG_FILE=CHANGELOG.md
+          echo '\n' | cat - CHANGELOG_FILE > temp && mv temp CHANGELOG_FILE
+          IFS=';' read -ra changelogs <<< "${{ github.event.inputs.plugin }}"
+          for (( idx=${#changelogs[@]}-1 ; idx>=0 ; idx-- )) ; do
+            echo '* ${changelogs[idx]}' | cat - CHANGELOG_FILE > temp && mv temp CHANGELOG_FILE
+          done
+          echo '\n' | cat - CHANGELOG_FILE > temp && mv temp CHANGELOG_FILE
+          echo '## ${{ github.event.inputs.version }}' | cat - CHANGELOG_FILE > temp && mv temp CHANGELOG_FILE
+      - name: Bump versions
+        run: |
+          yq -i '.version = ${{ github.event.inputs.version }}' pubspec.yaml
