@@ -29,34 +29,35 @@ class _NativeAdMobState extends State<NativeAdMob> {
   }
 
   Future<void> _requestAd() async {
-    AdManagerAdRequest request = const AdManagerAdRequest(mediationExtrasIdentifier: "Teads");
+    AdManagerAdRequest request =
+        const AdManagerAdRequest(mediationExtrasIdentifier: "Teads");
     TeadsAdapterSettings settings = TeadsAdapterSettings();
     await settings.enableDebug();
     NativeAd(
-      adUnitId: widget.selectedFormat.pid,
-      request: request,
-      listener: NativeAdListener(
-          // Called when an ad is successfully received.
-          onAdLoaded: (Ad ad) {
-            setState(() {
-              _nativeAd = ad as NativeAd;
-            });
-          },
-          // Called when an ad request failed.
-          onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            // Dispose the ad here to free resources.
-            ad.dispose();
-            print('Ad failed to load: $error');
-          },
-          // Called when an ad opens an overlay that covers the screen.
-          onAdOpened: (Ad ad) => print('Ad opened.'),
-          // Called when an ad removes an overlay that covers the screen.
-          onAdClosed: (Ad ad) => print('Ad closed.'),
-          // Called when an impression occurs on the ad.
-          onAdImpression: (Ad ad) => print('Ad impression.'),
-        ),
-        factoryId: 'admobNativeAd'
-    ).load();
+            adUnitId: widget.selectedFormat.pid,
+            request: request,
+            listener: NativeAdListener(
+              // Called when an ad is successfully received.
+              onAdLoaded: (Ad ad) {
+                setState(() {
+                  _nativeAd = ad as NativeAd;
+                });
+              },
+              // Called when an ad request failed.
+              onAdFailedToLoad: (Ad ad, LoadAdError error) {
+                // Dispose the ad here to free resources.
+                ad.dispose();
+                print('Ad failed to load: $error');
+              },
+              // Called when an ad opens an overlay that covers the screen.
+              onAdOpened: (Ad ad) => print('Ad opened.'),
+              // Called when an ad removes an overlay that covers the screen.
+              onAdClosed: (Ad ad) => print('Ad closed.'),
+              // Called when an impression occurs on the ad.
+              onAdImpression: (Ad ad) => print('Ad impression.'),
+            ),
+            factoryId: 'admobNativeAd')
+        .load();
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -185,23 +186,21 @@ class _NativeAdMobState extends State<NativeAdMob> {
                 time: "12",
                 textButton: "Follow",
               ),
-              _nativeAd != null ?
-                Container(
-                    padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        clipBehavior: Clip.antiAlias,
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: AdWidget(ad: _nativeAd!),
-                          width: 500,
-                          height: 400,
-                        )
-                    )
-                )
-              : const SizedBox.shrink(),
+              _nativeAd != null
+                  ? Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          clipBehavior: Clip.antiAlias,
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: AdWidget(ad: _nativeAd!),
+                            width: 500,
+                            height: 400,
+                          )))
+                  : const SizedBox.shrink(),
               const InFeedDemo(
                 source: "@espn",
                 icon:

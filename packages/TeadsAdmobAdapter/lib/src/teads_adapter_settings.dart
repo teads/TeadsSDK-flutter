@@ -6,7 +6,7 @@ class TeadsAdapterSettings {
   /// The method channel used to communicate with the native part.
   /// Internal use only.
   final MethodChannel _channel =
-  const MethodChannel('teads_admob_adapter/teads_adapter_settings');
+      const MethodChannel('teads_admob_adapter/teads_adapter_settings');
 
   /// The [TeadsAdapterSettings] map represented value.
   /// Internal use only.
@@ -21,7 +21,7 @@ class TeadsAdapterSettings {
   /// iOS only. Disable teads audio session management. You will need to handle the audio session manually.
   Future<void> disableTeadsAudioSessionManagement() async {
     _mapValue =
-    await _channel.invokeMethod('disableTeadsAudioSessionManagement');
+        await _channel.invokeMethod('disableTeadsAudioSessionManagement');
   }
 
   /// The GDPR status and consent, should match the IAB specifications.
@@ -63,7 +63,8 @@ class TeadsAdapterSettings {
 
   /// This is to set how the MediaView scale on its container. You can switch between CENTER_CROP (default) and CENTER_INSIDE.
   Future<void> setMediaScale(MediaScale mediaScale) async {
-    _mapValue = await _channel.invokeMethod('setMediaScale', [mediaScale.index]);
+    _mapValue =
+        await _channel.invokeMethod('setMediaScale', [mediaScale.index]);
   }
 
   /// Add extra AdPlacement data to Teads inApp SDK

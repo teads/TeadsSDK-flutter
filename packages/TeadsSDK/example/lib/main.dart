@@ -30,7 +30,8 @@ class InRead extends StatefulWidget {
   State<InRead> createState() => _InReadState();
 }
 
-class _InReadState extends State<InRead> implements TeadsInReadAdPlacementDelegate {
+class _InReadState extends State<InRead>
+    implements TeadsInReadAdPlacementDelegate {
   final TeadsInReadAdView _inReadAdView = TeadsInReadAdView();
   TeadsInReadAdPlacement? _placement;
   double _adViewHeight = 0;
@@ -52,7 +53,8 @@ class _InReadState extends State<InRead> implements TeadsInReadAdPlacementDelega
   Future<void> _initTeadsAd() async {
     TeadsAdPlacementSettings placementSettings = TeadsAdPlacementSettings();
     await placementSettings.enableDebug();
-    _placement = await Teads.createInReadPlacement(_pid, placementSettings, this);
+    _placement =
+        await Teads.createInReadPlacement(_pid, placementSettings, this);
   }
 
   void _requestAd() async {

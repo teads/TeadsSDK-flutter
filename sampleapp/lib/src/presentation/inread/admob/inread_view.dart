@@ -27,7 +27,7 @@ class _InReadAdmobState extends State<InReadAdmob> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _requestAd();
     });
   }
@@ -39,11 +39,12 @@ class _InReadAdmobState extends State<InReadAdmob> {
   }
 
   Future<void> _requestAd() async {
-    AdManagerAdRequest request = const AdManagerAdRequest(mediationExtrasIdentifier: "Teads");
+    AdManagerAdRequest request =
+        const AdManagerAdRequest(mediationExtrasIdentifier: "Teads");
     TeadsAdapterSettings settings = TeadsAdapterSettings();
     await settings.enableDebug();
     double width = MediaQuery.of(context).size.width;
-    _adSize = AdSize(width: width.toInt(), height: width ~/ (16/9));
+    _adSize = AdSize(width: width.toInt(), height: width ~/ (16 / 9));
     setState(() {
       _bannerAd = AdManagerBannerAd(
         sizes: [_adSize],
@@ -227,14 +228,14 @@ class _InReadAdmobState extends State<InReadAdmob> {
                       const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4),
                   width: double.infinity,
                 ),
-              _bannerAd != null ?
-              Container(
-                alignment: Alignment.center,
-                child: AdWidget(ad: _bannerAd!),
-                width: _adSize.width.toDouble(),
-                height: _adSize.height.toDouble(),
-              )
-              : const SizedBox.shrink(),
+              _bannerAd != null
+                  ? Container(
+                      alignment: Alignment.center,
+                      child: AdWidget(ad: _bannerAd!),
+                      width: _adSize.width.toDouble(),
+                      height: _adSize.height.toDouble(),
+                    )
+                  : const SizedBox.shrink(),
               for (int i = 0; i < 15; i++)
                 Container(
                   // fake article

@@ -52,22 +52,52 @@ class _IntegrationListState extends State<IntegrationList> {
 
                                           switch (widget.selectedFormat.type) {
                                             case FormatType.inRead:
-                                              switch (widget.selectedFormat.provider.type) {
+                                              switch (widget.selectedFormat
+                                                  .provider.type) {
                                                 case ProviderType.direct:
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => InReadDirect(selectedFormat: widget.selectedFormat)));
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              InReadDirect(
+                                                                  selectedFormat:
+                                                                      widget
+                                                                          .selectedFormat)));
                                                   break;
                                                 case ProviderType.admob:
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => InReadAdmob(selectedFormat: widget.selectedFormat)));
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              InReadAdmob(
+                                                                  selectedFormat:
+                                                                      widget
+                                                                          .selectedFormat)));
                                                   break;
                                               }
                                               break;
                                             case FormatType.native:
-                                              switch (widget.selectedFormat.provider.type) {
+                                              switch (widget.selectedFormat
+                                                  .provider.type) {
                                                 case ProviderType.direct:
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => NativeDirect(selectedFormat: widget.selectedFormat)));
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NativeDirect(
+                                                                  selectedFormat:
+                                                                      widget
+                                                                          .selectedFormat)));
                                                   break;
                                                 case ProviderType.admob:
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => NativeAdMob(selectedFormat: widget.selectedFormat)));
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NativeAdMob(
+                                                                  selectedFormat:
+                                                                      widget
+                                                                          .selectedFormat)));
                                                   break;
                                               }
                                               break;

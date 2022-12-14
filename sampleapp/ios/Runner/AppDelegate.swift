@@ -13,8 +13,6 @@ import teads_admob_adapter
         
         GeneratedPluginRegistrant.register(with: self)
         
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ GADSimulatorID ]
-        
         // Register for direct native ad
         let directNativeAdViewFactory = TeadsNativeAdViewFactory()
         FLTTeadsSDKFlutterPlugin.registerNativeAdViewFactory(registry: self, factoryId: "exampleNativeAd", nativeAdViewFactory: directNativeAdViewFactory)

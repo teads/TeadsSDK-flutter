@@ -48,11 +48,12 @@ class _InReadState extends State<InRead> {
   }
 
   Future<void> _requestAd() async {
-    AdManagerAdRequest request = const AdManagerAdRequest(mediationExtrasIdentifier: "Teads");
+    AdManagerAdRequest request =
+        const AdManagerAdRequest(mediationExtrasIdentifier: "Teads");
     TeadsAdapterSettings settings = TeadsAdapterSettings();
     await settings.enableDebug();
     double width = MediaQuery.of(context).size.width;
-    _adSize = AdSize(width: width.toInt(), height: width ~/ (16/9));
+    _adSize = AdSize(width: width.toInt(), height: width ~/ (16 / 9));
     setState(() {
       _bannerAd = AdManagerBannerAd(
         sizes: [_adSize],
@@ -85,16 +86,16 @@ class _InReadState extends State<InRead> {
   }
 
   Widget BannerAdWidget() {
-      if (_bannerAd != null) {
-        return Container(
-          alignment: Alignment.center,
-          width: _adSize.width.toDouble(),
-          height: _adSize.height.toDouble(),
-          child: AdWidget(ad: _bannerAd!),
-        );
-      } else {
-        return const SizedBox.shrink();
-      }
+    if (_bannerAd != null) {
+      return Container(
+        alignment: Alignment.center,
+        width: _adSize.width.toDouble(),
+        height: _adSize.height.toDouble(),
+        child: AdWidget(ad: _bannerAd!),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 
   @override

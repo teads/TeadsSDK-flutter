@@ -35,6 +35,7 @@ class _TeadsNativeAdViewState extends State<TeadsNativeAdView> {
   /// Internal use only.
   final MethodChannel _channel =
       const MethodChannel('teads_sdk_flutter/teads_ad_view/native');
+
   /// The [TeadsNativeAd] instance served by our servers.
   static TeadsNativeAd? _nativeAd;
 
