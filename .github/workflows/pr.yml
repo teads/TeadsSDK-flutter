@@ -1,0 +1,25 @@
+name: 🛠 Pull request workflow
+on:
+  pull_request:
+    branches:
+      - main
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  flutter_test:
+    name: Flutter test plugins
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: Run tests on teads_sdk_flutter
+        run: |
+          cd packages/TeadsSDK
+          flutter test
+      - name: Run tests on teads_admob_adapter
+        run: |
+          cd packages/TeadsAdmobAdapter
+          flutter test
