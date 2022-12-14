@@ -16,28 +16,54 @@ on:
         required: true
 jobs:
   release:
-    name: Release ${{ github.event.inputs.plugin }} ${{ github.event.inputs.version }}
+    name: Release ${{ github.event.inputs.plugin }} ${{ github.event.inputs.version }} 
     runs-on: ubuntu-latest
     steps:
       - name: Clone Repository
         uses: actions/checkout@v3
-      - name: Change directory
+      - name: Set working directory
+        id: working_directory
         run: |
           if [ ${{ github.event.inputs.plugin }} == "teads_sdk_flutter" ]; then
-            cd packages/TeadsSDK
+            echo "directory="packages/TeadsSDK"" >> $GITHUB_OUTPUT
           elif [ ${{ github.event.inputs.plugin }} == "teads_admob_adapter" ]; then
-            cd packages/TeadsAdmobAdapter
+            echo "directory="packages/TeadsAdmobAdapter"" >> $GITHUB_OUTPUT
           fi
-      - name: Update changelog
+      - name: Update CHANGELOG.md
+        working-directory: ${{ steps.working_directory.outputs.directory }}
         run: |
-          CHANGELOG_FILE=CHANGELOG.md
-          echo '\n' | cat - CHANGELOG_FILE > temp && mv temp CHANGELOG_FILE
-          IFS=';' read -ra changelogs <<< "${{ github.event.inputs.plugin }}"
-          for (( idx=${#changelogs[@]}-1 ; idx>=0 ; idx-- )) ; do
-            echo '* ${changelogs[idx]}' | cat - CHANGELOG_FILE > temp && mv temp CHANGELOG_FILE
+          sed -i '1i\\r' CHANGELOG.md
+          IFS=';' read -ra changelogs <<< "${{ github.event.inputs.changelog }}"
+          for i in "${changelogs[@]}"
+          do
+            sed -i '1i* '"${i}"'' CHANGELOG.md
           done
-          echo '\n' | cat - CHANGELOG_FILE > temp && mv temp CHANGELOG_FILE
-          echo '## ${{ github.event.inputs.version }}' | cat - CHANGELOG_FILE > temp && mv temp CHANGELOG_FILE
+          sed -i '1i\\r' CHANGELOG.md
+          sed -i '1i## ${{ github.event.inputs.version }}' CHANGELOG.md
+      - name: yq - portable yaml processor
+        uses: mikefarah/yq@v4.30.5
       - name: Bump versions
+        working-directory: ${{ steps.working_directory.outputs.directory }}
         run: |
-          yq -i '.version = ${{ github.event.inputs.version }}' pubspec.yaml
+          yq -i '.version = "${{ github.event.inputs.version }}"' pubspec.yaml
+      - name: Commit
+        working-directory: ${{ steps.working_directory.outputs.directory }}
+        run: |
+          git tag ${{ github.event.inputs.version }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Release ${{ github.event.inputs.plugin }} ${{ github.event.inputs.version }}
+          branch: release/${{ github.event.inputs.plugin }}_${{ github.event.inputs.version }}
+          delete-branch: true
+      - name: Auto approve
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: juliangruber/approve-pull-request-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.cpr.outputs.pull-request-number }}
+      - name: Auto merge
+        uses: peter-evans/enable-pull-request-automerge@v2
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        with:
+          pull-request-number: 1
