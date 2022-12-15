@@ -1,3 +1,8 @@
+## 1.0.6
+
+* second line
+* test release.yml
+
 ## 1.0.5
 
 * Prepare for `teads_admob_adapter` Flutter plugin.
