@@ -58,4 +58,4 @@ jobs:
         uses: peter-evans/enable-pull-request-automerge@v2
         if: steps.create-pull-request.outputs.pull-request-operation == 'created'
         with:
-          pull-request-number: 1
+          pull-request-number: ${{ steps.create-pull-request.outputs.pull-request-number }}
