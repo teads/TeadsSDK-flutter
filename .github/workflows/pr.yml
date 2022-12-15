@@ -1,8 +1,6 @@
 name: 🛠 Pull request workflow
 on:
-  pull_request:
-    branches:
-      - main
+  pull_request
 concurrency: 
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -11,6 +9,8 @@ jobs:
     name: Flutter test plugins
     runs-on: ubuntu-latest
     steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3
       - name: Download Flutter
         uses: subosito/flutter-action@v2
         with:
