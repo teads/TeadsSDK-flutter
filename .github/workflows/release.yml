@@ -53,9 +53,8 @@ jobs:
           title: Release ${{ github.event.inputs.plugin }} ${{ github.event.inputs.version }}
           commit-message: Release ${{ github.event.inputs.plugin }} ${{ github.event.inputs.version }}
           branch: release/${{ github.event.inputs.plugin }}_${{ github.event.inputs.version }}
-          delete-branch: true
-      - name: Auto merge
-        uses: peter-evans/enable-pull-request-automerge@v2
-        if: steps.create-pull-request.outputs.pull-request-operation == 'created'
-        with:
-          pull-request-number: 1
+      - name: Merge pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr merge ${{ steps.create-pull-request.outputs.pull-request-number }} --admin
