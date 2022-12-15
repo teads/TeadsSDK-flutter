@@ -1,7 +1,3 @@
-## 1.0.5
-
-* Prepare for `teads_admob_adapter` Flutter plugin.
-
 ## 1.0.4
 
 * Fix missing FLTTeadsAdPlacementSettings iOS initialization.
