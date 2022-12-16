@@ -1,3 +1,7 @@
+## 1.0.5
+
+* Prepare for  Flutter plugin.
+
 ## 1.0.4
 
 * Fix missing FLTTeadsAdPlacementSettings iOS initialization.
