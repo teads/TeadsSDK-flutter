@@ -50,11 +50,12 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.1.1)
-  - teads_admob_adapter (0.0.1):
+  - teads_admob_adapter (1.0.0):
     - Flutter
     - google_mobile_ads
+    - teads_sdk_flutter
     - TeadsAdMobAdapter (>= 5.0.22)
-  - teads_sdk_flutter (1.0.1):
+  - teads_sdk_flutter (1.0.5):
     - Flutter
     - TeadsSDK (>= 5.0.22)
   - TeadsAdMobAdapter (5.0.22):
@@ -100,8 +101,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  teads_admob_adapter: 8af3e282e93597383fdacf053da228b57b6e9a58
-  teads_sdk_flutter: fa9c6a35a9053684676a7ea49e58303859bbaa85
+  teads_admob_adapter: c0972abffdc21f339200388e40916ee4cf43bea8
+  teads_sdk_flutter: dffb525088320aad001f5f1aeb8a26891a79420d
   TeadsAdMobAdapter: cc013e437e049e573f27487a9d070d1d5d7fd122
   TeadsSDK: 79aaa55480d1c192b4fc7962f521910c41361358
 

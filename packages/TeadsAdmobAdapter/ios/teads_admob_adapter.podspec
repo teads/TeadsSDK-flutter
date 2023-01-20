@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'TeadsAdMobAdapter', '>= 5.0.22'
+  s.dependency 'TeadsAdMobAdapter', '>= 5.0.23'
   s.dependency 'google_mobile_ads'
   s.dependency 'teads_sdk_flutter'
   s.platform = :ios, '10.0'
