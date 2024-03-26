@@ -1,3 +1,7 @@
+Deprecated
+---
+This repository is deprecated and no longer will receive updates. Publishers that integrated Teads with Flutter before such a deprecation will still receive support for their current integration.
+
 <p align="center">
     <a href="https://teads.com/" target="_blank">
         <img width="75%" src="https://raw.githubusercontent.com/teads/TeadsSDK-flutter/main/ReadmeResources/teads_logo.png" alt="Teads logo">
